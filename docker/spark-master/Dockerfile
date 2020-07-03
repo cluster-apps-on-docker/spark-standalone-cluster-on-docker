@@ -1,4 +1,5 @@
-FROM spark-base
+ARG spark_version="3.0.0"
+FROM spark-base:${spark_version}
 LABEL manteiner="Andre Perez <https://github.com/andre-marcos-perez>"
 
 # -- Layer: Image Metadata
@@ -17,7 +18,7 @@ ENV SPARK_MASTER_PORT 7077
 
 # -- Runtime
 
-EXPOSE 8080 4040 7077
+EXPOSE 8080  7077
 WORKDIR ${SPARK_HOME}
 
 CMD bin/spark-class org.apache.spark.deploy.master.Master >> logs/spark-master.out

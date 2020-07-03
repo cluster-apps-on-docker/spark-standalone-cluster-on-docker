@@ -1,10 +1,10 @@
-version: "3.7"
+version: "3.6"
 volumes:
   shared-workspace:
     driver: local
 services:
   spark-master:
-    image: spark-master
+    image: spark-master:3.0.0
     container_name: spark-master
     ports:
       - 8080:8080
@@ -13,7 +13,7 @@ services:
     volumes:
       - shared-workspace:/opt/workspace
   spark-worker-1:
-    image: spark-worker
+    image: spark-worker:3.0.0
     container_name: spark-worker-1
     environment:
       - SPARK_WORKER_CORES=1
@@ -25,7 +25,7 @@ services:
     depends_on:
       - spark-master
   spark-worker-2:
-    image: spark-worker
+    image: spark-worker:3.0.0
     container_name: spark-worker-2
     environment:
       - SPARK_WORKER_CORES=1

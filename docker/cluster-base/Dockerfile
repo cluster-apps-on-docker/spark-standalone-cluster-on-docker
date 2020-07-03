@@ -22,7 +22,7 @@ RUN mkdir -p /opt/workspace/data && \
     ln -s /usr/bin/python3 /usr/bin/python && \
     curl https://downloads.lightbend.com/scala/${scala_version}/scala-${scala_version}.deb -k -o scala.deb && \
     apt install -y ./scala.deb && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf scala.deb /var/lib/apt/lists/*
 
 ENV SCALA_HOME="/usr/bin/scala"
 ENV PATH=${PATH}:${SCALA_HOME}/bin

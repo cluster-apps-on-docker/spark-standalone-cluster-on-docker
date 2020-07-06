@@ -13,47 +13,41 @@
 
 ### Build the cluster from DockerHub
 
-1. Install [Docker and Docker Compose](https://docs.docker.com/get-docker/), check the [supported versions;](#tech-stack-supported-version);
+1. Install [Docker and Docker Compose](https://docs.docker.com/get-docker/), check the [supported versions](#tech-stack-supported-version);
 2. Compose the cluster:
 
 ```bash
 docker-compose up
 ```
 
-3. Enjoy. :)
+3. Enjoy. :smile:
 
 ### Build the cluster from your local machine
 
 > **Note**: Building locally is only supported on Unix OS's.
 
-1. Install [Docker and Docker Compose](https://docs.docker.com/get-docker/), check the [supported versions;](#tech-stack-supported-version);
-2. Change to the build folder:
+1. Install [Docker and Docker Compose](https://docs.docker.com/get-docker/), check the [supported versions](#tech-stack-supported-version);
+2. Build the images:
 
 ```bash
-cd build/
+cd build ; chmod +x build.sh ; ./build.sh
 ```
 
-3. Build the images:
-
-```bash
-chmod +x build.sh ;./build.sh
-```
-
-4. Compose the cluster:
+3. Compose the cluster:
 
 ```bash
 docker-compose up
 ```
 
-5. Enjoy. :)
+4. Enjoy. :smile:
 
 ## <a name="features"></a>Features
 
-1. **[Apache Spark Standalone Cluster](http://spark.apache.org/docs/latest/spark-standalone.html)** shipped with:
-..* Master node;
-..* Worker nodes with 1 core and 512m of memory (default).
+1. **Apache Spark Standalone Cluster** shipped with:
+   * One master node;
+   * Two worker nodes with 1 core and 512m of memory (default).
 2. Simulated **Hadoop Distributed File System**;
-3. **[JupyterLab](https://jupyterlab.readthedocs.io/en/stable/)** interface;
+3. **JupyterLab** interface;
 4. **PySpark** notebook with Apache Spark API examples.
 
 ## <a name="tech-stack"></a>Tech Stack Supported Version
@@ -73,7 +67,7 @@ We'd love some help. To contribute, follow the steps bellow:
 
 1. Fork the project;
 2. Create your feature branch, we use [gitflow](https://github.com/nvie/gitflow);
-3. Do your magic :);
+3. Do your magic :smile:;
 4. Commit your changes;
 5. Push to your feature branch;
 6. Create a [new pull request](https://github.com/andre-marcos-perez/spark-cluster-on-docker/pulls).

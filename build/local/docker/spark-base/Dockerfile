@@ -4,6 +4,7 @@ LABEL manteiner="Andre Perez <https://github.com/andre-marcos-perez>"
 # -- Layer: Image Metadata
 
 ARG build_date
+
 LABEL org.label-schema.build-date=${build_date}
 LABEL org.label-schema.name="Apache Spark Standalone Cluster on Docker - Spark Base Image"
 LABEL org.label-schema.description="Spark base image shipped Spark"
@@ -24,4 +25,10 @@ RUN curl https://archive.apache.org/dist/spark/spark-${spark_version}/spark-${sp
     rm spark.tgz
 
 ENV SPARK_HOME /usr/bin/spark-${spark_version}-bin-hadoop${hadoop_version}
+ENV SPARK_MASTER_HOST spark-master
+ENV SPARK_MASTER_PORT 7077
 ENV PYSPARK_PYTHON python3
+
+# -- Runtime
+
+WORKDIR ${SPARK_HOME}

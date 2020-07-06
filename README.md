@@ -1,13 +1,26 @@
 # Apache Spark Standalone Cluster on Docker
 > Build your own Apache Spark Standalone cluster with a JupyterLab interface on Docker :zap:
 
+This project gives you an out-of-the-box Apache Spark Standalone cluster (one master + two workers)  
+with a JupyterLab interface built on top of Docker infrastructure. The cluster is shipped with a (jupyter  
+notebook)[build/workspace/] with examples on how to read, process and write data using PySpark, Apache Spark's Python API.
+
 ## Contents
 
-- [Quick Start](#quick-start)
 - [Features](#features)
+- [Quick Start](#quick-start)
 - [Tech Stack Supported Version](#tech-stack-supported-version)
 - [Contributing](#contributing)
 - [Contributors](#contributors)
+
+## <a name="features"></a>Features
+
+1. **Apache Spark Standalone Cluster** shipped with:
+   * One master node;
+   * Two worker nodes with 1 core and 512m of memory (default).
+2. Simulated **Hadoop Distributed File System**;
+3. **JupyterLab** interface;
+4. **PySpark** notebook with Apache Spark API examples.
 
 ## <a name="quick-start"></a>Quick Start
 
@@ -40,15 +53,6 @@ docker-compose up
 ```
 
 4. Enjoy. :smile:
-
-## <a name="features"></a>Features
-
-1. **Apache Spark Standalone Cluster** shipped with:
-   * One master node;
-   * Two worker nodes with 1 core and 512m of memory (default).
-2. Simulated **Hadoop Distributed File System**;
-3. **JupyterLab** interface;
-4. **PySpark** notebook with Apache Spark API examples.
 
 ## <a name="tech-stack"></a>Tech Stack Supported Version
 

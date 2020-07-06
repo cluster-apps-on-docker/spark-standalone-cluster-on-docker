@@ -1,5 +1,5 @@
-FROM cluster-base
-LABEL manteiner="Andre Perez <https://github.com/andre-marcos-perez>"
+FROM base
+LABEL manteiner="Andre Perez <andre.marcos.perez@gmail.com>"
 
 # -- Layer: Image Metadata
 

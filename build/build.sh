@@ -6,7 +6,7 @@
 # -- Variables ---------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
 
-SHOULD_BUILD_CLUSTER_BASE="true"
+SHOULD_BUILD_BASE="true"
 SHOULD_BUILD_SPARK="true"
 SHOULD_BUILD_JUPYTERLAB="true"
 
@@ -50,9 +50,9 @@ function cleanContainers() {
 
     fi
 
-    if [[ "${SHOULD_BUILD_CLUSTER_BASE}" == "true" ]]
+    if [[ "${SHOULD_BUILD_BASE}" == "true" ]]
     then
-      container="$(docker ps -a | grep 'cluster-base' | awk '{print $1}')"
+      container="$(docker ps -a | grep 'base' | awk '{print $1}')"
       docker stop "${container}"
       docker rm "${container}"
     fi
@@ -73,22 +73,22 @@ function cleanImages() {
       docker rmi "$(docker images | grep 'spark-base' | awk '{print $3}')"
     fi
 
-    if [[ "${SHOULD_BUILD_CLUSTER_BASE}" == "true" ]]
+    if [[ "${SHOULD_BUILD_BASE}" == "true" ]]
     then
-      docker rmi "$(docker images | grep 'cluster-base' | awk '{print $3}')"
+      docker rmi "$(docker images | grep 'base' | awk '{print $3}')"
     fi
 
 }
 
 function buildImages() {
 
-  if [[ "${SHOULD_BUILD_CLUSTER_BASE}" == "true" ]]
+  if [[ "${SHOULD_BUILD_BASE}" == "true" ]]
   then
     docker build \
       --build-arg build_date="${BUILD_DATE}" \
       --build-arg scala_version="${SCALA_VERSION}" \
-      -f docker/cluster-base/Dockerfile \
-      -t cluster-base .
+      -f docker/base/Dockerfile \
+      -t base .
   fi
 
   if [[ "${SHOULD_BUILD_SPARK}" == "true" ]]

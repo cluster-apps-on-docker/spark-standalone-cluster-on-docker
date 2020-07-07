@@ -6,6 +6,8 @@ with a **JupyterLab** interface built on top of **Docker**. The cluster is shipp
 notebook](build/workspace/) with examples on how to read, process and write data using **PySpark**,  
 Apache Spark's Python API, from a simulated **Apache Hadoop Distributed File System**.
 
+![architecture](docs/image/spark-cluster-on-docker.png)
+
 ## Contents
 
 - [Features](#features)

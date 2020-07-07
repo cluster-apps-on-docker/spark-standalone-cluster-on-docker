@@ -28,7 +28,8 @@ Apache Spark's Python API, from a simulated **Apache Hadoop Distributed File Sys
 ### Build the cluster from DockerHub
 
 1. Install [Docker and Docker Compose](https://docs.docker.com/get-docker/), check the [supported versions](#tech-stack-supported-version);
-2. Compose the cluster:
+2. Get the source code;
+3. Compose the cluster:
 
 ```bash
 docker-compose up
@@ -39,13 +40,14 @@ docker-compose up
 > **Note**: Building locally is only supported on Unix OS's.
 
 1. Install [Docker and Docker Compose](https://docs.docker.com/get-docker/), check the [supported versions](#tech-stack-supported-version);
-2. Build the images:
+2. Get the source code;
+3. Build the images:
 
 ```bash
 cd build ; chmod +x build.sh ; ./build.sh
 ```
 
-3. Compose the cluster:
+4. Compose the cluster:
 
 ```bash
 docker-compose up

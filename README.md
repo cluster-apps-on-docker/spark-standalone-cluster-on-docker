@@ -125,11 +125,11 @@ Some ideas:
 
 ## <a name="dockerhub-metrics"></a>DockerHub Metrics
 
-| Image                                                              | Size                                                                           | Pulls                                                                     |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
-| **[JupyterLab](https://hub.docker.com/r/andreper/jupyterlab)**     | ![docker-size](https://img.shields.io/docker/image-size/andreper/jupyterlab)   | ![docker-pull](https://img.shields.io/docker/pulls/andreper/jupyterlab)   |
-| **[Spark Master](https://hub.docker.com/r/andreper/spark-master)** | ![docker-size](https://img.shields.io/docker/image-size/andreper/spark-master) | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-master) |
-| **[Spark Worker](https://hub.docker.com/r/andreper/spark-worker)** | ![docker-size](https://img.shields.io/docker/image-size/andreper/spark-worker) | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-worker) |
+| Image                                                              | Size (latest version)                                                                               | Pulls                                                                     |
+| ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| **[JupyterLab](https://hub.docker.com/r/andreper/jupyterlab)**     | ![docker-size](https://img.shields.io/docker/image-size/andreper/jupyterlab/latest-spark-latest)    | ![docker-pull](https://img.shields.io/docker/pulls/andreper/jupyterlab)   |
+| **[Spark Master](https://hub.docker.com/r/andreper/spark-master)** | ![docker-size](https://img.shields.io/docker/image-size/andreper/spark-master/latest-hadoop-latest) | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-master) |
+| **[Spark Worker](https://hub.docker.com/r/andreper/spark-worker)** | ![docker-size](https://img.shields.io/docker/image-size/andreper/spark-worker/latest-hadoop-latest) | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-worker) |
 
 ## <a name="contributors"></a>Contributors
 

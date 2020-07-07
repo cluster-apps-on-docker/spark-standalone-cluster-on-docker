@@ -1,60 +1,71 @@
 # Apache Spark Standalone Cluster on Docker
 > Build your own Apache Spark Standalone cluster with a JupyterLab interface on Docker :zap:
 
-![architecture](docs/image/spark-cluster-on-docker.png)
+This project gives you an out-of-the-box **Apache Spark** cluster with a **JupyterLab** interface and a simulated **Apache Hadoop Distributed File System**, all built on top of **Docker**. Learn Apache Spark through its Python API, **PySpark**, by running the [Jupyter notebooks](build/workspace/) with examples on how to read, process and write data.
 
-This project gives you an out-of-the-box **Apache Spark** Standalone cluster (one master + two workers) with a **JupyterLab** interface built on top of **Docker**. The cluster is shipped with a [jupyter notebook](build/workspace/) with examples on how to read, process and write data using **PySpark**, Apache Spark's Python API, from a simulated **Apache Hadoop Distributed File System**.
+![architecture](docs/image/cluster-architecture.png)
+
+| Application            | URL                                      |
+| ---------------------- | ---------------------------------------- |
+| JupyterLab             | [localhost:8888](http://localhost:8888/) |
+| Apache Spark Master    | [localhost:8080](http://localhost:8080/) |
+| Apache Spark Worker I  | [localhost:8081](http://localhost:8081/) |
+| Apache Spark Worker II | [localhost:8082](http://localhost:8082/) |
 
 ## Contents
 
-- [Features](#features)
 - [Quick Start](#quick-start)
-- [Tech Stack Supported Version](#tech-stack-supported-version)
+- [Features](#features)
+- [Tech Stack Version](#tech-stack-version)
 - [Contributing](#contributing)
 - [Contributors](#contributors)
-
-## <a name="features"></a>Features
-
-1. **Apache Spark Standalone Cluster** shipped with:
-   * One master node;
-   * Two worker nodes with 1 core and 512m of memory (default).
-2. Simulated **Hadoop Distributed File System**;
-3. **JupyterLab** interface;
-4. **PySpark** notebook with Apache Spark API examples.
 
 ## <a name="quick-start"></a>Quick Start
 
 ### Build the cluster from DockerHub
 
-1. Install [Docker and Docker Compose](https://docs.docker.com/get-docker/), check the [supported versions](#tech-stack-supported-version);
+1. Install [Docker and Docker Compose](https://docs.docker.com/get-docker/), check the [supported versions](#tech-stack-version);
 2. Get the source code;
-3. Compose the cluster:
+3. Compose the cluster.
 
 ```bash
 docker-compose up
 ```
+
+4. Run [Jupyter notebook](build/workspace/) with PySpark examples.
 
 ### Build the cluster from your local machine
 
 > **Note**: Building locally is only supported on Unix OS's.
 
-1. Install [Docker and Docker Compose](https://docs.docker.com/get-docker/), check the [supported versions](#tech-stack-supported-version);
+1. Install [Docker and Docker Compose](https://docs.docker.com/get-docker/), check the [supported versions](#tech-stack-version);
 2. Get the source code;
-3. Build the images:
+3. Build the images;
 
 ```bash
 cd build ; chmod +x build.sh ; ./build.sh
 ```
 
-4. Compose the cluster:
+4. Compose the cluster.
 
 ```bash
 docker-compose up
 ```
 
-## <a name="tech-stack"></a>Tech Stack Supported Version
+5. Run [Jupyter notebook](build/workspace/) with PySpark examples.
 
-| Tech          | Supported Version |
+## <a name="features"></a>Features
+
+1. **Apache Spark Standalone Cluster** shipped with three nodes:
+   - One master node;
+   - Two worker nodes with 1 core and 512m of memory (default).
+2. Simulated **Hadoop Distributed File System**;
+3. **JupyterLab** interface;
+4. **PySpark** notebooks with Apache Spark Python API examples.
+
+## <a name="tech-stack-version"></a>Tech Stack Version
+
+| Tech          | Version           |
 | ------------- | ----------------- |
 | Docker        | 19.03.x           |
 | Python        | 3.7               |
@@ -63,7 +74,7 @@ docker-compose up
 | Apache Hadoop | 2.7               |
 | JupyterLab    | 2.1.4             |
 
-## <a name="contribuing"></a>Contributing
+## <a name="contributing"></a>Contributing
 
 We'd love some help. To contribute, follow the steps bellow:
 
@@ -80,8 +91,8 @@ Some ideas:
 - JupyterLab Scala kernel;
 - Scala Jupyter notebook with Apache Spark Scala API examples;
 - JupyterLab R kernel;
-- R Jupyter notebook with Apache Spark R API examples
-- Tests, tests and more tests.
+- R Jupyter notebook with Apache Spark R API examples;
+- Test coverage.
 
 ## <a name="contributors"></a>Contributors
 

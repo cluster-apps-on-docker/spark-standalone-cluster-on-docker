@@ -6,15 +6,15 @@
 # -- Variables ---------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
 
-SHOULD_BUILD_BASE="true"
-SHOULD_BUILD_SPARK="true"
-SHOULD_BUILD_JUPYTERLAB="true"
+SHOULD_BUILD_BASE="$(grep -m 1 build_base build.yml | grep -o -P '(?<=").*(?=")')"
+SHOULD_BUILD_SPARK="$(grep -m 1 build_spark build.yml | grep -o -P '(?<=").*(?=")')"
+SHOULD_BUILD_JUPYTERLAB="$(grep -m 1 build_jupyter build.yml | grep -o -P '(?<=").*(?=")')"
 
 BUILD_DATE="$(date -u +'%Y-%m-%d')"
-SCALA_VERSION="2.12.11"
-SPARK_VERSION="3.0.0"
-HADOOP_VERSION="2.7"
-JUPYTERLAB_VERSION="2.1.4"
+SCALA_VERSION="$(grep -m 1 scala build.yml | grep -o -P '(?<=").*(?=")')"
+SPARK_VERSION="$(grep -m 1 spark build.yml | grep -o -P '(?<=").*(?=")')"
+HADOOP_VERSION="$(grep -m 1 hadoop build.yml | grep -o -P '(?<=").*(?=")')"
+JUPYTERLAB_VERSION="$(grep -m 1 jupyterlab build.yml | grep -o -P '(?<=").*(?=")')"
 
 # ----------------------------------------------------------------------------------------------------------------------
 # -- Functions----------------------------------------------------------------------------------------------------------

@@ -120,7 +120,7 @@ function buildImages() {
       --build-arg spark_version="${SPARK_VERSION}" \
       --build-arg jupyterlab_version="${JUPYTERLAB_VERSION}" \
       -f docker/jupyterlab/Dockerfile \
-      -t jupyterlab:${JUPYTERLAB_VERSION} .
+      -t jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION} .
   fi
 
 }

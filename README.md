@@ -1,16 +1,16 @@
 # Apache Spark Standalone Cluster on Docker
 > Build your own Apache Spark Standalone cluster with a JupyterLab interface on Docker :zap:
 
+<p align="center"><img src="docs/image/cluster-architecture.png"></p>
+
 This project gives you an out-of-the-box **Apache Spark** cluster with a **JupyterLab** interface and a simulated **Apache Hadoop Distributed File System**, all built on top of **Docker**. Learn Apache Spark through its Python API, **PySpark**, by running the [Jupyter notebooks](build/workspace/) with examples on how to read, process and write data.
 
-![architecture](docs/image/cluster-architecture.png)
-
-| Application            | URL                                      |
-| ---------------------- | ---------------------------------------- |
-| JupyterLab             | [localhost:8888](http://localhost:8888/) |
-| Apache Spark Master    | [localhost:8080](http://localhost:8080/) |
-| Apache Spark Worker I  | [localhost:8081](http://localhost:8081/) |
-| Apache Spark Worker II | [localhost:8082](http://localhost:8082/) |
+| Application                | URL                                      |
+| -------------------------- | ---------------------------------------- |
+| **JupyterLab**             | [localhost:8888](http://localhost:8888/) |
+| **Apache Spark Master**    | [localhost:8080](http://localhost:8080/) |
+| **Apache Spark Worker I**  | [localhost:8081](http://localhost:8081/) |
+| **Apache Spark Worker II** | [localhost:8082](http://localhost:8082/) |
 
 ## Contents
 
@@ -26,7 +26,7 @@ This project gives you an out-of-the-box **Apache Spark** cluster with a **Jupyt
 
 1. Install [Docker and Docker Compose](https://docs.docker.com/get-docker/), check the [supported versions](#tech-stack-version);
 2. Get the source code;
-3. Compose the cluster.
+3. Compose the cluster;
 
 ```bash
 docker-compose up
@@ -46,7 +46,7 @@ docker-compose up
 cd build ; chmod +x build.sh ; ./build.sh
 ```
 
-4. Compose the cluster.
+4. Compose the cluster;
 
 ```bash
 docker-compose up
@@ -97,6 +97,3 @@ Some ideas:
 ## <a name="contributors"></a>Contributors
 
  - **André Perez** - [dekoperez](https://twitter.com/dekoperez) - andre.marcos.perez@gmail.com
-
-
-

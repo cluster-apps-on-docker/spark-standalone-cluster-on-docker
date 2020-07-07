@@ -113,6 +113,7 @@ We'd love some help. To contribute, follow the steps bellow:
 Some ideas:
 
 - Microsoft Windows build script;
+- DockerHub CI/CD integration;
 - Spark submit support;
 - JupyterLab Scala kernel;
 - Jupyter notebook with Apache Spark Scala API examples;

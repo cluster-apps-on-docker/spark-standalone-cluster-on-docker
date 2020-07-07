@@ -54,25 +54,26 @@ cd build
 ```
 
 4. Edit the [build.yml](build/build.yml) file with your favorite tech stack version;
-5. Make the build script executable;
+5. Match those version on the [docker compose](build/docker-compose.yml) file;
+6. Make the build script executable;
 
 ```bash
 chmod +x build.sh
 ```
 
-6. Build the images;
+7. Build the images;
 
 ```bash
 ./build.sh
 ```
 
-7. Build the cluster;
+8. Build the cluster;
 
 ```bash
 docker-compose up
 ```
 
-8. Run Apache Spark code using the provided [Jupyter notebook](build/workspace/pyspark.ipynb) with PySpark examples.
+9. Run Apache Spark code using the provided [Jupyter notebook](build/workspace/pyspark.ipynb) with PySpark examples.
 
 ## <a name="tech-stack-version"></a>Tech Stack Version
 

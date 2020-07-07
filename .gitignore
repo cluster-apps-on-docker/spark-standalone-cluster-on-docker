@@ -2,6 +2,10 @@
 # Created by https://www.toptal.com/developers/gitignore/api/spark,jupyternotebooks,pycharm,pycharm+iml,pycharm+all
 # Edit at https://www.toptal.com/developers/gitignore?templates=spark,jupyternotebooks,pycharm,pycharm+iml,pycharm+all
 
+### App defined ###
+
+build/build.yml
+
 ### JupyterNotebooks ###
 # gitignore template for Jupyter Notebooks
 # website: http://jupyter.org/

@@ -125,6 +125,6 @@ Some ideas:
 
 ## <a name="links"></a>Links
 
- - [JupyterLab Image on DockerHub](https://hub.docker.com/r/andreper/jupyterlab);
- - [Spark Master Image on DockerHub](https://hub.docker.com/r/andreper/spark-master);
- - [Spark Worker Image on DockerHub](https://hub.docker.com/r/andreper/spark-worker).
+ - **DockerHub Repo**: [JupyterLab image repository](https://hub.docker.com/r/andreper/jupyterlab);
+ - **DockerHub Repo**: [Spark master image repository](https://hub.docker.com/r/andreper/spark-master);
+ - **DockerHub Repo**: [Spark worker image repository](https://hub.docker.com/r/andreper/spark-worker).

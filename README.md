@@ -14,8 +14,8 @@ This project gives you an out-of-the-box **Apache Spark** cluster with a **Jupyt
 - [Quick Start](#quick-start)
 - [Tech Stack Version](#tech-stack-version)
 - [Contributing](#contributing)
+- [DockerHub Metrics](#dockerhub-metrics)
 - [Contributors](#contributors)
-- [Links](#links)
 
 ## <a name="quick-start"></a>Quick Start
 
@@ -86,11 +86,11 @@ docker-compose up
 
 - Applications
 
-| App                | Version            | Latest             |
-| ------------------ | ------------------ | ------------------ |
-| **Apache Spark**   | 3.0.0              | 3.0.0              |
-| **Apache Hadoop**  | 2.7                | 2.7                |
-| **JupyterLab**     | 2.1.4              | 2.1.4              |
+| App                | Version                 | Latest             |
+| ------------------ | ----------------------  | ------------------ |
+| **Apache Spark**   | 2.4.0 \| 2.4.4 \| 3.0.0 | 3.0.0              |
+| **Apache Hadoop**  | 2.7                     | 2.7                |
+| **JupyterLab**     | 2.1.4                   | 2.1.4              |
 
 - Tech
 
@@ -121,12 +121,14 @@ Some ideas:
 - Jupyter notebook with Apache Spark R API examples;
 - Test coverage.
 
+## <a name="dockerhub-metrics"></a>DockerHub Metrics
+
+| Image                                                              | Size                                                                           | Pulls                                                                     |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| **[JupyterLab](https://hub.docker.com/r/andreper/jupyterlab)**     | ![docker-size](https://img.shields.io/docker/image-size/andreper/jupyterlab)   | ![docker-pull](https://img.shields.io/docker/pulls/andreper/jupyterlab)   |
+| **[Spark Master](https://hub.docker.com/r/andreper/spark-master)** | ![docker-size](https://img.shields.io/docker/image-size/andreper/spark-master) | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-master) |
+| **[Spark Worker](https://hub.docker.com/r/andreper/spark-worker)** | ![docker-size](https://img.shields.io/docker/image-size/andreper/spark-worker) | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-worker) |
+
 ## <a name="contributors"></a>Contributors
 
  - **André Perez** - [dekoperez](https://twitter.com/dekoperez) - andre.marcos.perez@gmail.com
-
-## <a name="links"></a>Links
-
- - **DockerHub**: [JupyterLab image repository](https://hub.docker.com/r/andreper/jupyterlab);
- - **DockerHub**: [Spark master image repository](https://hub.docker.com/r/andreper/spark-master);
- - **DockerHub**: [Spark worker image repository](https://hub.docker.com/r/andreper/spark-worker).

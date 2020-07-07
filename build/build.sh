@@ -63,13 +63,13 @@ function cleanImages() {
 
     if [[ "${SHOULD_BUILD_JUPYTERLAB}" == "true" ]]
     then
-      docker rmi "$(docker images | grep 'jupyterlab' | awk '{print $3}')"
+      docker rmi -f "$(docker images | grep 'jupyterlab' | awk '{print $3}')"
     fi
 
     if [[ "${SHOULD_BUILD_SPARK}" == "true" ]]
     then
-      docker rmi "$(docker images | grep 'spark-worker' | awk '{print $3}')"
-      docker rmi "$(docker images | grep 'spark-master' | awk '{print $3}')"
+      docker rmi -f "$(docker images | grep 'spark-worker' | awk '{print $3}')"
+      docker rmi -f "$(docker images | grep 'spark-master' | awk '{print $3}')"
       docker rmi "$(docker images | grep 'spark-base' | awk '{print $3}')"
     fi
 
@@ -88,7 +88,7 @@ function buildImages() {
       --build-arg build_date="${BUILD_DATE}" \
       --build-arg scala_version="${SCALA_VERSION}" \
       -f docker/base/Dockerfile \
-      -t base .
+      -t base:latest .
   fi
 
   if [[ "${SHOULD_BUILD_SPARK}" == "true" ]]
@@ -99,15 +99,19 @@ function buildImages() {
       --build-arg spark_version="${SPARK_VERSION}" \
       --build-arg hadoop_version="${HADOOP_VERSION}" \
       -f docker/spark-base/Dockerfile \
-      -t spark-base:${SPARK_VERSION} .
+      -t spark-base:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} .
 
     docker build \
       --build-arg build_date="${BUILD_DATE}" \
+      --build-arg spark_version="${SPARK_VERSION}" \
+      --build-arg hadoop_version="${HADOOP_VERSION}" \
       -f docker/spark-master/Dockerfile \
       -t spark-master:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} .
 
     docker build \
       --build-arg build_date="${BUILD_DATE}" \
+      --build-arg spark_version="${SPARK_VERSION}" \
+      --build-arg hadoop_version="${HADOOP_VERSION}" \
       -f docker/spark-worker/Dockerfile \
       -t spark-worker:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} .
 

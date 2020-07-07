@@ -13,8 +13,8 @@ LABEL org.label-schema.schema-version="1.0"
 
 # -- Layer: JupyterLab
 
-ARG spark_version=3.0.0
-ARG jupyterlab_version=2.1.4
+ARG spark_version
+ARG jupyterlab_version
 
 RUN apt-get update -y && \
     apt-get install -y python3-pip python3-dev && \

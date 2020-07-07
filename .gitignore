@@ -4,7 +4,10 @@
 
 ### App defined ###
 
+docker-compose.yml
+
 build/build.yml
+build/docker-compose.yml
 
 ### JupyterNotebooks ###
 # gitignore template for Jupyter Notebooks

@@ -6,7 +6,7 @@ This project gives you an out-of-the-box **Apache Spark** cluster with a **Jupyt
 <p align="center"><img src="docs/image/cluster-architecture.png"></p>
 
 ![jupyterlab-latest-version](https://img.shields.io/docker/v/andreper/jupyterlab/2.1.4-spark-3.0.0?color=green&label=jupyterlab-latest)
-![spark-latest-version](https://img.shields.io/docker/v/andreper/spark-master/3.0.0?color=yellowgreen&label=spark-latest)
+![spark-latest-version](https://img.shields.io/docker/v/andreper/spark-master/3.0.0-hadoop-2.7?color=yellowgreen&label=spark-latest)
 ![repository-license](https://img.shields.io/github/license/andre-marcos-perez/spark-cluster-on-docker?color=yellow)
 
 ## Contents
@@ -127,6 +127,6 @@ Some ideas:
 
 ## <a name="links"></a>Links
 
- - **DockerHub Repo**: [JupyterLab image repository](https://hub.docker.com/r/andreper/jupyterlab);
- - **DockerHub Repo**: [Spark master image repository](https://hub.docker.com/r/andreper/spark-master);
- - **DockerHub Repo**: [Spark worker image repository](https://hub.docker.com/r/andreper/spark-worker).
+ - **DockerHub**: [JupyterLab image repository](https://hub.docker.com/r/andreper/jupyterlab);
+ - **DockerHub**: [Spark master image repository](https://hub.docker.com/r/andreper/spark-master);
+ - **DockerHub**: [Spark worker image repository](https://hub.docker.com/r/andreper/spark-worker).

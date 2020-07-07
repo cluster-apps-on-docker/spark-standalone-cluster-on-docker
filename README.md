@@ -1,9 +1,10 @@
 # Apache Spark Standalone Cluster on Docker
 > Build your own Apache Spark Standalone cluster with a JupyterLab interface on Docker :zap:
 
-This project gives you an out-of-the-box Apache Spark Standalone cluster (one master + two workers)  
-with a JupyterLab interface built on top of Docker infrastructure. The cluster is shipped with a (jupyter  
-notebook)[build/workspace/] with examples on how to read, process and write data using PySpark, Apache Spark's Python API.
+This project gives you an out-of-the-box **Apache Spark** Standalone cluster (one master + two workers)  
+with a **JupyterLab** interface built on top of **Docker**. The cluster is shipped with a [jupyter  
+notebook](build/workspace/) with examples on how to read, process and write data using **PySpark**,  
+Apache Spark's Python API, from a simulated **Apache Hadoop Distributed File System**.
 
 ## Contents
 
@@ -33,8 +34,6 @@ notebook)[build/workspace/] with examples on how to read, process and write data
 docker-compose up
 ```
 
-3. Enjoy. :smile:
-
 ### Build the cluster from your local machine
 
 > **Note**: Building locally is only supported on Unix OS's.
@@ -51,8 +50,6 @@ cd build ; chmod +x build.sh ; ./build.sh
 ```bash
 docker-compose up
 ```
-
-4. Enjoy. :smile:
 
 ## <a name="tech-stack"></a>Tech Stack Supported Version
 

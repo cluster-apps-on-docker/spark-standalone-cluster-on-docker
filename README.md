@@ -5,9 +5,11 @@ This project gives you an out-of-the-box **Apache Spark** cluster with a **Jupyt
 
 <p align="center"><img src="docs/image/cluster-architecture.png"></p>
 
-![jupyterlab-latest-version](https://img.shields.io/docker/v/andreper/jupyterlab/2.1.4-spark-3.0.0?color=green&label=jupyterlab-latest)
-![spark-latest-version](https://img.shields.io/docker/v/andreper/spark-master/3.0.0-hadoop-2.7?color=yellowgreen&label=spark-latest)
-![repository-license](https://img.shields.io/github/license/andre-marcos-perez/spark-cluster-on-docker?color=yellow)
+![jupyterlab-latest-version](https://img.shields.io/docker/v/andreper/jupyterlab/2.1.4-spark-3.0.0?color=brightgreen&label=jupyterlab-latest)
+![spark-latest-version](https://img.shields.io/docker/v/andreper/spark-master/3.0.0-hadoop-2.7?color=yellow&label=spark-latest)
+![docker-version](https://img.shields.io/badge/docker-v1.13.0%2B-blue)
+![docker-compose-version](https://img.shields.io/badge/docker--compose-v3.0%2B-blue)
+![repository-license](https://img.shields.io/github/license/andre-marcos-perez/spark-cluster-on-docker?color=orange)
 
 ## Contents
 

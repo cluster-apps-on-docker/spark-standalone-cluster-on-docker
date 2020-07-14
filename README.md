@@ -11,6 +11,8 @@ This project gives you an out-of-the-box **Apache Spark** cluster with a **Jupyt
 ![docker-compose-version](https://img.shields.io/badge/docker--compose-v3.0%2B-blue)
 ![repository-license](https://img.shields.io/github/license/andre-marcos-perez/spark-cluster-on-docker?color=orange)
 
+> The project just got its [own article](https://towardsdatascience.com/apache-spark-cluster-on-docker-ft-a-juyterlab-interface-418383c95445) at Towards Data Science Medium blog! :sparkles:
+
 ## Contents
 
 - [Quick Start](#quick-start)
@@ -125,7 +127,7 @@ Some ideas:
 
 ## <a name="dockerhub-metrics"></a>DockerHub Metrics
 
-| Image                                                              | Size (latest version)                                                                               | Pulls                                                                     |
+| Image                                                              | Latest Version Size                                                                                 | Pulls                                                                     |
 | ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
 | **[JupyterLab](https://hub.docker.com/r/andreper/jupyterlab)**     | ![docker-size](https://img.shields.io/docker/image-size/andreper/jupyterlab/latest-spark-latest)    | ![docker-pull](https://img.shields.io/docker/pulls/andreper/jupyterlab)   |
 | **[Spark Master](https://hub.docker.com/r/andreper/spark-master)** | ![docker-size](https://img.shields.io/docker/image-size/andreper/spark-master/latest-hadoop-latest) | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-master) |

@@ -1,0 +1,30 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Spark Cluster on Docker CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  schedule:
+    - cron:  '0 0 * * MON-FRI'
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  
+  base-image:
+    
+    name: Base Image
+    runs-on: ubuntu-latest
+        
+    steps:
+      - name: Build image
+        env:
+          BUILD_DATE: "$(date -u +'%Y-%m-%d')"
+          SCALA_VERSION: ""
+        run: |
+          docker build \
+          --build-arg build_date="${BUILD_DATE}" \
+          --build-arg scala_version="${SCALA_VERSION}" \
+          -f buid/docker/base/Dockerfile \
+          -t base:latest .
+ 

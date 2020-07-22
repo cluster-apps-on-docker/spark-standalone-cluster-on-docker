@@ -6,7 +6,7 @@
 # -- Variables ---------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
 
-DOCKERHUB_REPOSITORY=""
+DOCKERHUB_REPOSITORY="andreper"
 BUILD_DATE="$(date -u +'%Y-%m-%d')"
 
 SHOULD_BUILD_BASE="$(grep -m 1 build_base build.yml | grep -o -P '(?<=").*(?=")')"
@@ -144,9 +144,27 @@ function pushImages() {
       docker tag spark-master:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} ${DOCKERHUB_REPOSITORY}/spark-master:${SPARK_VERSION}-hadoop-${HADOOP_VERSION}
       docker push ${DOCKERHUB_REPOSITORY}/spark-master:${SPARK_VERSION}-hadoop-${HADOOP_VERSION}
 
+      if [[ "${SPARK_VERSION}" == "3.0.0" ]]
+      then
+
+        docker login
+        docker tag spark-master:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} ${DOCKERHUB_REPOSITORY}/spark-master:latest
+        docker push ${DOCKERHUB_REPOSITORY}/spark-master:latest
+
+      fi
+
       docker login
       docker tag spark-worker:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} ${DOCKERHUB_REPOSITORY}/spark-worker:${SPARK_VERSION}-hadoop-${HADOOP_VERSION}
       docker push ${DOCKERHUB_REPOSITORY}/spark-worker:${SPARK_VERSION}-hadoop-${HADOOP_VERSION}
+
+      if [[ "${SPARK_VERSION}" == "3.0.0" ]]
+      then
+
+        docker login
+        docker tag spark-worker:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} ${DOCKERHUB_REPOSITORY}/spark-worker:latest
+        docker push ${DOCKERHUB_REPOSITORY}/spark-worker:latest
+
+      fi
 
     fi
 
@@ -156,6 +174,15 @@ function pushImages() {
       docker login
       docker tag jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION} ${DOCKERHUB_REPOSITORY}/jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION}
       docker push ${DOCKERHUB_REPOSITORY}/jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION}
+
+      if [[ "${SPARK_VERSION}" == "3.0.0" ]]
+      then
+
+        docker login
+        docker tag jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION} ${DOCKERHUB_REPOSITORY}/jupyterlab:latest
+        docker push ${DOCKERHUB_REPOSITORY}/jupyterlab:latest
+
+      fi
 
     fi
 
@@ -169,3 +196,4 @@ cleanContainers;
 cleanImages;
 cleanVolume;
 buildImages;
+# pushImages;

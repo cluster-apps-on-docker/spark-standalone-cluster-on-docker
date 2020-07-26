@@ -60,12 +60,12 @@ jobs:
           SPARK_VERSION: "3.0.0"
           HADOOP_VERSION: "2.7"
         run: |
-        docker build \
-        --build-arg build_date="${BUILD_DATE}" \
-        --build-arg spark_version="${SPARK_VERSION}" \
-        --build-arg hadoop_version="${HADOOP_VERSION}" \
-        -f docker/spark-master/Dockerfile \
-        -t spark-master:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} .
+          docker build \
+          --build-arg build_date="${BUILD_DATE}" \
+          --build-arg spark_version="${SPARK_VERSION}" \
+          --build-arg hadoop_version="${HADOOP_VERSION}" \
+          -f docker/spark-master/Dockerfile \
+          -t spark-master:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} .
 
   spark-worker-image:
     name: Spark Master Image
@@ -78,9 +78,9 @@ jobs:
           SPARK_VERSION: "3.0.0"
           HADOOP_VERSION: "2.7"
         run: |
-        docker build \
-        --build-arg build_date="${BUILD_DATE}" \
-        --build-arg spark_version="${SPARK_VERSION}" \
-        --build-arg hadoop_version="${HADOOP_VERSION}" \
-        -f docker/spark-worker/Dockerfile \
-        -t spark-worker:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} .
+          docker build \
+          --build-arg build_date="${BUILD_DATE}" \
+          --build-arg spark_version="${SPARK_VERSION}" \
+          --build-arg hadoop_version="${HADOOP_VERSION}" \
+          -f docker/spark-worker/Dockerfile \
+          -t spark-worker:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} .

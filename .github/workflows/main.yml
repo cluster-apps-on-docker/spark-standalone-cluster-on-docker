@@ -5,12 +5,9 @@ on:
     - cron:  '0 0 * * MON-FRI'
 
 jobs:
-  
   base-image:
-    
     name: Base Image
     runs-on: ubuntu-latest
-        
     steps:
       - name: Build docker image
         env:
@@ -22,4 +19,3 @@ jobs:
           --build-arg scala_version="${SCALA_VERSION}" \
           -f buid/docker/base/Dockerfile \
           -t base:latest .
- 

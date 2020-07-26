@@ -1,6 +1,6 @@
 ---
-name: Bug report
-about: Create a report to help us improve
+name: Bug Issue
+about: Create a bug issue to help us improve the project
 title: "[BUG]"
 labels: ''
 assignees: andre-marcos-perez

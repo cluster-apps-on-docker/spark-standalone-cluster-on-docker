@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Create a report to help us improve
+about: Please follow the template bellow to help us improve.
 title: "[BUG]"
 labels: ''
 assignees: andre-marcos-perez

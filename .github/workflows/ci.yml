@@ -1,6 +1,6 @@
 # -- Build Apache Spark Standalone Cluster Docker Images
 
-name: Docker Hub CI
+name: Build
 
 # ----------------------------------------------------------------------------------------------------------------------
 # -- Trigger -----------------------------------------------------------------------------------------------------------
@@ -8,7 +8,7 @@ name: Docker Hub CI
 
 on:
   schedule:
-    - cron:  '0/30 * * * MON-FRI'
+    - cron:  '0/10 * * * MON-FRI'
 
 # ----------------------------------------------------------------------------------------------------------------------
 # -- Jobs --------------------------------------------------------------------------------------------------------------
@@ -26,9 +26,4 @@ jobs:
         env:
           BUILD_DATE: "$(date -u +'%Y-%m-%d')"
           SCALA_VERSION: "2.12.11"
-        run: |
-          docker build \
-          --build-arg build_date="${BUILD_DATE}" \
-          --build-arg scala_version="${SCALA_VERSION}" \
-          -f buid/docker/base/Dockerfile \
-          -t base:latest .
+        run: docker build --build-arg build_date="${BUILD_DATE}" --build-arg scala_version="${SCALA_VERSION}" -f buid/docker/base/Dockerfile -t base:latest .

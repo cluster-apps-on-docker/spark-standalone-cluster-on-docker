@@ -8,7 +8,7 @@ name: Build
 
 on:
   schedule:
-    - cron:  '0 0/1 * * *'
+    - cron:  '0 0/6 * * *'
 
 # ----------------------------------------------------------------------------------------------------------------------
 # -- Jobs --------------------------------------------------------------------------------------------------------------
@@ -28,7 +28,7 @@ jobs:
           docker build \
             --build-arg build_date="${BUILD_DATE}" \
             --build-arg scala_version="${SCALA_VERSION}" \
-            -f buid/docker/base/Dockerfile \
+            -f build/docker/base/Dockerfile \
             -t base:latest .
 
   spark-base-image:
@@ -46,7 +46,7 @@ jobs:
               --build-arg build_date="${BUILD_DATE}" \
               --build-arg spark_version="${SPARK_VERSION}" \
               --build-arg hadoop_version="${HADOOP_VERSION}" \
-              -f docker/spark-base/Dockerfile \
+              -f build/docker/spark-base/Dockerfile \
               -t spark-base:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} .
 
   spark-master-image:
@@ -64,7 +64,7 @@ jobs:
             --build-arg build_date="${BUILD_DATE}" \
             --build-arg spark_version="${SPARK_VERSION}" \
             --build-arg hadoop_version="${HADOOP_VERSION}" \
-            -f docker/spark-master/Dockerfile \
+            -f build/docker/spark-master/Dockerfile \
             -t spark-master:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} .
 
   spark-worker-image:
@@ -82,7 +82,7 @@ jobs:
             --build-arg build_date="${BUILD_DATE}" \
             --build-arg spark_version="${SPARK_VERSION}" \
             --build-arg hadoop_version="${HADOOP_VERSION}" \
-            -f docker/spark-worker/Dockerfile \
+            -f build/docker/spark-worker/Dockerfile \
             -t spark-worker:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} .
 
   jupyterlab-image:
@@ -100,5 +100,5 @@ jobs:
             --build-arg build_date="${BUILD_DATE}" \
             --build-arg spark_version="${SPARK_VERSION}" \
             --build-arg jupyterlab_version="${JUPYTERLAB_VERSION}" \
-            -f docker/jupyterlab/Dockerfile \
+            -f build/docker/jupyterlab/Dockerfile \
             -t jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION} .

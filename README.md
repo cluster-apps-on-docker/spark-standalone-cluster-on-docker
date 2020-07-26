@@ -105,25 +105,7 @@ docker-compose up
 
 ## <a name="contributing"></a>Contributing
 
-We'd love some help. To contribute, follow the steps bellow:
-
-1. Fork the project;
-2. Create your feature branch, we use [gitflow](https://github.com/nvie/gitflow);
-3. Do your magic :rainbow:;
-4. Commit your changes;
-5. Push to your feature branch;
-6. Create a [new pull request](https://github.com/andre-marcos-perez/spark-cluster-on-docker/pulls).
-
-Some ideas:
-
-- Microsoft Windows build script;
-- DockerHub CI/CD integration;
-- Spark submit support;
-- JupyterLab Scala kernel;
-- Jupyter notebook with Apache Spark Scala API examples;
-- JupyterLab R kernel;
-- Jupyter notebook with Apache Spark R API examples;
-- Test coverage.
+We'd love some help. To contribute, please read [this file](CONTRIBUTING.md).
 
 ## <a name="dockerhub-metrics"></a>DockerHub Metrics
 

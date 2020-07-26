@@ -6,11 +6,13 @@
 # -- Variables ---------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
 
+DOCKERHUB_REPOSITORY="andreper"
+BUILD_DATE="$(date -u +'%Y-%m-%d')"
+
 SHOULD_BUILD_BASE="$(grep -m 1 build_base build.yml | grep -o -P '(?<=").*(?=")')"
 SHOULD_BUILD_SPARK="$(grep -m 1 build_spark build.yml | grep -o -P '(?<=").*(?=")')"
 SHOULD_BUILD_JUPYTERLAB="$(grep -m 1 build_jupyter build.yml | grep -o -P '(?<=").*(?=")')"
 
-BUILD_DATE="$(date -u +'%Y-%m-%d')"
 SCALA_VERSION="$(grep -m 1 scala build.yml | grep -o -P '(?<=").*(?=")')"
 SPARK_VERSION="$(grep -m 1 spark build.yml | grep -o -P '(?<=").*(?=")')"
 HADOOP_VERSION="$(grep -m 1 hadoop build.yml | grep -o -P '(?<=").*(?=")')"
@@ -63,21 +65,25 @@ function cleanImages() {
 
     if [[ "${SHOULD_BUILD_JUPYTERLAB}" == "true" ]]
     then
-      docker rmi "$(docker images | grep 'jupyterlab' | awk '{print $3}')"
+      docker rmi -f "$(docker images | grep -m 1 'jupyterlab' | awk '{print $3}')"
     fi
 
     if [[ "${SHOULD_BUILD_SPARK}" == "true" ]]
     then
-      docker rmi "$(docker images | grep 'spark-worker' | awk '{print $3}')"
-      docker rmi "$(docker images | grep 'spark-master' | awk '{print $3}')"
-      docker rmi "$(docker images | grep 'spark-base' | awk '{print $3}')"
+      docker rmi -f "$(docker images | grep -m 1 'spark-worker' | awk '{print $3}')"
+      docker rmi -f "$(docker images | grep -m 1 'spark-master' | awk '{print $3}')"
+      docker rmi -f "$(docker images | grep -m 1 'spark-base' | awk '{print $3}')"
     fi
 
     if [[ "${SHOULD_BUILD_BASE}" == "true" ]]
     then
-      docker rmi "$(docker images | grep 'base' | awk '{print $3}')"
+      docker rmi -f "$(docker images | grep -m 1 'base' | awk '{print $3}')"
     fi
 
+}
+
+function cleanVolume() {
+  docker volume rm "hadoop-distributed-file-system"
 }
 
 function buildImages() {
@@ -88,7 +94,7 @@ function buildImages() {
       --build-arg build_date="${BUILD_DATE}" \
       --build-arg scala_version="${SCALA_VERSION}" \
       -f docker/base/Dockerfile \
-      -t base .
+      -t base:latest .
   fi
 
   if [[ "${SHOULD_BUILD_SPARK}" == "true" ]]
@@ -99,15 +105,19 @@ function buildImages() {
       --build-arg spark_version="${SPARK_VERSION}" \
       --build-arg hadoop_version="${HADOOP_VERSION}" \
       -f docker/spark-base/Dockerfile \
-      -t spark-base:${SPARK_VERSION} .
+      -t spark-base:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} .
 
     docker build \
       --build-arg build_date="${BUILD_DATE}" \
+      --build-arg spark_version="${SPARK_VERSION}" \
+      --build-arg hadoop_version="${HADOOP_VERSION}" \
       -f docker/spark-master/Dockerfile \
       -t spark-master:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} .
 
     docker build \
       --build-arg build_date="${BUILD_DATE}" \
+      --build-arg spark_version="${SPARK_VERSION}" \
+      --build-arg hadoop_version="${HADOOP_VERSION}" \
       -f docker/spark-worker/Dockerfile \
       -t spark-worker:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} .
 
@@ -125,8 +135,57 @@ function buildImages() {
 
 }
 
-function cleanVolume() {
-  docker volume rm "hadoop-distributed-file-system"
+function pushImages() {
+
+    if [[ "${SHOULD_BUILD_SPARK}" == "true" ]]
+    then
+
+      docker login
+      docker tag spark-master:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} ${DOCKERHUB_REPOSITORY}/spark-master:${SPARK_VERSION}-hadoop-${HADOOP_VERSION}
+      docker push ${DOCKERHUB_REPOSITORY}/spark-master:${SPARK_VERSION}-hadoop-${HADOOP_VERSION}
+
+      if [[ "${SPARK_VERSION}" == "3.0.0" ]]
+      then
+
+        docker login
+        docker tag spark-master:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} ${DOCKERHUB_REPOSITORY}/spark-master:latest
+        docker push ${DOCKERHUB_REPOSITORY}/spark-master:latest
+
+      fi
+
+      docker login
+      docker tag spark-worker:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} ${DOCKERHUB_REPOSITORY}/spark-worker:${SPARK_VERSION}-hadoop-${HADOOP_VERSION}
+      docker push ${DOCKERHUB_REPOSITORY}/spark-worker:${SPARK_VERSION}-hadoop-${HADOOP_VERSION}
+
+      if [[ "${SPARK_VERSION}" == "3.0.0" ]]
+      then
+
+        docker login
+        docker tag spark-worker:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} ${DOCKERHUB_REPOSITORY}/spark-worker:latest
+        docker push ${DOCKERHUB_REPOSITORY}/spark-worker:latest
+
+      fi
+
+    fi
+
+    if [[ "${SHOULD_BUILD_JUPYTERLAB}" == "true" ]]
+    then
+
+      docker login
+      docker tag jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION} ${DOCKERHUB_REPOSITORY}/jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION}
+      docker push ${DOCKERHUB_REPOSITORY}/jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION}
+
+      if [[ "${SPARK_VERSION}" == "3.0.0" ]]
+      then
+
+        docker login
+        docker tag jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION} ${DOCKERHUB_REPOSITORY}/jupyterlab:latest
+        docker push ${DOCKERHUB_REPOSITORY}/jupyterlab:latest
+
+      fi
+
+    fi
+
 }
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -137,3 +196,4 @@ cleanContainers;
 cleanImages;
 cleanVolume;
 buildImages;
+# pushImages;

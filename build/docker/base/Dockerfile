@@ -14,7 +14,7 @@ LABEL org.label-schema.schema-version="1.0"
 
 # -- Layer: OS + Python 3.7 + Scala 2.11
 
-ARG scala_version=2.12.11
+ARG scala_version
 ARG shared_workspace=/opt/workspace
 
 RUN mkdir -p ${shared_workspace}/data && \

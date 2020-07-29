@@ -3,15 +3,15 @@ name: Bug Issue
 about: Create a bug issue to help us improve the project
 title: "[BUG]"
 labels: ''
-assignees: andre-marcos-perez
+assignees: 'andre-marcos-perez'
 
 ---
 
 ## Introduction
 
-Hi there, thanks for helping the project! We are doing our best to help the community to learn and practice distributed and parallel computing through our projects. Please follow the template below to report bugs and issues.
+Hi there, thanks for helping the project! We are doing our best to help the community to learn and practice distributed and parallel computing through our projects. Please follow the template below to report bugs.
 
-## Issue
+## Bug
 
 ### Expected behaviour
 

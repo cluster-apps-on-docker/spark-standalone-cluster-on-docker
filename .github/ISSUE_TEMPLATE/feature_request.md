@@ -13,8 +13,6 @@ Hi there, thanks for helping the project! We are doing our best to help the comm
 
 ## Feature
 
-### Context
-
-### Feature description
+### Description
 
 ### Comments (optional)

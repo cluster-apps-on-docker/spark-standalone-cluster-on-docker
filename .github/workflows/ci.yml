@@ -1,104 +1,233 @@
-# -- Build Apache Spark Standalone Cluster Docker Images
-
 name: Build
 
-# ----------------------------------------------------------------------------------------------------------------------
-# -- Trigger -----------------------------------------------------------------------------------------------------------
-# ----------------------------------------------------------------------------------------------------------------------
-
 on:
+
   schedule:
     - cron:  '0 0/6 * * *'
 
-# ----------------------------------------------------------------------------------------------------------------------
-# -- Jobs --------------------------------------------------------------------------------------------------------------
-# ----------------------------------------------------------------------------------------------------------------------
-
 jobs:
 
-  cluster-base-image:
-    name: Cluster Base Image
-    runs-on: ubuntu-latest
-    steps:
-      - name: Build Docker Image
-        env:
-          BUILD_DATE: "$(date -u +'%Y-%m-%d')"
-          SCALA_VERSION: "2.12.11"
-        run: |
-          docker build \
-            --build-arg build_date="${BUILD_DATE}" \
-            --build-arg scala_version="${SCALA_VERSION}" \
-            -f build/docker/base/Dockerfile \
-            -t base:latest .
+  spark-images:
 
-  spark-base-image:
-      name: Spark Base Image
+      name: Spark Images
       runs-on: ubuntu-latest
-      needs: cluster-base-image
+      env:
+        HADOOP_VERSION: "2.7"
+        SCALA_VERSION: "2.12.11"
+        DOCKERHUB_USR: ${{ secrets.DOCKERHUB_USR }}
+        DOCKERHUB_PWD: ${{ secrets.DOCKERHUB_PWD }}
+
       steps:
-        - name: Build Docker Image
-          env:
-            BUILD_DATE: "$(date -u +'%Y-%m-%d')"
-            SPARK_VERSION: "3.0.0"
-            HADOOP_VERSION: "2.7"
+
+        - name: Checkout Code
+          uses: actions/checkout@master
+
+        - name: Build Base Image
           run: |
+            cd ${GITHUB_WORKSPACE}/build
             docker build \
-              --build-arg build_date="${BUILD_DATE}" \
+              --build-arg build_date="$(date -u +'%Y-%m-%d')" \
+              --build-arg scala_version="${SCALA_VERSION}" \
+              -f docker/base/Dockerfile \
+              -t base:latest .
+
+        - name: Build Spark Base Image - Spark v3.0.0 (latest)
+          env:
+            SPARK_VERSION: "3.0.0"
+          run: |
+            cd ${GITHUB_WORKSPACE}/build
+            docker build \
+              --build-arg build_date="$(date -u +'%Y-%m-%d')" \
               --build-arg spark_version="${SPARK_VERSION}" \
               --build-arg hadoop_version="${HADOOP_VERSION}" \
-              -f build/docker/spark-base/Dockerfile \
+              -f docker/spark-base/Dockerfile \
               -t spark-base:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} .
 
-  spark-master-image:
-    name: Spark Master Image
-    runs-on: ubuntu-latest
-    needs: spark-base-image
-    steps:
-      - name: Build Docker Image
-        env:
-          BUILD_DATE: "$(date -u +'%Y-%m-%d')"
-          SPARK_VERSION: "3.0.0"
-          HADOOP_VERSION: "2.7"
-        run: |
-          docker build \
-            --build-arg build_date="${BUILD_DATE}" \
-            --build-arg spark_version="${SPARK_VERSION}" \
-            --build-arg hadoop_version="${HADOOP_VERSION}" \
-            -f build/docker/spark-master/Dockerfile \
-            -t spark-master:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} .
+        - name: Build & Push Spark Master Image - Spark v3.0.0 (latest)
+          env:
+            SPARK_VERSION: "3.0.0"
+          run: |
+            cd ${GITHUB_WORKSPACE}/build
+            docker build \
+              --build-arg build_date="$(date -u +'%Y-%m-%d')" \
+              --build-arg spark_version="${SPARK_VERSION}" \
+              --build-arg hadoop_version="${HADOOP_VERSION}" \
+              -f docker/spark-master/Dockerfile \
+              -t spark-master:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} .
+            echo ${DOCKERHUB_PWD} | docker login -u ${DOCKERHUB_USR} --password-stdin
+            docker tag spark-master:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} ${DOCKERHUB_USR}/spark-master:${SPARK_VERSION}-hadoop-${HADOOP_VERSION}
+            docker push ${DOCKERHUB_USR}/spark-master:${SPARK_VERSION}-hadoop-${HADOOP_VERSION}
+            docker tag spark-master:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} ${DOCKERHUB_USR}/spark-master:latest
+            docker push ${DOCKERHUB_USR}/spark-master:latest
 
-  spark-worker-image:
-    name: Spark Master Image
-    runs-on: ubuntu-latest
-    needs: spark-base-image
-    steps:
-      - name: Build Docker Image
-        env:
-          BUILD_DATE: "$(date -u +'%Y-%m-%d')"
-          SPARK_VERSION: "3.0.0"
-          HADOOP_VERSION: "2.7"
-        run: |
-          docker build \
-            --build-arg build_date="${BUILD_DATE}" \
-            --build-arg spark_version="${SPARK_VERSION}" \
-            --build-arg hadoop_version="${HADOOP_VERSION}" \
-            -f build/docker/spark-worker/Dockerfile \
-            -t spark-worker:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} .
+        - name: Build & Push Spark Worker Image - Spark v3.0.0 (latest)
+          env:
+            SPARK_VERSION: "3.0.0"
+          run: |
+            cd ${GITHUB_WORKSPACE}/build
+            docker build \
+              --build-arg build_date="$(date -u +'%Y-%m-%d')" \
+              --build-arg spark_version="${SPARK_VERSION}" \
+              --build-arg hadoop_version="${HADOOP_VERSION}" \
+              -f docker/spark-worker/Dockerfile \
+              -t spark-worker:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} .
+            echo ${DOCKERHUB_PWD} | docker login -u ${DOCKERHUB_USR} --password-stdin
+            docker tag spark-worker:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} ${DOCKERHUB_USR}/spark-worker:${SPARK_VERSION}-hadoop-${HADOOP_VERSION}
+            docker push ${DOCKERHUB_USR}/spark-worker:${SPARK_VERSION}-hadoop-${HADOOP_VERSION}
+            docker tag spark-worker:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} ${DOCKERHUB_USR}/spark-worker:latest
+            docker push ${DOCKERHUB_USR}/spark-worker:latest
 
-  jupyterlab-image:
-    name: Spark Base Image
+        - name: Build Spark Base Image - Spark v2.4.4
+          env:
+            SPARK_VERSION: "2.4.4"
+          run: |
+            cd ${GITHUB_WORKSPACE}/build
+            docker build \
+              --build-arg build_date="$(date -u +'%Y-%m-%d')" \
+              --build-arg spark_version="${SPARK_VERSION}" \
+              --build-arg hadoop_version="${HADOOP_VERSION}" \
+              -f docker/spark-base/Dockerfile \
+              -t spark-base:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} .
+
+        - name: Build & Push Spark Master Image - Spark v2.4.4
+          env:
+            SPARK_VERSION: "2.4.4"
+          run: |
+            cd ${GITHUB_WORKSPACE}/build
+            docker build \
+              --build-arg build_date="$(date -u +'%Y-%m-%d')" \
+              --build-arg spark_version="${SPARK_VERSION}" \
+              --build-arg hadoop_version="${HADOOP_VERSION}" \
+              -f docker/spark-master/Dockerfile \
+              -t spark-master:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} .
+            echo ${DOCKERHUB_PWD} | docker login -u ${DOCKERHUB_USR} --password-stdin
+            docker tag spark-master:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} ${DOCKERHUB_USR}/spark-master:${SPARK_VERSION}-hadoop-${HADOOP_VERSION}
+            docker push ${DOCKERHUB_USR}/spark-master:${SPARK_VERSION}-hadoop-${HADOOP_VERSION}
+
+        - name: Build & Push Spark Worker Image - Spark v2.4.4
+          env:
+            SPARK_VERSION: "2.4.4"
+          run: |
+            cd ${GITHUB_WORKSPACE}/build
+            docker build \
+              --build-arg build_date="$(date -u +'%Y-%m-%d')" \
+              --build-arg spark_version="${SPARK_VERSION}" \
+              --build-arg hadoop_version="${HADOOP_VERSION}" \
+              -f docker/spark-worker/Dockerfile \
+              -t spark-worker:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} .
+            echo ${DOCKERHUB_PWD} | docker login -u ${DOCKERHUB_USR} --password-stdin
+            docker tag spark-worker:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} ${DOCKERHUB_USR}/spark-worker:${SPARK_VERSION}-hadoop-${HADOOP_VERSION}
+            docker push ${DOCKERHUB_USR}/spark-worker:${SPARK_VERSION}-hadoop-${HADOOP_VERSION}
+
+        - name: Build Spark Base Image - Spark v2.4.0
+          env:
+            SPARK_VERSION: "2.4.0"
+          run: |
+            cd ${GITHUB_WORKSPACE}/build
+            docker build \
+              --build-arg build_date="$(date -u +'%Y-%m-%d')" \
+              --build-arg spark_version="${SPARK_VERSION}" \
+              --build-arg hadoop_version="${HADOOP_VERSION}" \
+              -f docker/spark-base/Dockerfile \
+              -t spark-base:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} .
+
+        - name: Build & Push Spark Master Image - Spark v2.4.0
+          env:
+            SPARK_VERSION: "2.4.0"
+          run: |
+            cd ${GITHUB_WORKSPACE}/build
+            docker build \
+              --build-arg build_date="$(date -u +'%Y-%m-%d')" \
+              --build-arg spark_version="${SPARK_VERSION}" \
+              --build-arg hadoop_version="${HADOOP_VERSION}" \
+              -f docker/spark-master/Dockerfile \
+              -t spark-master:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} .
+            echo ${DOCKERHUB_PWD} | docker login -u ${DOCKERHUB_USR} --password-stdin
+            docker tag spark-master:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} ${DOCKERHUB_USR}/spark-master:${SPARK_VERSION}-hadoop-${HADOOP_VERSION}
+            docker push ${DOCKERHUB_USR}/spark-master:${SPARK_VERSION}-hadoop-${HADOOP_VERSION}
+
+        - name: Build & Push Spark Worker Image - Spark v2.4.0
+          env:
+            SPARK_VERSION: "2.4.0"
+          run: |
+            cd ${GITHUB_WORKSPACE}/build
+            docker build \
+              --build-arg build_date="$(date -u +'%Y-%m-%d')" \
+              --build-arg spark_version="${SPARK_VERSION}" \
+              --build-arg hadoop_version="${HADOOP_VERSION}" \
+              -f docker/spark-worker/Dockerfile \
+              -t spark-worker:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} .
+            echo ${DOCKERHUB_PWD} | docker login -u ${DOCKERHUB_USR} --password-stdin
+            docker tag spark-worker:${SPARK_VERSION}-hadoop-${HADOOP_VERSION} ${DOCKERHUB_USR}/spark-worker:${SPARK_VERSION}-hadoop-${HADOOP_VERSION}
+            docker push ${DOCKERHUB_USR}/spark-worker:${SPARK_VERSION}-hadoop-${HADOOP_VERSION}
+
+  jupyterlab-images:
+
+    name: JupyterLab Images
     runs-on: ubuntu-latest
-    needs: cluster-base-image
+    env:
+      SCALA_VERSION: "2.12.11"
+      JUPYTERLAB_VERSION: "2.1.4"
+      DOCKERHUB_USR: ${{ secrets.DOCKERHUB_USR }}
+      DOCKERHUB_PWD: ${{ secrets.DOCKERHUB_PWD }}
+
     steps:
-      - name: Build Docker Image
-        env:
-          BUILD_DATE: "$(date -u +'%Y-%m-%d')"
-          SPARK_VERSION: "3.0.0"
-          JUPYTERLAB_VERSION: "2.1.4"
+
+      - name: Checkout Code
+        uses: actions/checkout@master
+
+      - name: Build Base Image
         run: |
+          cd ${GITHUB_WORKSPACE}/build
           docker build \
-            --build-arg build_date="${BUILD_DATE}" \
+            --build-arg build_date="$(date -u +'%Y-%m-%d')" \
+            --build-arg scala_version="${SCALA_VERSION}" \
+            -f docker/base/Dockerfile \
+            -t base:latest .
+
+      - name: Build & Push JupyterLab Image - Spark v3.0.0 (latest)
+        env:
+          SPARK_VERSION: "3.0.0"
+        run: |
+          cd ${GITHUB_WORKSPACE}/build
+          docker build \
+            --build-arg build_date="$(date -u +'%Y-%m-%d')" \
             --build-arg spark_version="${SPARK_VERSION}" \
             --build-arg jupyterlab_version="${JUPYTERLAB_VERSION}" \
-            -f build/docker/jupyterlab/Dockerfile \
+            -f docker/jupyterlab/Dockerfile \
             -t jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION} .
+          echo ${DOCKERHUB_PWD} | docker login -u ${DOCKERHUB_USR} --password-stdin
+          docker tag jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION} ${DOCKERHUB_USR}/jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION}
+          docker push ${DOCKERHUB_USR}/jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION}
+          docker tag jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION} ${DOCKERHUB_USR}/jupyterlab:latest
+          docker push ${DOCKERHUB_USR}/jupyterlab:latest
+
+      - name: Build & Push JupyterLab Image - Spark v2.4.4
+        env:
+          SPARK_VERSION: "2.4.4"
+        run: |
+          cd ${GITHUB_WORKSPACE}/build
+          docker build \
+            --build-arg build_date="$(date -u +'%Y-%m-%d')" \
+            --build-arg spark_version="${SPARK_VERSION}" \
+            --build-arg jupyterlab_version="${JUPYTERLAB_VERSION}" \
+            -f docker/jupyterlab/Dockerfile \
+            -t jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION} .
+          echo ${DOCKERHUB_PWD} | docker login -u ${DOCKERHUB_USR} --password-stdin
+          docker tag jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION} ${DOCKERHUB_USR}/jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION}
+          docker push ${DOCKERHUB_USR}/jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION}
+
+      - name: Build & Push JupyterLab Image - Spark v2.4.0
+        env:
+          SPARK_VERSION: "2.4.0"
+        run: |
+          cd ${GITHUB_WORKSPACE}/build
+          docker build \
+            --build-arg build_date="$(date -u +'%Y-%m-%d')" \
+            --build-arg spark_version="${SPARK_VERSION}" \
+            --build-arg jupyterlab_version="${JUPYTERLAB_VERSION}" \
+            -f docker/jupyterlab/Dockerfile \
+            -t jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION} .
+          echo ${DOCKERHUB_PWD} | docker login -u ${DOCKERHUB_USR} --password-stdin
+          docker tag jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION} ${DOCKERHUB_USR}/jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION}
+          docker push ${DOCKERHUB_USR}/jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION}

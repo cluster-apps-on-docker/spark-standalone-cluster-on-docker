@@ -38,21 +38,23 @@ jobs:
         env:
           SCALA_VERSION: "2.12.11"
         run: |
+          cd ${GITHUB_WORKSPACE}/build
           docker build \
             --build-arg build_date="$(date -u +'%Y-%m-%d')" \
             --build-arg scala_version="${SCALA_VERSION}" \
-            -f build/docker/base/Dockerfile \
+            -f docker/base/Dockerfile \
             -t base:latest .
       - name: Build JupyterLab Image
         env:
           SPARK_VERSION: "3.0.0"
           JUPYTERLAB_VERSION: "2.1.4"
         run: |
+          cd ${GITHUB_WORKSPACE}/build
           docker build \
             --build-arg build_date="$(date -u +'%Y-%m-%d')" \
             --build-arg spark_version="${SPARK_VERSION}" \
             --build-arg jupyterlab_version="${JUPYTERLAB_VERSION}" \
-            -f build/docker/jupyterlab/Dockerfile \
+            -f docker/jupyterlab/Dockerfile \
             -t jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION} .
       - name: Publish JupyterLab Image
         env:

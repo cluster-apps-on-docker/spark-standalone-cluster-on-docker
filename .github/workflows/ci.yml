@@ -24,11 +24,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Testing ENV and RUN
-        env:
-          BUILD_DATE: "$(date -u +'%Y-%m-%d')"
         run: |
-          ls;
-          echo "${BUILD_DATE}"
+          echo "$(ls)";
+          echo "$(date -u +'%Y-%m-%d')"
 
 #  cluster-base-image:
 #    name: Cluster Base Image

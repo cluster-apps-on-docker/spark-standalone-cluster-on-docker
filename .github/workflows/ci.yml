@@ -19,33 +19,31 @@ on:
 
 jobs:
 
+#  list-dir:
+#    name: List directory
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@master
+#      - name: Testing ENV and RUN
+#        run: |
+#          echo "$(ls .)";
+#          echo "$(date -u +'%Y-%m-%d')"
 
-
-  list-dir:
-    name: List directory
+  cluster-base-image:
+    name: Cluster Base Image
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: Testing ENV and RUN
+      - name: Build Docker Image
+        env:
+          SCALA_VERSION: "2.12.11"
         run: |
-          echo "$(ls .)";
-          echo "$(date -u +'%Y-%m-%d')"
+          docker build \
+            --build-arg build_date="$(date -u +'%Y-%m-%d') \
+            --build-arg scala_version="${SCALA_VERSION}" \
+            -f build/docker/base/Dockerfile \
+            -t base:latest .
 
-#  cluster-base-image:
-#    name: Cluster Base Image
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Build Docker Image
-#        env:
-#          BUILD_DATE: "$(date -u +'%Y-%m-%d')"
-#          SCALA_VERSION: "2.12.11"
-#        run: |
-#          docker build \
-#            --build-arg build_date="${BUILD_DATE}" \
-#            --build-arg scala_version="${SCALA_VERSION}" \
-#            -f build/docker/base/Dockerfile \
-#            -t base:latest .
-#
 #  spark-base-image:
 #      name: Spark Base Image
 #      runs-on: ubuntu-latest

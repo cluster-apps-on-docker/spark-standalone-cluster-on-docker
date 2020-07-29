@@ -25,7 +25,7 @@ jobs:
     steps:
       - name: Testing ENV and RUN
         run: |
-          echo "$(ls)";
+          echo "$(pwd)";
           echo "$(date -u +'%Y-%m-%d')"
 
 #  cluster-base-image:

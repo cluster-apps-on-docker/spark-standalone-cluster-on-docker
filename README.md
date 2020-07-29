@@ -6,10 +6,17 @@ This project gives you an out-of-the-box **Apache Spark** cluster in standalone 
 <p align="center"><img src="docs/image/cluster-architecture.png"></p>
 
 ![build](https://github.com/andre-marcos-perez/spark-standalone-cluster-on-docker/workflows/build/badge.svg?branch=master)
-![jupyterlab-latest-version](https://img.shields.io/docker/v/andreper/jupyterlab/2.1.4-spark-3.0.0?color=brightgreen&label=jupyterlab-latest)
+![jupyterlab-latest-version](https://img.shields.io/docker/v/andreper/jupyterlab/2.1.4-spark-3.0.0?color=yellow&label=jupyterlab-latest)
 ![spark-latest-version](https://img.shields.io/docker/v/andreper/spark-master/3.0.0-hadoop-2.7?color=yellow&label=spark-latest)
 ![docker-version](https://img.shields.io/badge/docker-v1.13.0%2B-blue)
 ![docker-compose-version](https://img.shields.io/badge/docker--compose-v3.0%2B-blue)
+
+## TL;DR
+
+```bash
+curl -LO https://raw.githubusercontent.com/andre-marcos-perez/spark-standalone-cluster-on-docker/master/docker-compose.yml
+docker-compose up
+```
 
 ## Contents
 
@@ -109,9 +116,9 @@ We'd love some help. To contribute, please read [this file](CONTRIBUTING.md).
 
 | Image                                                              | Latest Version Size                                                                                 | Pulls                                                                     |
 | ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| **[JupyterLab](https://hub.docker.com/r/andreper/jupyterlab)**     | ![docker-size](https://img.shields.io/docker/image-size/andreper/jupyterlab/latest-spark-latest)    | ![docker-pull](https://img.shields.io/docker/pulls/andreper/jupyterlab)   |
-| **[Spark Master](https://hub.docker.com/r/andreper/spark-master)** | ![docker-size](https://img.shields.io/docker/image-size/andreper/spark-master/latest-hadoop-latest) | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-master) |
-| **[Spark Worker](https://hub.docker.com/r/andreper/spark-worker)** | ![docker-size](https://img.shields.io/docker/image-size/andreper/spark-worker/latest-hadoop-latest) | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-worker) |
+| **[JupyterLab](https://hub.docker.com/r/andreper/jupyterlab)**     | ![docker-size](https://img.shields.io/docker/image-size/andreper/jupyterlab/latest)    | ![docker-pull](https://img.shields.io/docker/pulls/andreper/jupyterlab)   |
+| **[Spark Master](https://hub.docker.com/r/andreper/spark-master)** | ![docker-size](https://img.shields.io/docker/image-size/andreper/spark-master/latest) | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-master) |
+| **[Spark Worker](https://hub.docker.com/r/andreper/spark-worker)** | ![docker-size](https://img.shields.io/docker/image-size/andreper/spark-worker/latest) | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-worker) |
 
 ## <a name="contributors"></a>Contributors
 

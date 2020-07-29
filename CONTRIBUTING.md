@@ -14,11 +14,11 @@ and parallel computing through our projects. Please follow the template bellow t
 
 ### Contributions ideas
 
-- Microsoft Windows build script;
-- DockerHub CI/CD integration;
-- Spark submit support;
-- JupyterLab Scala kernel;
-- Jupyter notebook with Apache Spark Scala API examples;
-- JupyterLab R kernel;
-- Jupyter notebook with Apache Spark R API examples;
-- Test coverage.
+- [] Microsoft Windows build script;
+- [x] DockerHub CI/CD integration;
+- [] Spark submit support;
+- [] JupyterLab Scala kernel;
+- [] Jupyter notebook with Apache Spark Scala API examples;
+- [] JupyterLab R kernel;
+- [] Jupyter notebook with Apache Spark R API examples;
+- [] Test coverage.

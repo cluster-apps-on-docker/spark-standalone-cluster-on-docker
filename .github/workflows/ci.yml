@@ -1,11 +1,9 @@
 name: Docker Hub Build
 
 on:
-  push:
-    branches: [ feature/github-ci ]
 
-#  schedule:
-#    - cron:  '0 0/6 * * *'
+  schedule:
+    - cron:  '0 0/6 * * *'
 
 jobs:
 

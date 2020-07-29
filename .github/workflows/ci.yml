@@ -24,8 +24,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Testing ENV and RUN
+        uses: actions/checkout
         run: |
-          echo "$(ls ..)";
+          echo "$(ls .)";
           echo "$(date -u +'%Y-%m-%d')"
 
 #  cluster-base-image:

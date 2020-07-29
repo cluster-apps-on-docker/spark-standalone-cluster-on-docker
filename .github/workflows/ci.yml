@@ -27,8 +27,8 @@ jobs:
         env:
           BUILD_DATE: "$(date -u +'%Y-%m-%d')"
         run: |
-          ls,
-          echo "${BUILD_DATE}".
+          ls;
+          echo "${BUILD_DATE}"
 
 #  cluster-base-image:
 #    name: Cluster Base Image

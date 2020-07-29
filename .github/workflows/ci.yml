@@ -19,13 +19,16 @@ on:
 
 jobs:
 
+
+
   list-dir:
     name: List directory
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@master
       - name: Testing ENV and RUN
         run: |
-          echo "$(ls ${GITHUB_WORKSPACE})";
+          echo "$(ls .)";
           echo "$(date -u +'%Y-%m-%d')"
 
 #  cluster-base-image:

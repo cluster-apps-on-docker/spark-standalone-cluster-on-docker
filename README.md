@@ -5,7 +5,7 @@ This project gives you an out-of-the-box **Apache Spark** cluster in standalone 
 
 <p align="center"><img src="docs/image/cluster-architecture.png"></p>
 
-![Build](https://github.com/andre-marcos-perez/spark-standalone-cluster-on-docker/workflows/Build/badge.svg?branch=master)
+![build](https://github.com/andre-marcos-perez/spark-standalone-cluster-on-docker/workflows/build/badge.svg?branch=master)
 ![jupyterlab-latest-version](https://img.shields.io/docker/v/andreper/jupyterlab/2.1.4-spark-3.0.0?color=brightgreen&label=jupyterlab-latest)
 ![spark-latest-version](https://img.shields.io/docker/v/andreper/spark-master/3.0.0-hadoop-2.7?color=yellow&label=spark-latest)
 ![docker-version](https://img.shields.io/badge/docker-v1.13.0%2B-blue)

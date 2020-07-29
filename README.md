@@ -1,24 +1,22 @@
 # Apache Spark Standalone Cluster on Docker
-> Build your own Apache Spark Standalone cluster with a JupyterLab interface on Docker :zap:
+> The project just got its [own article](https://towardsdatascience.com/apache-spark-cluster-on-docker-ft-a-juyterlab-interface-418383c95445) at Towards Data Science Medium blog! :sparkles:
 
-This project gives you an out-of-the-box **Apache Spark** cluster with a **JupyterLab** interface and a simulated **Apache Hadoop Distributed File System**, all built on top of **Docker**. Learn Apache Spark through its Python API, **PySpark**, by running the [Jupyter notebooks](build/workspace/pyspark.ipynb) with examples on how to read, process and write data.
+This project gives you an out-of-the-box **Apache Spark** cluster in standalone mode with a **JupyterLab** interface and a simulated **Apache Hadoop Distributed File System**, all built on top of **Docker**. Learn Apache Spark through its Python API, **PySpark**, by running the [Jupyter notebooks](build/workspace/pyspark.ipynb) with examples on how to read, process and write data.
 
 <p align="center"><img src="docs/image/cluster-architecture.png"></p>
 
+![Build](https://github.com/andre-marcos-perez/spark-standalone-cluster-on-docker/workflows/Build/badge.svg?branch=master)
 ![jupyterlab-latest-version](https://img.shields.io/docker/v/andreper/jupyterlab/2.1.4-spark-3.0.0?color=brightgreen&label=jupyterlab-latest)
 ![spark-latest-version](https://img.shields.io/docker/v/andreper/spark-master/3.0.0-hadoop-2.7?color=yellow&label=spark-latest)
 ![docker-version](https://img.shields.io/badge/docker-v1.13.0%2B-blue)
 ![docker-compose-version](https://img.shields.io/badge/docker--compose-v3.0%2B-blue)
-![repository-license](https://img.shields.io/github/license/andre-marcos-perez/spark-cluster-on-docker?color=orange)
-
-> The project just got its [own article](https://towardsdatascience.com/apache-spark-cluster-on-docker-ft-a-juyterlab-interface-418383c95445) at Towards Data Science Medium blog! :sparkles:
 
 ## Contents
 
 - [Quick Start](#quick-start)
 - [Tech Stack Version](#tech-stack-version)
 - [Contributing](#contributing)
-- [DockerHub Metrics](#dockerhub-metrics)
+- [Docker Hub Metrics](#docker-hub-metrics)
 - [Contributors](#contributors)
 
 ## <a name="quick-start"></a>Quick Start
@@ -107,7 +105,7 @@ docker-compose up
 
 We'd love some help. To contribute, please read [this file](CONTRIBUTING.md).
 
-## <a name="dockerhub-metrics"></a>DockerHub Metrics
+## <a name="docker-hub-metrics"></a>Docker Hub Metrics
 
 | Image                                                              | Latest Version Size                                                                                 | Pulls                                                                     |
 | ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |

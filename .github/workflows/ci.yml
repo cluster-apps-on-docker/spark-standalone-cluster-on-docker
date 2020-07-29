@@ -23,11 +23,12 @@ jobs:
     name: List directory
     runs-on: ubuntu-latest
     steps:
-      env:
-        BUILD_DATE: "$(date -u +'%Y-%m-%d')"
-      run: |
-        ls
-        echo ${BUILD_DATE}
+      - name: Testing ENV and RUN
+        env:
+          BUILD_DATE: "$(date -u +'%Y-%m-%d')"
+        run: |
+          ls
+          echo ${BUILD_DATE}
 
 #  cluster-base-image:
 #    name: Cluster Base Image

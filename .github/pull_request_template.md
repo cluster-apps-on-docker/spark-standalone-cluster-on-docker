@@ -1,6 +1,8 @@
 ## Introduction
 
-Hi there, thanks for helping the project! We are doing our best to help the community to learn and practice distributed and parallel computing through our projects. Please follow the template below to create a pull request.
+Hi there, thanks for helping the project!
+
+We are doing our best to help the community to learn and practice parallel computing in distributed environments through our projects. :sparkles:
 
 ## Pull Request
 

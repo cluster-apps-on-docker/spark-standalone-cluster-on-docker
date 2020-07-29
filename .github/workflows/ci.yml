@@ -25,8 +25,7 @@ jobs:
     steps:
       - name: Testing ENV and RUN
         run: |
-          echo "${GITHUB_WORKSPACE}";
-          echo "$(ls .)";
+          echo "$(ls ${GITHUB_WORKSPACE})";
           echo "$(date -u +'%Y-%m-%d')"
 
 #  cluster-base-image:

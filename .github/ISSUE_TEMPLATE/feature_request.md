@@ -1,20 +1,20 @@
 ---
-name: Feature request
-about: Suggest an idea for this project
-title: ''
+name: Feature Request
+about: Create a feature request to help us improve the project
+title: '[FEATURE]'
 labels: ''
-assignees: ''
+assignees: 'andre-marcos-perez'
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+## Introduction
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+Hi there, thanks for helping the project! We are doing our best to help the community to learn and practice distributed and parallel computing through our projects. Please follow the template below to suggest new features.
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+## Feature
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+### Context
+
+### Feature description
+
+### Comments (optional)

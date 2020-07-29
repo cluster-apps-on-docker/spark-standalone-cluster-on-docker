@@ -39,7 +39,7 @@ jobs:
           SCALA_VERSION: "2.12.11"
         run: |
           docker build \
-            --build-arg build_date="$(date -u +'%Y-%m-%d') \
+            --build-arg build_date="$(date -u +'%Y-%m-%d')" \
             --build-arg scala_version="${SCALA_VERSION}" \
             -f build/docker/base/Dockerfile \
             -t base:latest .

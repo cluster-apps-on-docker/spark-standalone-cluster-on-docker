@@ -1,4 +1,4 @@
-name: Build & Push Docker Images
+name: Docker Hub Build
 
 on:
   push:

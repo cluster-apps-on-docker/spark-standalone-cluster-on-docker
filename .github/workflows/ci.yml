@@ -24,8 +24,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Testing ENV and RUN
-        uses: actions/checkout
         run: |
+          echo "${GITHUB_WORKSPACE}";
           echo "$(ls .)";
           echo "$(date -u +'%Y-%m-%d')"
 

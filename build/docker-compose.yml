@@ -12,7 +12,7 @@ services:
     volumes:
       - shared-workspace:/opt/workspace
   spark-master:
-    image: spark-master:3.0.0
+    image: spark-master:3.0.0-hadoop-2.7
     container_name: spark-master
     ports:
       - 8080:8080

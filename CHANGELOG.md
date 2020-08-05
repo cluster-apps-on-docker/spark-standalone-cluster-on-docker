@@ -2,8 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.0](https://github.com/andre-marcos-perez/spark-standalone-cluster-on-docker/releases/tag/v1.0.0) (2020-07-30)
+## [v1.0.0](https://github.com/andre-marcos-perez/spark-standalone-cluster-on-docker/releases/tag/v1.0.0) (2020-07-30)
+
+### Tech Stack
+
+ - **Infra**
+   - Python 3.7
+   - Scala 2.12
+   - Docker Engine 1.13.0+
+   - Docker Compose 1.10.0+
+
+ - **Apps**
+   - JupyterLab 2.1.4
+   - Apache Spark 2.4.0, 2.4.4 and 3.0.0
 
 ### Features
 
-- TODO
+ - Docker compose file to build the cluster from your own machine;
+ - Docker compose file to build the cluster from Docker Hub;
+ - GitHub Workflow CI with Docker Hub to build the cluster daily.
+
+### Repository
+
+- Contributing rules;
+- GitHub templates for Bug Issue, Feature Request and Pull Request.
+
+### Community
+
+ - Article on [Medium](https://towardsdatascience.com/apache-spark-cluster-on-docker-ft-a-juyterlab-interface-418383c95445).

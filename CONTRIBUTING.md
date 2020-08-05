@@ -16,7 +16,7 @@ parallel computing in distributed environments through our projects. :sparkles:
 ### Contributions ideas
 
 - [] Microsoft Windows build script;
-- [x] DockerHub CI/CD integration;
+- [x] Docker Hub CI/CD integration;
 - [] Spark submit support;
 - [] JupyterLab Scala kernel;
 - [] Jupyter notebook with Apache Spark Scala API examples;

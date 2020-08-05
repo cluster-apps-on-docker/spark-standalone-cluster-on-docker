@@ -37,7 +37,7 @@ docker-compose up
 | **Apache Spark Worker I**  | [localhost:8081](http://localhost:8081/) | Spark Worker node with 1 core and 512m of memory (default) |
 | **Apache Spark Worker II** | [localhost:8082](http://localhost:8082/) | Spark Worker node with 1 core and 512m of memory (default) |
 
-### Build from DockerHub
+### Build from Docker Hub
 
 1. Install [Docker and Docker Compose](https://docs.docker.com/get-docker/), check **infra** [supported versions](#tech-stack-version);
 2. Download the source code or clone the repository;

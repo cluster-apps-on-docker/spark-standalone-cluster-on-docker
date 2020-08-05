@@ -11,7 +11,7 @@ LABEL org.label-schema.description="JupyterLab image"
 LABEL org.label-schema.url="https://github.com/andre-marcos-perez/spark-cluster-on-docker"
 LABEL org.label-schema.schema-version="1.0"
 
-# -- Layer: JupyterLab
+# -- Layer: JupyterLab + Python kernel
 
 ARG spark_version
 ARG jupyterlab_version
@@ -20,6 +20,15 @@ RUN apt-get update -y && \
     apt-get install -y python3-pip python3-dev && \
     pip3 install --upgrade pip && \
     pip3 install pyspark==${spark_version} jupyterlab==${jupyterlab_version}
+
+# -- Layer: Scala kernel
+
+ARG scala_version
+
+RUN curl -Lo coursier https://git.io/coursier-cli && \
+    chmod +x coursier && \
+    ./coursier launch --fork almond:0.10.0 --scala ${scala_version} -- --install && \
+    rm -f coursier
 
 # -- Runtime
 

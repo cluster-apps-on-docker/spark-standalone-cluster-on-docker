@@ -9,7 +9,7 @@ This project gives you an out-of-the-box **Apache Spark** cluster in standalone 
 ![jupyterlab-latest-version](https://img.shields.io/docker/v/andreper/jupyterlab/2.1.4-spark-3.0.0?color=yellow&label=jupyterlab-latest)
 ![spark-latest-version](https://img.shields.io/docker/v/andreper/spark-master/3.0.0-hadoop-2.7?color=yellow&label=spark-latest)
 ![docker-version](https://img.shields.io/badge/docker-v1.13.0%2B-blue)
-![docker-compose-version](https://img.shields.io/badge/docker--compose-v3.0%2B-blue)
+![docker-compose-file-version](https://img.shields.io/badge/docker--compose-v1.10.0%2B-blue)
 
 ## TL;DR
 
@@ -37,7 +37,7 @@ docker-compose up
 | **Apache Spark Worker I**  | [localhost:8081](http://localhost:8081/) | Spark Worker node with 1 core and 512m of memory (default) |
 | **Apache Spark Worker II** | [localhost:8082](http://localhost:8082/) | Spark Worker node with 1 core and 512m of memory (default) |
 
-### Build from DockerHub
+### Build from Docker Hub
 
 1. Install [Docker and Docker Compose](https://docs.docker.com/get-docker/), check **infra** [supported versions](#tech-stack-version);
 2. Download the source code or clone the repository;
@@ -91,7 +91,7 @@ docker-compose up
 | App                | Version            |
 | ------------------ | ------------------ |
 | **Docker**         | 1.13.0+            |
-| **Docker Compose** | 3.0+               |
+| **Docker Compose** | 1.10.0+            |
 
 - Applications
 

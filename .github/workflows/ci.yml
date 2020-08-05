@@ -195,6 +195,7 @@ jobs:
           cd ${GITHUB_WORKSPACE}/build
           docker build \
             --build-arg build_date="$(date -u +'%Y-%m-%d')" \
+            --build-arg scala_version="${SCALA_VERSION}" \
             --build-arg spark_version="${SPARK_VERSION}" \
             --build-arg jupyterlab_version="${JUPYTERLAB_VERSION}" \
             -f docker/jupyterlab/Dockerfile \
@@ -212,6 +213,7 @@ jobs:
           cd ${GITHUB_WORKSPACE}/build
           docker build \
             --build-arg build_date="$(date -u +'%Y-%m-%d')" \
+            --build-arg scala_version="${SCALA_VERSION}" \
             --build-arg spark_version="${SPARK_VERSION}" \
             --build-arg jupyterlab_version="${JUPYTERLAB_VERSION}" \
             -f docker/jupyterlab/Dockerfile \
@@ -227,6 +229,7 @@ jobs:
           cd ${GITHUB_WORKSPACE}/build
           docker build \
             --build-arg build_date="$(date -u +'%Y-%m-%d')" \
+            --build-arg scala_version="${SCALA_VERSION}" \
             --build-arg spark_version="${SPARK_VERSION}" \
             --build-arg jupyterlab_version="${JUPYTERLAB_VERSION}" \
             -f docker/jupyterlab/Dockerfile \

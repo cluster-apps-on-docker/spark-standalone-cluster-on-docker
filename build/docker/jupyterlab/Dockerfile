@@ -25,9 +25,10 @@ RUN apt-get update -y && \
 
 ARG scala_version
 
-RUN curl -Lo coursier https://git.io/coursier-cli && \
+RUN apt-get install -y ca-certificates-java --no-install-recommends && \
+    curl -Lo coursier https://git.io/coursier-cli && \
     chmod +x coursier && \
-    ./coursier launch --fork almond:0.10.0 --scala ${scala_version} -- --install && \
+    ./coursier launch --fork almond:0.10.0 --scala ${scala_version} -- --display-name "Scala ${scala_version}" --install && \
     rm -f coursier
 
 # -- Runtime

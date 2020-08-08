@@ -18,8 +18,8 @@ parallel computing in distributed environments through our projects. :sparkles:
 - [] Microsoft Windows build script;
 - [x] Docker Hub CI/CD integration;
 - [] Spark submit support;
-- [] JupyterLab Scala kernel;
-- [] Jupyter notebook with Apache Spark Scala API examples;
+- [x] JupyterLab Scala kernel;
+- [x] Jupyter notebook with Apache Spark Scala API examples;
 - [] JupyterLab R kernel;
 - [] Jupyter notebook with Apache Spark R API examples;
 - [] Test coverage.

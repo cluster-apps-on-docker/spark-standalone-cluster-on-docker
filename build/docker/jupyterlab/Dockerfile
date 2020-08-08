@@ -35,11 +35,6 @@ RUN apt-get install -y ca-certificates-java --no-install-recommends && \
 
 EXPOSE 8888
 WORKDIR ${SHARED_WORKSPACE}
-
-ARG data_files="workspace/data/"
-ADD ${data_files} ${SHARED_WORKSPACE}/data
-
-ARG notebooks_files="workspace/*.ipynb"
-ADD ${notebooks_files} ${SHARED_WORKSPACE}
+ADD workspace/ ${SHARED_WORKSPACE}/
 
 CMD jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token=

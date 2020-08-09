@@ -33,12 +33,12 @@ docker-compose up
 
 ### Cluster overview
 
-| Application                | URL                                      | Description                                                 |
-| -------------------------- | ---------------------------------------- | ----------------------------------------------------------- |
-| **JupyterLab**             | [localhost:8888](http://localhost:8888/) | Cluster interface with Scala and PySpark built-in notebooks |
-| **Apache Spark Master**    | [localhost:8080](http://localhost:8080/) | Spark Master node                                           |
-| **Apache Spark Worker I**  | [localhost:8081](http://localhost:8081/) | Spark Worker node with 1 core and 512m of memory (default)  |
-| **Apache Spark Worker II** | [localhost:8082](http://localhost:8082/) | Spark Worker node with 1 core and 512m of memory (default)  |
+| Application            | URL                                      | Description                                                 |
+| ---------------------- | ---------------------------------------- | ----------------------------------------------------------- |
+| JupyterLab             | [localhost:8888](http://localhost:8888/) | Cluster interface with Scala and PySpark built-in notebooks |
+| Apache Spark Master    | [localhost:8080](http://localhost:8080/) | Spark Master node                                           |
+| Apache Spark Worker I  | [localhost:8081](http://localhost:8081/) | Spark Worker node with 1 core and 512m of memory (default)  |
+| Apache Spark Worker II | [localhost:8082](http://localhost:8082/) | Spark Worker node with 1 core and 512m of memory (default)  |
 
 ### Prerequisites
 
@@ -112,11 +112,11 @@ docker-compose up
 
 ## <a name="docker-hub-metrics"></a>Docker Hub Metrics
 
-| Image                                                              | Latest Version Size                                                                                 | Downloads                                                                 |
-| ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| **[JupyterLab](https://hub.docker.com/r/andreper/jupyterlab)**     | ![docker-size](https://img.shields.io/docker/image-size/andreper/jupyterlab/latest)                 | ![docker-pull](https://img.shields.io/docker/pulls/andreper/jupyterlab)   |
-| **[Spark Master](https://hub.docker.com/r/andreper/spark-master)** | ![docker-size](https://img.shields.io/docker/image-size/andreper/spark-master/latest)               | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-master) |
-| **[Spark Worker](https://hub.docker.com/r/andreper/spark-worker)** | ![docker-size](https://img.shields.io/docker/image-size/andreper/spark-worker/latest)               | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-worker) |
+| Image                                                          | Latest Version Size                                                                                 | Downloads                                                                 |
+| -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| [JupyterLab](https://hub.docker.com/r/andreper/jupyterlab)     | ![docker-size](https://img.shields.io/docker/image-size/andreper/jupyterlab/latest)                 | ![docker-pull](https://img.shields.io/docker/pulls/andreper/jupyterlab)   |
+| [Spark Master](https://hub.docker.com/r/andreper/spark-master) | ![docker-size](https://img.shields.io/docker/image-size/andreper/spark-master/latest)               | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-master) |
+| [Spark Worker](https://hub.docker.com/r/andreper/spark-worker) | ![docker-size](https://img.shields.io/docker/image-size/andreper/spark-worker/latest)               | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-worker) |
 
 ## <a name="contributing"></a>Contributing
 

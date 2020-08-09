@@ -11,7 +11,7 @@ LABEL org.label-schema.description="JupyterLab image"
 LABEL org.label-schema.url="https://github.com/andre-marcos-perez/spark-cluster-on-docker"
 LABEL org.label-schema.schema-version="1.0"
 
-# -- Layer: JupyterLab
+# -- Layer: JupyterLab + Python kernel
 
 ARG spark_version
 ARG jupyterlab_version
@@ -21,15 +21,20 @@ RUN apt-get update -y && \
     pip3 install --upgrade pip && \
     pip3 install pyspark==${spark_version} jupyterlab==${jupyterlab_version}
 
+# -- Layer: Scala kernel
+
+ARG scala_version
+
+RUN apt-get install -y ca-certificates-java --no-install-recommends && \
+    curl -Lo coursier https://git.io/coursier-cli && \
+    chmod +x coursier && \
+    ./coursier launch --fork almond:0.10.0 --scala ${scala_version} -- --display-name "Scala ${scala_version}" --install && \
+    rm -f coursier
+
 # -- Runtime
 
 EXPOSE 8888
 WORKDIR ${SHARED_WORKSPACE}
-
-ARG data_files="workspace/data/"
-ADD ${data_files} ${SHARED_WORKSPACE}/data
-
-ARG notebooks_files="workspace/*.ipynb"
-ADD ${notebooks_files} ${SHARED_WORKSPACE}
+ADD workspace/ ${SHARED_WORKSPACE}/
 
 CMD jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token=

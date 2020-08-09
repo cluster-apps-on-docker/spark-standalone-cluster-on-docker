@@ -1,3 +1,7 @@
+---
+# ------------------------------------------------------------------------------------
+# -- Docs: https://github.com/andre-marcos-perez/spark-standalone-cluster-on-docker --
+# ------------------------------------------------------------------------------------
 version: "3.6"
 volumes:
   shared-workspace:
@@ -43,3 +47,4 @@ services:
       - shared-workspace:/opt/workspace
     depends_on:
       - spark-master
+...

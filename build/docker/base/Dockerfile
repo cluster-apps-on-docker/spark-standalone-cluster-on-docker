@@ -12,7 +12,7 @@ LABEL org.label-schema.description="Cluster base image shipped with Python, Scal
 LABEL org.label-schema.url="https://github.com/andre-marcos-perez/spark-cluster-on-docker"
 LABEL org.label-schema.schema-version="1.0"
 
-# -- Layer: OS + Python 3.7 + Scala 2.11
+# -- Layer: OS + Python + Scala
 
 ARG scala_version
 ARG shared_workspace=/opt/workspace

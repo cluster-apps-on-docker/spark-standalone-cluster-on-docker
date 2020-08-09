@@ -96,19 +96,19 @@ docker-compose up
 | Python         | 3.7     |
 | Scala          | 2.12    |
 
+- Jupyter Kernels
+
+| Component      | Version | Provider                        |
+| -------------- | ------- | ------------------------------- |
+| Python         | 2.1.4   | [Jupyter](https://jupyter.org/) |
+| Scala          | 0.10.0  | [Almond](https://almond.sh/)    |
+
 - Applications
 
-| Component      | Version                 | Docker Tag                                         |
-| -------------- | ----------------------  | -------------------------------------------------- |
-| Apache Spark   | 2.4.0 \| 2.4.4 \| 3.0.0 | **\<spark-version>**-hadoop-2.7                     |
+| Component      | Version                 | Docker Tag                                           |
+| -------------- | ----------------------  | ---------------------------------------------------- |
+| Apache Spark   | 2.4.0 \| 2.4.4 \| 3.0.0 | **\<spark-version>**-hadoop-2.7                      |
 | JupyterLab     | 2.1.4                   | **\<jupyterlab-version>**-spark-**\<spark-version>** |
-
-- Jupyter Kernel
-
-| Component      | Provider                        |
-| -------------- | ------------------------------- |
-| Python         | [Jupyter](https://jupyter.org/) |
-| Scala          | [Almond](https://almond.sh/)    |
 
 ## <a name="docker-hub-metrics"></a>Docker Hub Metrics
 

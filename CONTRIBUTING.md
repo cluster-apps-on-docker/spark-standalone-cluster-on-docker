@@ -15,11 +15,11 @@ parallel computing in distributed environments through our projects. :sparkles:
 
 ### Contributions ideas
 
-- [] Microsoft Windows build script;
+- [ ] Microsoft Windows build script;
 - [x] Docker Hub CI/CD integration;
-- [] Spark submit support;
+- [ ] Spark submit support;
 - [x] JupyterLab Scala kernel;
 - [x] Jupyter notebook with Apache Spark Scala API examples;
-- [] JupyterLab R kernel;
-- [] Jupyter notebook with Apache Spark R API examples;
-- [] Test coverage.
+- [ ] JupyterLab R kernel;
+- [ ] Jupyter notebook with Apache Spark R API examples;
+- [ ] Test coverage.

@@ -21,6 +21,6 @@ parallel computing in distributed environments through our projects. :sparkles:
 - [x] JupyterLab Scala kernel;
 - [x] Jupyter notebook with Apache Spark Scala API examples;
 - [x] JupyterLab R kernel;
-- [ ] Jupyter notebook with Apache Spark R API examples;
+- [x] Jupyter notebook with Apache Spark R API examples;
 - [ ] Test coverage;
 - [ ] Ever growing examples.

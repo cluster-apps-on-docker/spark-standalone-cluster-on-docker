@@ -33,9 +33,14 @@ RUN apt-get install -y ca-certificates-java --no-install-recommends && \
 
 # -- Layer: R kernel for SparkR
 
+COPY ./script/sparkr.sh ./sparkr.sh
+
 RUN apt-get install -y r-base-dev && \
     R -e "install.packages('IRkernel')" && \
-    R -e "IRkernel::installspec(displayname = 'R 3.5', user = FALSE)"
+    R -e "IRkernel::installspec(displayname = 'R 3.5', user = FALSE)" && \
+    chmod +x ./sparkr.sh && \
+    ./sparkr.sh ${spark_version} && \
+    rm -f sparkr.sh
 
 # -- Runtime
 

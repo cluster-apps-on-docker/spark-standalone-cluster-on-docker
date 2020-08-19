@@ -3,7 +3,7 @@
 > The project just got its [own article](https://towardsdatascience.com/apache-spark-cluster-on-docker-ft-a-juyterlab-interface-418383c95445) at Towards Data Science Medium blog! :sparkles:
 
 This project gives you an **Apache Spark** cluster in standalone mode with a **JupyterLab** interface built on top of **Docker**.
-Learn Apache Spark through its Scala, Python (PySpark) and R (SparkR) API by running the Jupyter [notebooks](build/workspace/) with examples on how to read, process and write data.
+Learn Apache Spark through its **Scala**, **Python** (PySpark) and **R** (SparkR) API by running the Jupyter [notebooks](build/workspace/) with examples on how to read, process and write data.
 
 <p align="center"><img src="docs/image/cluster-architecture.png"></p>
 
@@ -29,18 +29,18 @@ docker-compose up
 - [Tech Stack](#tech-stack)
 - [Contributing](#contributing)
 - [Contributors](#contributors)
-- [Downloads](#downloads)
+- [Docker Hub Downloads](#docker-hub-downloads)
 
 ## <a name="quick-start"></a>Quick Start
 
 ### Cluster overview
 
-| Application            | URL                                      | Description                                                         |
-| ---------------------- | ---------------------------------------- | ------------------------------------------------------------------- |
-| JupyterLab             | [localhost:8888](http://localhost:8888/) | Cluster interface with Scala, PySpark and SparkR built-in notebooks |
-| Apache Spark Master    | [localhost:8080](http://localhost:8080/) | Spark Master node                                                   |
-| Apache Spark Worker I  | [localhost:8081](http://localhost:8081/) | Spark Worker node with 1 core and 512m of memory (default)          |
-| Apache Spark Worker II | [localhost:8082](http://localhost:8082/) | Spark Worker node with 1 core and 512m of memory (default)          |
+| Application            | URL                                      | Description                                                |
+| ---------------------- | ---------------------------------------- | ---------------------------------------------------------- |
+| JupyterLab             | [localhost:8888](http://localhost:8888/) | Cluster interface with built-in Jupyter notebooks          |
+| Apache Spark Master    | [localhost:8080](http://localhost:8080/) | Spark Master node                                          |
+| Apache Spark Worker I  | [localhost:8081](http://localhost:8081/) | Spark Worker node with 1 core and 512m of memory (default) |
+| Apache Spark Worker II | [localhost:8082](http://localhost:8082/) | Spark Worker node with 1 core and 512m of memory (default) |
 
 ### Prerequisites
 
@@ -126,7 +126,7 @@ We'd love some help. To contribute, please read [this file](CONTRIBUTING.md).
 
  - **André Perez** - [dekoperez](https://twitter.com/dekoperez) - andre.marcos.perez@gmail.com
 
-## <a name="downloads"></a>Downloads
+## <a name="docker-hub-downloads"></a>Docker Hub Downloads
 
 | Image                                                          | Latest Version Size (Compressed)                                                               | Downloads                                                                 |
 | -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |

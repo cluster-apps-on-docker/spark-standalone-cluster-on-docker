@@ -11,7 +11,7 @@ LABEL org.label-schema.description="JupyterLab image"
 LABEL org.label-schema.url="https://github.com/andre-marcos-perez/spark-cluster-on-docker"
 LABEL org.label-schema.schema-version="1.0"
 
-# -- Layer: JupyterLab + Python kernel
+# -- Layer: JupyterLab + Python kernel for PySpark
 
 ARG spark_version
 ARG jupyterlab_version
@@ -21,7 +21,7 @@ RUN apt-get update -y && \
     pip3 install --upgrade pip && \
     pip3 install pyspark==${spark_version} jupyterlab==${jupyterlab_version}
 
-# -- Layer: Scala kernel
+# -- Layer: Scala kernel for Spark
 
 ARG scala_version
 
@@ -30,6 +30,12 @@ RUN apt-get install -y ca-certificates-java --no-install-recommends && \
     chmod +x coursier && \
     ./coursier launch --fork almond:0.10.0 --scala ${scala_version} -- --display-name "Scala ${scala_version}" --install && \
     rm -f coursier
+
+# -- Layer: R kernel for SparkR
+
+RUN apt-get install -y r-base-dev && \
+    R -e "install.packages('IRkernel')" && \
+    R -e "IRkernel::installspec(displayname = 'R 3.5', user = FALSE)"
 
 # -- Runtime
 

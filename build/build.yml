@@ -5,5 +5,5 @@ applications:
   jupyterlab: "2.1.4"
 build:
   build_base: "true"
-  build_spark: "false"
-  build_jupyterlab: "false"
+  build_spark: "true"
+  build_jupyterlab: "true"

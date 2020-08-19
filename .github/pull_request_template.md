@@ -7,7 +7,7 @@ parallel computing in distributed environments through our projects. :sparkles:
 
 ### Issue
 
-- *Issue number with link, e.g.: [#22](https://github.com/andre-marcos-perez/spark-standalone-cluster-on-docker/issues/22)*
+- *Issue number with link, e.g.: #22
 
 ### Changes
 
@@ -23,5 +23,5 @@ parallel computing in distributed environments through our projects. :sparkles:
 
 Please make sure to check the following:
 
-- [] I have followed the steps in the [CONTRIBUTING.md](../CONTRIBUTING.md) file.
-- [] I am aware that pull requests that do not follow the rules will be automatically rejected.
+- [ ] I have followed the steps in the [CONTRIBUTING.md](../CONTRIBUTING.md) file.
+- [ ] I am aware that pull requests that do not follow the rules will be automatically rejected.

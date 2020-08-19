@@ -99,10 +99,11 @@ docker-compose up
 
 - Jupyter Kernels
 
-| Component      | Version | Provider                        |
-| -------------- | ------- | ------------------------------- |
-| Python         | 2.1.4   | [Jupyter](https://jupyter.org/) |
-| Scala          | 0.10.0  | [Almond](https://almond.sh/)    |
+| Component      | Version | Provider                                |
+| -------------- | ------- | --------------------------------------- |
+| Python         | 2.1.4   | [Jupyter](https://jupyter.org/)         |
+| Scala          | 0.10.0  | [Almond](https://almond.sh/)            |
+| R              | 1.1.1   | [IRkernel](https://irkernel.github.io/) |
 
 - Applications
 
@@ -111,13 +112,15 @@ docker-compose up
 | Apache Spark   | 2.4.0 \| 2.4.4 \| 3.0.0 | **\<spark-version>**-hadoop-2.7                      |
 | JupyterLab     | 2.1.4                   | **\<jupyterlab-version>**-spark-**\<spark-version>** |
 
+> Apache Spark R API (SparkR) is only supported on version **2.4.4**. Full list can be found [here](https://cran.r-project.org/src/contrib/Archive/SparkR/).
+
 ## <a name="docker-hub-metrics"></a>Docker Hub Metrics
 
-| Image                                                          | Latest Version Size                                                                                 | Downloads                                                                 |
-| -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| [JupyterLab](https://hub.docker.com/r/andreper/jupyterlab)     | ![docker-size](https://img.shields.io/docker/image-size/andreper/jupyterlab/latest)                 | ![docker-pull](https://img.shields.io/docker/pulls/andreper/jupyterlab)   |
-| [Spark Master](https://hub.docker.com/r/andreper/spark-master) | ![docker-size](https://img.shields.io/docker/image-size/andreper/spark-master/latest)               | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-master) |
-| [Spark Worker](https://hub.docker.com/r/andreper/spark-worker) | ![docker-size](https://img.shields.io/docker/image-size/andreper/spark-worker/latest)               | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-worker) |
+| Image                                                          | Latest Version Size (Compressed)                                                      | Downloads                                                                 |
+| -------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| [JupyterLab](https://hub.docker.com/r/andreper/jupyterlab)     | ![docker-size](https://img.shields.io/docker/image-size/andreper/jupyterlab/latest)   | ![docker-pull](https://img.shields.io/docker/pulls/andreper/jupyterlab)   |
+| [Spark Master](https://hub.docker.com/r/andreper/spark-master) | ![docker-size](https://img.shields.io/docker/image-size/andreper/spark-master/latest) | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-master) |
+| [Spark Worker](https://hub.docker.com/r/andreper/spark-worker) | ![docker-size](https://img.shields.io/docker/image-size/andreper/spark-worker/latest) | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-worker) |
 
 ## <a name="contributing"></a>Contributing
 

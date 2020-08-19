@@ -42,5 +42,5 @@ Please fill the template below.
 
 Please provide the following:
 
-- [] Docker Engine version: *Can be found using `docker version`, e.g.: 19.03.6*
-- [] Docker Compose version: *Can be found using `docker-compose version`, e.g.: 1.21.0*
+- [ ] Docker Engine version: *Can be found using `docker version`, e.g.: 19.03.6*
+- [ ] Docker Compose version: *Can be found using `docker-compose version`, e.g.: 1.21.0*

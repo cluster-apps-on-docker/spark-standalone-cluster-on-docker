@@ -27,9 +27,9 @@ docker-compose up
 
 - [Quick Start](#quick-start)
 - [Tech Stack](#tech-stack)
+- [Docker Hub Metrics](#docker-hub-metrics)
 - [Contributing](#contributing)
 - [Contributors](#contributors)
-- [Docker Hub Downloads](#docker-hub-downloads)
 
 ## <a name="quick-start"></a>Quick Start
 
@@ -116,6 +116,14 @@ docker-compose up
 
 > Apache Spark R API (SparkR) is only supported on version **2.4.4**. Full list can be found [here](https://cran.r-project.org/src/contrib/Archive/SparkR/).
 
+## <a name="docker-hub-metrics"></a>Docker Hub Metrics
+
+| Image                                                          | Size                                                                                           | Downloads                                                                 |
+| -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| [JupyterLab](https://hub.docker.com/r/andreper/jupyterlab)     | ![docker-size-jupyterlab](https://img.shields.io/docker/image-size/andreper/jupyterlab/latest) | ![docker-pull](https://img.shields.io/docker/pulls/andreper/jupyterlab)   |
+| [Spark Master](https://hub.docker.com/r/andreper/spark-master) | ![docker-size-master](https://img.shields.io/docker/image-size/andreper/spark-master/latest)   | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-master) |
+| [Spark Worker](https://hub.docker.com/r/andreper/spark-worker) | ![docker-size-worker](https://img.shields.io/docker/image-size/andreper/spark-worker/latest)   | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-worker) |
+
 ## <a name="contributing"></a>Contributing
 
 We'd love some help. To contribute, please read [this file](CONTRIBUTING.md).
@@ -125,11 +133,3 @@ We'd love some help. To contribute, please read [this file](CONTRIBUTING.md).
 ## <a name="contributors"></a>Contributors
 
  - **André Perez** - [dekoperez](https://twitter.com/dekoperez) - andre.marcos.perez@gmail.com
-
-## <a name="docker-hub-downloads"></a>Docker Hub Downloads
-
-| Image                                                          | Latest Version Size (Compressed)                                                               | Downloads                                                                 |
-| -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| [JupyterLab](https://hub.docker.com/r/andreper/jupyterlab)     | ![docker-size-jupyterlab](https://img.shields.io/docker/image-size/andreper/jupyterlab/latest) | ![docker-pull](https://img.shields.io/docker/pulls/andreper/jupyterlab)   |
-| [Spark Master](https://hub.docker.com/r/andreper/spark-master) | ![docker-size-master](https://img.shields.io/docker/image-size/andreper/spark-master/latest)   | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-master) |
-| [Spark Worker](https://hub.docker.com/r/andreper/spark-worker) | ![docker-size-worker](https://img.shields.io/docker/image-size/andreper/spark-worker/latest)   | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-worker) |

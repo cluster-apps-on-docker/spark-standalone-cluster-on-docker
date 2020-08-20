@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0](https://github.com/andre-marcos-perez/spark-standalone-cluster-on-docker/releases/tag/v1.2.0) (2020-08-19)
+
+### Features
+
+ - R kernel for JupyterLab;
+ - Jupyter notebook with Spark R API (SparkR) example.
+
 ## [1.1.0](https://github.com/andre-marcos-perez/spark-standalone-cluster-on-docker/releases/tag/v1.1.0) (2020-08-09)
 
 ### Features

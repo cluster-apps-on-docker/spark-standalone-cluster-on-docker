@@ -1,8 +1,9 @@
 # Apache Spark Standalone Cluster on Docker
+
 > The project just got its [own article](https://towardsdatascience.com/apache-spark-cluster-on-docker-ft-a-juyterlab-interface-418383c95445) at Towards Data Science Medium blog! :sparkles:
 
 This project gives you an **Apache Spark** cluster in standalone mode with a **JupyterLab** interface built on top of **Docker**.
-Learn Apache Spark through its Scala and Python API (PySpark) by running the Jupyter [notebooks](build/workspace/) with examples on how to read, process and write data.
+Learn Apache Spark through its **Scala**, **Python** (PySpark) and **R** (SparkR) API by running the Jupyter [notebooks](build/workspace/) with examples on how to read, process and write data.
 
 <p align="center"><img src="docs/image/cluster-architecture.png"></p>
 
@@ -13,6 +14,7 @@ Learn Apache Spark through its Scala and Python API (PySpark) by running the Jup
 ![docker-compose-file-version](https://img.shields.io/badge/docker--compose-v1.10.0%2B-blue)
 ![spark-scala-api](https://img.shields.io/badge/spark%20api-scala-red)
 ![spark-pyspark-api](https://img.shields.io/badge/spark%20api-pyspark-red)
+![spark-sparkr-api](https://img.shields.io/badge/spark%20api-sparkr-red)
 
 ## TL;DR
 
@@ -33,12 +35,12 @@ docker-compose up
 
 ### Cluster overview
 
-| Application            | URL                                      | Description                                                 |
-| ---------------------- | ---------------------------------------- | ----------------------------------------------------------- |
-| JupyterLab             | [localhost:8888](http://localhost:8888/) | Cluster interface with Scala and PySpark built-in notebooks |
-| Apache Spark Master    | [localhost:8080](http://localhost:8080/) | Spark Master node                                           |
-| Apache Spark Worker I  | [localhost:8081](http://localhost:8081/) | Spark Worker node with 1 core and 512m of memory (default)  |
-| Apache Spark Worker II | [localhost:8082](http://localhost:8082/) | Spark Worker node with 1 core and 512m of memory (default)  |
+| Application            | URL                                      | Description                                                |
+| ---------------------- | ---------------------------------------- | ---------------------------------------------------------- |
+| JupyterLab             | [localhost:8888](http://localhost:8888/) | Cluster interface with built-in Jupyter notebooks          |
+| Apache Spark Master    | [localhost:8080](http://localhost:8080/) | Spark Master node                                          |
+| Apache Spark Worker I  | [localhost:8081](http://localhost:8081/) | Spark Worker node with 1 core and 512m of memory (default) |
+| Apache Spark Worker II | [localhost:8082](http://localhost:8082/) | Spark Worker node with 1 core and 512m of memory (default) |
 
 ### Prerequisites
 
@@ -54,7 +56,7 @@ docker-compose up
 docker-compose up
 ```
 
-4. Run Apache Spark code using the provided Jupyter [notebooks](build/workspace/) with Scala and PySpark examples;
+4. Run Apache Spark code using the provided Jupyter [notebooks](build/workspace/) with Scala, PySpark and SparkR examples;
 5. Stop the cluster by typing `ctrl+c`.
 
 ### Build from your local machine
@@ -82,7 +84,7 @@ chmod +x build.sh ; ./build.sh
 docker-compose up
 ```
 
-7. Run Apache Spark code using the provided Jupyter [notebooks](build/workspace/) with Scala and PySpark examples;
+7. Run Apache Spark code using the provided Jupyter [notebooks](build/workspace/) with Scala, PySpark and SparkR examples;
 8. Stop the cluster by typing `ctrl+c`.
 
 ## <a name="tech-stack"></a>Tech Stack
@@ -93,15 +95,17 @@ docker-compose up
 | -------------- | ------- |
 | Docker Engine  | 1.13.0+ |
 | Docker Compose | 1.10.0+ |
-| Python         | 3.7     |
-| Scala          | 2.12    |
+| Python         | 3.7.3   |
+| Scala          | 2.12.11 |
+| R              | 3.5.2   |
 
 - Jupyter Kernels
 
-| Component      | Version | Provider                        |
-| -------------- | ------- | ------------------------------- |
-| Python         | 2.1.4   | [Jupyter](https://jupyter.org/) |
-| Scala          | 0.10.0  | [Almond](https://almond.sh/)    |
+| Component      | Version | Provider                                |
+| -------------- | ------- | --------------------------------------- |
+| Python         | 2.1.4   | [Jupyter](https://jupyter.org/)         |
+| Scala          | 0.10.0  | [Almond](https://almond.sh/)            |
+| R              | 1.1.1   | [IRkernel](https://irkernel.github.io/) |
 
 - Applications
 
@@ -110,17 +114,21 @@ docker-compose up
 | Apache Spark   | 2.4.0 \| 2.4.4 \| 3.0.0 | **\<spark-version>**-hadoop-2.7                      |
 | JupyterLab     | 2.1.4                   | **\<jupyterlab-version>**-spark-**\<spark-version>** |
 
+> Apache Spark R API (SparkR) is only supported on version **2.4.4**. Full list can be found [here](https://cran.r-project.org/src/contrib/Archive/SparkR/).
+
 ## <a name="docker-hub-metrics"></a>Docker Hub Metrics
 
-| Image                                                          | Latest Version Size                                                                                 | Downloads                                                                 |
-| -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| [JupyterLab](https://hub.docker.com/r/andreper/jupyterlab)     | ![docker-size](https://img.shields.io/docker/image-size/andreper/jupyterlab/latest)                 | ![docker-pull](https://img.shields.io/docker/pulls/andreper/jupyterlab)   |
-| [Spark Master](https://hub.docker.com/r/andreper/spark-master) | ![docker-size](https://img.shields.io/docker/image-size/andreper/spark-master/latest)               | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-master) |
-| [Spark Worker](https://hub.docker.com/r/andreper/spark-worker) | ![docker-size](https://img.shields.io/docker/image-size/andreper/spark-worker/latest)               | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-worker) |
+| Image                                                          | Size                                                                                           | Downloads                                                                 |
+| -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| [JupyterLab](https://hub.docker.com/r/andreper/jupyterlab)     | ![docker-size-jupyterlab](https://img.shields.io/docker/image-size/andreper/jupyterlab/latest) | ![docker-pull](https://img.shields.io/docker/pulls/andreper/jupyterlab)   |
+| [Spark Master](https://hub.docker.com/r/andreper/spark-master) | ![docker-size-master](https://img.shields.io/docker/image-size/andreper/spark-master/latest)   | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-master) |
+| [Spark Worker](https://hub.docker.com/r/andreper/spark-worker) | ![docker-size-worker](https://img.shields.io/docker/image-size/andreper/spark-worker/latest)   | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-worker) |
 
 ## <a name="contributing"></a>Contributing
 
 We'd love some help. To contribute, please read [this file](CONTRIBUTING.md).
+
+> Staring us on GitHub is also an awesome way to show your support :star:
 
 ## <a name="contributors"></a>Contributors
 

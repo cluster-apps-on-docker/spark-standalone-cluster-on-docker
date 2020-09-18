@@ -1,5 +1,5 @@
 applications:
-  scala: "2.12.11"
+  scala: "2.12.12"
   spark: "2.4.4"
   hadoop: "2.7"
   jupyterlab: "2.1.4"

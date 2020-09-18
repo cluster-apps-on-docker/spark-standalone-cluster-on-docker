@@ -28,7 +28,7 @@ ARG scala_version
 RUN apt-get install -y ca-certificates-java --no-install-recommends && \
     curl -Lo coursier https://git.io/coursier-cli && \
     chmod +x coursier && \
-    ./coursier launch --fork almond:0.10.0 --scala ${scala_version} -- --display-name "Scala ${scala_version}" --install && \
+    ./coursier launch --fork almond:0.10.6 --scala ${scala_version} -- --display-name "Scala ${scala_version}" --install && \
     rm -f coursier
 
 # -- Layer: R kernel for SparkR
@@ -41,6 +41,10 @@ RUN apt-get install -y r-base-dev && \
     chmod +x ./sparkr.sh && \
     ./sparkr.sh ${spark_version} && \
     rm -f sparkr.sh
+	
+# -- Layer: local development
+
+RUN apt-get install git
 
 # -- Runtime
 

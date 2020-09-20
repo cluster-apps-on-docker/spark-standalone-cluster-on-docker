@@ -33,7 +33,7 @@ All notable changes to this project will be documented in this file.
 
  - **Apps**
    - JupyterLab 2.1.4
-   - Apache Spark 2.4.0, 2.4.4 and 3.0.0
+   - Apache Spark 2.4.0, 2.4.4 and 3.0.1
 
 ### Features
 

@@ -84,6 +84,14 @@ chmod +x build.sh ; ./build.sh
 docker-compose up
 ```
 
+> **Note**: Hack away, follow best practices for Dockerfiles and if anything went wrong, keep in mind that last resort is to invalidate the docker cache in case any build step faild but did not report to docker and all steps from this step onwards are missing:
+
+```
+cd build
+docker rmi -f $(docker images -aq)
+./build.sh
+```
+
 7. Run Apache Spark code using the provided Jupyter [notebooks](build/workspace/) with Scala, PySpark and SparkR examples;
 8. Stop the cluster by typing `ctrl+c`.
 

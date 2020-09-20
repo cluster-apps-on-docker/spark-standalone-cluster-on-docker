@@ -1,7 +1,7 @@
 applications:
   scala: "2.12.12"
-  spark: "2.4.4"
-  hadoop: "2.7"
+  spark: "3.0.1"
+  hadoop: "3.2"
   jupyterlab: "2.1.4"
 build:
   build_base: "true"

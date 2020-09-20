@@ -41,10 +41,6 @@ RUN apt-get install -y r-base-dev && \
     chmod +x ./sparkr.sh && \
     ./sparkr.sh ${spark_version} && \
     rm -f sparkr.sh
-	
-# -- Layer: local development
-
-RUN apt-get install git
 
 # -- Runtime
 

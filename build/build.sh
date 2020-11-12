@@ -6,16 +6,31 @@
 # -- Variables ---------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
 
+# check if 'mac' is passed as an argument and use 'ggrep' then
+# 'ggrep' (GNU version of grep for Mac) can be installed from homebrew
+if [[ $1 == "mac" ]]
+then
+  grep="ggrep"
+else
+  grep="grep"
+fi
+
+grep_origin="$(${grep} --version)"
+if [[ $grep_origin != *"GNU"* ]]; then
+  echo "Using wrong grep: ${grep_origin}. GNU version is required. You can install it e.g. with homebrew on Mac."
+  exit
+fi
+
 BUILD_DATE="$(date -u +'%Y-%m-%d')"
 
-SHOULD_BUILD_BASE="$(grep -m 1 build_base build.yml | grep -o -P '(?<=").*(?=")')"
-SHOULD_BUILD_SPARK="$(grep -m 1 build_spark build.yml | grep -o -P '(?<=").*(?=")')"
-SHOULD_BUILD_JUPYTERLAB="$(grep -m 1 build_jupyter build.yml | grep -o -P '(?<=").*(?=")')"
+SHOULD_BUILD_BASE="$(${grep} -m 1 build_base build.yml | ${grep} -o -P '(?<=").*(?=")')"
+SHOULD_BUILD_SPARK="$(${grep} -m 1 build_spark build.yml | ${grep} -o -P '(?<=").*(?=")')"
+SHOULD_BUILD_JUPYTERLAB="$(${grep} -m 1 build_jupyter build.yml | ${grep} -o -P '(?<=").*(?=")')"
 
-SCALA_VERSION="$(grep -m 1 scala build.yml | grep -o -P '(?<=").*(?=")')"
-SPARK_VERSION="$(grep -m 1 spark build.yml | grep -o -P '(?<=").*(?=")')"
-HADOOP_VERSION="$(grep -m 1 hadoop build.yml | grep -o -P '(?<=").*(?=")')"
-JUPYTERLAB_VERSION="$(grep -m 1 jupyterlab build.yml | grep -o -P '(?<=").*(?=")')"
+SCALA_VERSION="$(${grep} -m 1 scala build.yml | ${grep} -o -P '(?<=").*(?=")')"
+SPARK_VERSION="$(${grep} -m 1 spark build.yml | ${grep} -o -P '(?<=").*(?=")')"
+HADOOP_VERSION="$(${grep} -m 1 hadoop build.yml | ${grep} -o -P '(?<=").*(?=")')"
+JUPYTERLAB_VERSION="$(${grep} -m 1 jupyterlab build.yml | ${grep} -o -P '(?<=").*(?=")')"
 
 # ----------------------------------------------------------------------------------------------------------------------
 # -- Functions----------------------------------------------------------------------------------------------------------
@@ -25,7 +40,7 @@ function cleanContainers() {
 
     if [[ "${SHOULD_BUILD_JUPYTERLAB}" == "true" ]]
     then
-      container="$(docker ps -a | grep 'jupyterlab' | awk '{print $1}')"
+      container="$(docker ps -a | ${grep} 'jupyterlab' | awk '{print $1}')"
       docker stop "${container}"
       docker rm "${container}"
     fi
@@ -33,19 +48,19 @@ function cleanContainers() {
     if [[ "${SHOULD_BUILD_SPARK}" == "true" ]]
     then
 
-      container="$(docker ps -a | grep 'spark-worker' -m 1 | awk '{print $1}')"
+      container="$(docker ps -a | ${grep} 'spark-worker' -m 1 | awk '{print $1}')"
       while [ -n "${container}" ];
       do
         docker stop "${container}"
         docker rm "${container}"
-        container="$(docker ps -a | grep 'spark-worker' -m 1 | awk '{print $1}')"
+        container="$(docker ps -a | ${grep} 'spark-worker' -m 1 | awk '{print $1}')"
       done
 
-      container="$(docker ps -a | grep 'spark-master' | awk '{print $1}')"
+      container="$(docker ps -a | ${grep} 'spark-master' | awk '{print $1}')"
       docker stop "${container}"
       docker rm "${container}"
 
-      container="$(docker ps -a | grep 'spark-base' | awk '{print $1}')"
+      container="$(docker ps -a | ${grep} 'spark-base' | awk '{print $1}')"
       docker stop "${container}"
       docker rm "${container}"
 
@@ -53,7 +68,7 @@ function cleanContainers() {
 
     if [[ "${SHOULD_BUILD_BASE}" == "true" ]]
     then
-      container="$(docker ps -a | grep 'base' | awk '{print $1}')"
+      container="$(docker ps -a | ${grep} 'base' | awk '{print $1}')"
       docker stop "${container}"
       docker rm "${container}"
     fi
@@ -64,19 +79,19 @@ function cleanImages() {
 
     if [[ "${SHOULD_BUILD_JUPYTERLAB}" == "true" ]]
     then
-      docker rmi -f "$(docker images | grep -m 1 'jupyterlab' | awk '{print $3}')"
+      docker rmi -f "$(docker images | ${grep} -m 1 'jupyterlab' | awk '{print $3}')"
     fi
 
     if [[ "${SHOULD_BUILD_SPARK}" == "true" ]]
     then
-      docker rmi -f "$(docker images | grep -m 1 'spark-worker' | awk '{print $3}')"
-      docker rmi -f "$(docker images | grep -m 1 'spark-master' | awk '{print $3}')"
-      docker rmi -f "$(docker images | grep -m 1 'spark-base' | awk '{print $3}')"
+      docker rmi -f "$(docker images | ${grep} -m 1 'spark-worker' | awk '{print $3}')"
+      docker rmi -f "$(docker images | ${grep} -m 1 'spark-master' | awk '{print $3}')"
+      docker rmi -f "$(docker images | ${grep} -m 1 'spark-base' | awk '{print $3}')"
     fi
 
     if [[ "${SHOULD_BUILD_BASE}" == "true" ]]
     then
-      docker rmi -f "$(docker images | grep -m 1 'base' | awk '{print $3}')"
+      docker rmi -f "$(docker images | ${grep} -m 1 'base' | awk '{print $3}')"
     fi
 
 }

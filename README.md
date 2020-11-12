@@ -61,7 +61,7 @@ docker-compose up
 
 ### Build from your local machine
 
-> **Note**: Local build is currently only supported on Linux OS distributions.
+> **Note**: Local build is currently only supported on Linux OS and Mac OSX distributions.
 
 1. Download the source code or clone the repository;
 2. Move to the build directory;
@@ -86,6 +86,24 @@ docker-compose up
 
 7. Run Apache Spark code using the provided Jupyter [notebooks](build/workspace/) with Scala, PySpark and SparkR examples;
 8. Stop the cluster by typing `ctrl+c`.
+
+#### Mac OSX
+
+Mac OSX comes with the preinstalled BSD version of `grep`. 
+In order to be able to build these Docker images, you will need to install GNU version of grep with Homebrew:
+
+```
+brew install grep
+```
+
+> **Note**: From now on you can use the GNU version of grep by calling ``ggrep``. 
+
+Now you can run the steps described above, but add an argument in step 5:
+
+```bash
+chmod +x build.sh ; ./build.sh mac
+```
+
 
 ## <a name="tech-stack"></a>Tech Stack
 

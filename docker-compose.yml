@@ -13,6 +13,7 @@ services:
     container_name: jupyterlab
     ports:
       - 8888:8888
+      - 4040:4040
     volumes:
       - shared-workspace:/opt/workspace
   spark-master:

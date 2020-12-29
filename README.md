@@ -1,8 +1,8 @@
 # Apache Spark Standalone Cluster on Docker
 
-> The project was featured on an [article](https://www.mongodb.com/blog/post/getting-started-with-mongodb-pyspark-and-jupyter-notebook) at **MongoDB** official tech blog! :scream:
+> The project was featured on an **[article](https://www.mongodb.com/blog/post/getting-started-with-mongodb-pyspark-and-jupyter-notebook)** at **MongoDB** official tech blog! :scream:
 
-> The project just got its own [article](https://towardsdatascience.com/apache-spark-cluster-on-docker-ft-a-juyterlab-interface-418383c95445) at **Towards Data Science** Medium blog! :sparkles:
+> The project just got its own **[article](https://towardsdatascience.com/apache-spark-cluster-on-docker-ft-a-juyterlab-interface-418383c95445)** at **Towards Data Science** Medium blog! :sparkles:
 
 ## Introduction
 
@@ -53,16 +53,22 @@ docker-compose up
 
 ### Download from Docker Hub (easier)
 
-1. Download the source code or clone the repository;
+1. Download the [docker compose](docker-compose.yml) file;
+
+```bash
+curl -LO https://raw.githubusercontent.com/andre-marcos-perez/spark-standalone-cluster-on-docker/master/docker-compose.yml
+```
+
 2. Edit the [docker compose](docker-compose.yml) file with your favorite tech stack version, check **apps** [supported versions](#tech-stack);
-3. Build the cluster;
+3. Start the cluster;
 
 ```bash
 docker-compose up
 ```
 
 4. Run Apache Spark code using the provided Jupyter [notebooks](build/workspace/) with Scala, PySpark and SparkR examples;
-5. Stop the cluster by typing `ctrl+c`.
+5. Stop the cluster by typing `ctrl+c` on the terminal;
+6. Run step 3 to restart the cluster.
 
 ### Build from your local machine
 
@@ -77,20 +83,21 @@ cd build
 
 3. Edit the [build.yml](build/build.yml) file with your favorite tech stack version;
 4. Match those version on the [docker compose](build/docker-compose.yml) file;
-5. Build the images;
+5. Build up the images;
 
 ```bash
 chmod +x build.sh ; ./build.sh
 ```
 
-6. Build the cluster;
+6. Start the cluster;
 
 ```bash
 docker-compose up
 ```
 
 7. Run Apache Spark code using the provided Jupyter [notebooks](build/workspace/) with Scala, PySpark and SparkR examples;
-8. Stop the cluster by typing `ctrl+c`.
+8. Stop the cluster by typing `ctrl+c` on the terminal;
+9. Run step 6 to restart the cluster.
 
 ## <a name="tech-stack"></a>Tech Stack
 
@@ -108,7 +115,7 @@ docker-compose up
 | 3.x   | 3.2    | 2.12.10 | 0.10.9                             | 3.7.3  | 7.19.0                                 | 3.5.2 | 1.1.1                                   |
 | 2.x   | 2.7    | 2.11.12 | 0.6.0                              | 3.7.3  | 7.19.0                                 | 3.5.2 | 1.1.1                                   |
 
-- Available Images
+- Apps
 
 | Component      | Version                 | Docker Tag                                           |
 | -------------- | ----------------------- | ---------------------------------------------------- |

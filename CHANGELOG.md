@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [1.3.0](https://github.com/andre-marcos-perez/spark-standalone-cluster-on-docker/releases/tag/v1.3.0) ()
 
+### Support
+
+ - Added Patreon support link :sparkling_heart:
+
 ### Features
 
  - Exposed Spark driver web ui 4040 port ([#39](https://github.com/cluster-apps-on-docker/spark-standalone-cluster-on-docker/issues/39));

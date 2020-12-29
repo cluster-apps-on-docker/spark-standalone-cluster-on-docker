@@ -19,6 +19,7 @@ Learn Apache Spark through its **Scala**, **Python** (PySpark) and **R** (SparkR
 ![spark-scala-api](https://img.shields.io/badge/spark%20api-scala-red)
 ![spark-pyspark-api](https://img.shields.io/badge/spark%20api-pyspark-red)
 ![spark-sparkr-api](https://img.shields.io/badge/spark%20api-sparkr-red)
+![sponsor](https://img.shields.io/badge/patreon-sponsor-ff69b4)
 
 ## TL;DR
 
@@ -34,6 +35,7 @@ docker-compose up
 - [Metrics](#metrics)
 - [Contributing](#contributing)
 - [Contributors](#contributors)
+- [Sponsor](#sponsor)
 
 ## <a name="quick-start"></a>Quick Start
 
@@ -142,3 +144,7 @@ A list of amazing people that somehow contributed to the project can be found in
 project is maintained by:
 
  - **André Perez** - [dekoperez](https://twitter.com/dekoperez) - andre.marcos.perez@gmail.com
+
+## <a name="sponsor"></a>Sponsor
+
+Support us on [Patreon](https://www.patreon.com/andreperez). :sparkling_heart:

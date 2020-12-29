@@ -141,7 +141,7 @@ We'd love some help. To contribute, please read [this file](CONTRIBUTING.md).
 A list of amazing people that somehow contributed to the project can be found in [this file](CONTRIBUTORS.md). This 
 project is maintained by:
 
- - **André Perez** - [dekoperez](https://twitter.com/dekoperez) - andre.marcos.perez@gmail.com
+> **André Perez** - [dekoperez](https://twitter.com/dekoperez) - andre.marcos.perez@gmail.com
 
 ## <a name="support"></a>Support
 

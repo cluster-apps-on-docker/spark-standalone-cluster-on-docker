@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0](https://github.com/andre-marcos-perez/spark-standalone-cluster-on-docker/releases/tag/v1.3.0) ()
+
+### Features
+
+ - Exposed Spark master WebUI 4040 port ([#41](https://github.com/cluster-apps-on-docker/spark-standalone-cluster-on-docker/pull/41)).
+ - Made SparkR available for all Spark versions.
+ 
+### Core
+
+ - Enhanced Spark compatibility with Scala kernel ([#35](https://github.com/cluster-apps-on-docker/spark-standalone-cluster-on-docker/issues/35)):
+ 
 ## [1.2.0](https://github.com/andre-marcos-perez/spark-standalone-cluster-on-docker/releases/tag/v1.2.0) (2020-08-19)
 
 ### Features

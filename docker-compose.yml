@@ -27,6 +27,11 @@ services:
   spark-worker-1:
     image: andreper/spark-worker:3.0.0
     container_name: spark-worker-1
+    deploy:
+      resources:
+        limits:
+          cpus: 1
+          memory: 512m
     environment:
       - SPARK_WORKER_CORES=1
       - SPARK_WORKER_MEMORY=512m
@@ -39,6 +44,11 @@ services:
   spark-worker-2:
     image: andreper/spark-worker:3.0.0
     container_name: spark-worker-2
+    deploy:
+      resources:
+        limits:
+          cpus: 1
+          memory: 512m
     environment:
       - SPARK_WORKER_CORES=1
       - SPARK_WORKER_MEMORY=512m

@@ -1,6 +1,5 @@
 ARG spark_version
-ARG hadoop_version
-FROM spark-base:${spark_version}-hadoop-${hadoop_version}
+FROM spark-base:${spark_version}
 LABEL manteiner="Andre Perez <andre.marcos.perez@gmail.com>"
 
 # -- Layer: Image Metadata

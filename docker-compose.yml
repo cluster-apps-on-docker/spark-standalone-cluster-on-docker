@@ -1,7 +1,7 @@
 ---
-# ------------------------------------------------------------------------------------
-# -- Docs: https://github.com/andre-marcos-perez/spark-standalone-cluster-on-docker --
-# ------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------
+# -- Docs: https://github.com/cluster-apps-on-docker/spark-standalone-cluster-on-docker --
+# ----------------------------------------------------------------------------------------
 version: "3.6"
 volumes:
   shared-workspace:
@@ -30,7 +30,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: 1
+          cpus: '1'
           memory: 512m
     environment:
       - SPARK_WORKER_CORES=1
@@ -47,7 +47,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: 1
+          cpus: '1'
           memory: 512m
     environment:
       - SPARK_WORKER_CORES=1

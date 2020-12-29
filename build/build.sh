@@ -112,14 +112,12 @@ function buildImages() {
     docker build \
       --build-arg build_date="${BUILD_DATE}" \
       --build-arg spark_version="${SPARK_VERSION}" \
-      --build-arg hadoop_version="${HADOOP_VERSION}" \
       -f docker/spark-master/Dockerfile \
       -t spark-master:${SPARK_VERSION} .
 
     docker build \
       --build-arg build_date="${BUILD_DATE}" \
       --build-arg spark_version="${SPARK_VERSION}" \
-      --build-arg hadoop_version="${HADOOP_VERSION}" \
       -f docker/spark-worker/Dockerfile \
       -t spark-worker:${SPARK_VERSION} .
 

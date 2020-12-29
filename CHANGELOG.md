@@ -6,8 +6,9 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
- - Exposed Spark driver web ui 4040 port ([#41](https://github.com/cluster-apps-on-docker/spark-standalone-cluster-on-docker/pull/41)).
- - Made SparkR available for all Spark versions.
+ - Exposed Spark driver web ui 4040 port ([#39](https://github.com/cluster-apps-on-docker/spark-standalone-cluster-on-docker/issues/39));
+ - Made SparkR available for all Spark versions;
+ - Upgraded JupyterLab from v2.1.4 to v3.0.0, the latest stable version.
  
 ### Core
 

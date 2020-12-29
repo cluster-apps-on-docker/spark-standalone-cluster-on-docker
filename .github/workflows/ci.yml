@@ -177,7 +177,7 @@ jobs:
     name: JupyterLab Images
     runs-on: ubuntu-latest
     env:
-      JUPYTERLAB_VERSION: "2.1.4"
+      JUPYTERLAB_VERSION: "3.0.0"
       DOCKERHUB_USR: ${{ secrets.DOCKERHUB_USR }}
       DOCKERHUB_PWD: ${{ secrets.DOCKERHUB_PWD }}
 
@@ -197,7 +197,7 @@ jobs:
             -f docker/base/Dockerfile \
             -t base:latest .
 
-      - name: Build & Push JupyterLab Image - Spark v3.0.0 (latest)
+      - name: Build & Push JupyterLab Image - JupyterLab v3.0.0 + Spark v3.0.0 (latest)
         env:
           SPARK_VERSION: "3.0.0"
           SCALA_VERSION: "2.12.10"
@@ -229,7 +229,7 @@ jobs:
             -f docker/base/Dockerfile \
             -t base:latest .
 
-      - name: Build & Push JupyterLab Image - Spark v2.4.4
+      - name: Build & Push JupyterLab Image - JupyterLab v3.0.0 + Spark v2.4.4
         env:
           SPARK_VERSION: "2.4.4"
           SCALA_VERSION: "2.11.12"
@@ -248,7 +248,7 @@ jobs:
           docker tag jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION} ${DOCKERHUB_USR}/jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION}
           docker push ${DOCKERHUB_USR}/jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION}
 
-      - name: Build & Push JupyterLab Image - Spark v2.4.0
+      - name: Build & Push JupyterLab Image - JupyterLab v3.0.0 + Spark v2.4.0
         env:
           SPARK_VERSION: "2.4.0"
           SCALA_VERSION: "2.11.12"

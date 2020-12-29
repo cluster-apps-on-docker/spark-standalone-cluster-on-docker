@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
- - Exposed Spark master WebUI 4040 port ([#41](https://github.com/cluster-apps-on-docker/spark-standalone-cluster-on-docker/pull/41)).
+ - Exposed Spark driver web ui 4040 port ([#41](https://github.com/cluster-apps-on-docker/spark-standalone-cluster-on-docker/pull/41)).
  - Made SparkR available for all Spark versions.
  
 ### Core

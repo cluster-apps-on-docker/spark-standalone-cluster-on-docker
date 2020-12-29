@@ -41,7 +41,7 @@ RUN apt-get install -y ca-certificates-java --no-install-recommends && \
 RUN apt-get install -y r-base-dev && \
     R -e "install.packages('IRkernel')" && \
     R -e "IRkernel::installspec(displayname = 'R 3.5', user = FALSE)" && \
-    curl -L https://archive.apache.org/dist/spark/spark-${spark_version}/SparkR_${spark_version}.tar.gz -k -o sparkr.tar.gz && \
+    curl https://archive.apache.org/dist/spark/spark-${spark_version}/SparkR_${spark_version}.tar.gz -k -o sparkr.tar.gz && \
     R CMD INSTALL sparkr.tar.gz && \
     rm -f sparkr.tar.gz
 

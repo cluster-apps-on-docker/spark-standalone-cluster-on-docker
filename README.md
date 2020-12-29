@@ -4,13 +4,15 @@
 
 > The project just got its own [article](https://towardsdatascience.com/apache-spark-cluster-on-docker-ft-a-juyterlab-interface-418383c95445) at **Towards Data Science** Medium blog! :sparkles:
 
+## Introduction
+
 This project gives you an **Apache Spark** cluster in standalone mode with a **JupyterLab** interface built on top of **Docker**.
 Learn Apache Spark through its **Scala**, **Python** (PySpark) and **R** (SparkR) API by running the Jupyter [notebooks](build/workspace/) with examples on how to read, process and write data.
 
 <p align="center"><img src="docs/image/cluster-architecture.png"></p>
 
 ![build](https://github.com/andre-marcos-perez/spark-standalone-cluster-on-docker/workflows/build/badge.svg?branch=master)
-![jupyterlab-latest-version](https://img.shields.io/docker/v/andreper/jupyterlab/2.1.4-spark-3.0.0?color=yellow&label=jupyterlab-latest)
+![jupyterlab-latest-version](https://img.shields.io/docker/v/andreper/jupyterlab/3.0.0-spark-3.0.0?color=yellow&label=jupyterlab-latest)
 ![spark-latest-version](https://img.shields.io/docker/v/andreper/spark-master/3.0.0?color=yellow&label=spark-latest)
 ![docker-version](https://img.shields.io/badge/docker-v1.13.0%2B-blue)
 ![docker-compose-file-version](https://img.shields.io/badge/docker--compose-v1.10.0%2B-blue)
@@ -49,7 +51,7 @@ docker-compose up
 
  - Install [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/), check **infra** [supported versions](#tech-stack)
 
-### Build from Docker Hub
+### Download from Docker Hub (easier)
 
 1. Download the source code or clone the repository;
 2. Edit the [docker compose](docker-compose.yml) file with your favorite tech stack version, check **apps** [supported versions](#tech-stack);
@@ -101,17 +103,17 @@ docker-compose up
 
 - Languages and Kernels
 
-| Spark | Hadoop | Scala   | [Scala Kernel](https://almond.sh/) | Python | [Python Kernel](https://jupyter.org/) | R     | [R Kernel](https://irkernel.github.io/) |
+| Spark | Hadoop | Scala   | [Scala Kernel](https://almond.sh/) | Python | [Python Kernel](https://ipython.org/) | R     | [R Kernel](https://irkernel.github.io/) |
 | ----- | ------ | ------- | ---------------------------------- | ------ | ------------------------------------- | ----- | --------------------------------------- |
-| 3.x   | 3.2    | 2.12.10 | 0.10.9                             | 3.7.3  | 2.1.4                                 | 3.5.2 | 1.1.1                                   |
-| 2.x   | 2.7    | 2.11.12 | 0.6.0                              | 3.7.3  | 2.1.4                                 | 3.5.2 | 1.1.1                                   |
+| 3.x   | 3.2    | 2.12.10 | 0.10.9                             | 3.7.3  | 7.19.0                                 | 3.5.2 | 1.1.1                                   |
+| 2.x   | 2.7    | 2.11.12 | 0.6.0                              | 3.7.3  | 7.19.0                                 | 3.5.2 | 1.1.1                                   |
 
 - Available Images
 
 | Component      | Version                 | Docker Tag                                           |
 | -------------- | ----------------------- | ---------------------------------------------------- |
 | Apache Spark   | 2.4.0 \| 2.4.4 \| 3.0.0 | **\<spark-version>**                                 |
-| JupyterLab     | 2.1.4                   | **\<jupyterlab-version>**-spark-**\<spark-version>** |
+| JupyterLab     | 3.0.0                   | **\<jupyterlab-version>**-spark-**\<spark-version>** |
 
 ## <a name="metrics"></a>Metrics
 

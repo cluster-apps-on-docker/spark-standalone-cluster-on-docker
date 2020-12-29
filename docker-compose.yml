@@ -9,7 +9,7 @@ volumes:
     driver: local
 services:
   jupyterlab:
-    image: andreper/jupyterlab:2.1.4-spark-3.0.0
+    image: andreper/jupyterlab:3.0.0-spark-3.0.0
     container_name: jupyterlab
     ports:
       - 8888:8888

@@ -101,10 +101,10 @@ docker-compose up
 
 - Languages and Kernels
 
-| Spark | Hadoop | Scala   | [Scala Kernel](https://almond.sh/) | Python | [Python Kernel](https://jupyter.org/) | R     | [R Kernel]((https://irkernel.github.io/)) |
-| ----- | ------ | ------- | ---------------------------------- | ------ | ------------------------------------- | ----- | ----------------------------------------- |
-| 3.x   | 3.2    | 2.12.10 | 0.10.9                             | 3.7.3  | 2.1.4                                 | 3.5.2 | 1.1.1                                     |
-| 2.x   | 2.7    | 2.11.12 | 0.6.0                              | 3.7.3  | 2.1.4                                 | 3.5.2 | 1.1.1                                     |
+| Spark | Hadoop | Scala   | [Scala Kernel](https://almond.sh/) | Python | [Python Kernel](https://jupyter.org/) | R     | [R Kernel](https://irkernel.github.io/) |
+| ----- | ------ | ------- | ---------------------------------- | ------ | ------------------------------------- | ----- | --------------------------------------- |
+| 3.x   | 3.2    | 2.12.10 | 0.10.9                             | 3.7.3  | 2.1.4                                 | 3.5.2 | 1.1.1                                   |
+| 2.x   | 2.7    | 2.11.12 | 0.6.0                              | 3.7.3  | 2.1.4                                 | 3.5.2 | 1.1.1                                   |
 
 - Available Images
 

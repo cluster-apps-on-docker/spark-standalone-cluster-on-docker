@@ -14,8 +14,6 @@ Learn Apache Spark through its **Scala**, **Python** (PySpark) and **R** (SparkR
 ![build](https://github.com/andre-marcos-perez/spark-standalone-cluster-on-docker/workflows/build/badge.svg?branch=master)
 ![jupyterlab-latest-version](https://img.shields.io/docker/v/andreper/jupyterlab/3.0.0-spark-3.0.0?color=yellow&label=jupyterlab-latest)
 ![spark-latest-version](https://img.shields.io/docker/v/andreper/spark-master/3.0.0?color=yellow&label=spark-latest)
-![docker-version](https://img.shields.io/badge/docker-v1.13.0%2B-blue)
-![docker-compose-file-version](https://img.shields.io/badge/docker--compose-v1.10.0%2B-blue)
 ![spark-scala-api](https://img.shields.io/badge/spark%20api-scala-red)
 ![spark-pyspark-api](https://img.shields.io/badge/spark%20api-pyspark-red)
 ![spark-sparkr-api](https://img.shields.io/badge/spark%20api-sparkr-red)
@@ -122,7 +120,7 @@ docker-compose up
 | Component      | Version                 | Docker Tag                                           |
 | -------------- | ----------------------- | ---------------------------------------------------- |
 | Apache Spark   | 2.4.0 \| 2.4.4 \| 3.0.0 | **\<spark-version>**                                 |
-| JupyterLab     | 3.0.0                   | **\<jupyterlab-version>**-spark-**\<spark-version>** |
+| JupyterLab     | 2.1.4 \| 3.0.0          | **\<jupyterlab-version>**-spark-**\<spark-version>** |
 
 ## <a name="metrics"></a>Metrics
 

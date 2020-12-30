@@ -7,14 +7,19 @@ jobs:
   spark-images:
       name: Spark Images
       runs-on: ubuntu-latest
+      env:
+        DOCKERHUB_USR: ${{ secrets.DOCKERHUB_USR }}
+        DOCKERHUB_PWD: ${{ secrets.DOCKERHUB_PWD }}
       steps:
         - name: Checkout Code
           uses: actions/checkout@master
         - name: Build Spark v3.0.0 (latest)
           uses: ./.github/actions/build-spark
           with:
+            DOCKERHUB_USR: ${DOCKERHUB_USR}
+            DOCKERHUB_PWD: ${DOCKERHUB_PWD}
             SCALA_VERSION: "2.12.10"
             SPARK_VERSION: "3.0.0"
             HADOOP_VERSION: "3.2"
-            SHOULD_PUSH_TO_DOCKERHUB: 'false'
             IS_LATEST: 'true'
+            PUSH_TO_DOCKERHUB: 'false'

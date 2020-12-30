@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 
  - Added Patreon support link :sparkling_heart:
 
+### Repository
+
+ - Added staging branch between develop and master to test CI/CD pipeline without pushing images to Docker Hub
+
 ### Core
 
  - Exposed Spark driver web ui 4040 port ([#39](https://github.com/cluster-apps-on-docker/spark-standalone-cluster-on-docker/issues/39));

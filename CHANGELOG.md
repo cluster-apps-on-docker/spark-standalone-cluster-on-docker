@@ -2,20 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.2](https://github.com/andre-marcos-perez/spark-standalone-cluster-on-docker/releases/tag/v1.2.2) (2020-12-30)
+
+### Repository
+
+ - Enhanced ci/cd script with Github actions.
+
 ## [1.2.1](https://github.com/andre-marcos-perez/spark-standalone-cluster-on-docker/releases/tag/v1.2.1) (2020-12-29)
 
 ### Support
 
- - Added Patreon support link :sparkling_heart:
+ - Added Patreon support link. :sparkling_heart:
 
 ### Repository
 
- - Added staging branch between develop and master to test CI/CD pipeline without pushing images to Docker Hub
+ - Added staging branch between develop and master to test CI/CD pipeline without pushing images to Docker Hub.
 
 ### Core
 
  - Exposed Spark driver web ui 4040 port ([#39](https://github.com/cluster-apps-on-docker/spark-standalone-cluster-on-docker/issues/39));
- - Upgraded JupyterLab from v2.1.4 to v3.0.0.
+ - Upgraded JupyterLab from v2.1.4 to v3.0.0;
  - Made SparkR available for all Spark versions;
  - Enhanced Spark compatibility with Scala kernel ([#35](https://github.com/cluster-apps-on-docker/spark-standalone-cluster-on-docker/issues/35)).
  

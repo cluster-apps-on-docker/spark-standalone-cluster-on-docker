@@ -61,7 +61,7 @@ jobs:
               -t spark-master:${SPARK_VERSION} .
             echo ${DOCKERHUB_PWD} | docker login -u ${DOCKERHUB_USR} --password-stdin
             docker tag spark-master:${SPARK_VERSION} ${DOCKERHUB_USR}/spark-master:${SPARK_VERSION}
-            if [ "${GITHUB_REF}" == "master" ]; then; docker push ${DOCKERHUB_USR}/spark-master:${SPARK_VERSION}; fi
+            if [ "${GITHUB_REF}" == "master" ]; then docker push ${DOCKERHUB_USR}/spark-master:${SPARK_VERSION}; fi
             docker tag spark-master:${SPARK_VERSION} ${DOCKERHUB_USR}/spark-master:latest
             if [ "${GITHUB_REF}" == "master" ]; then docker push ${DOCKERHUB_USR}/spark-master:latest; fi
 

@@ -13,8 +13,7 @@ All notable changes to this project will be documented in this file.
  - Exposed Spark driver web ui 4040 port ([#39](https://github.com/cluster-apps-on-docker/spark-standalone-cluster-on-docker/issues/39));
  - Upgraded JupyterLab from v2.1.4 to v3.0.0.
  - Made SparkR available for all Spark versions;
- - Enhanced Spark compatibility with Scala kernel ([#35](https://github.com/cluster-apps-on-docker/spark-standalone-cluster-on-docker/issues/35));
- - Enhanced Docker Compose file with fine grained resources control ([#40](https://github.com/cluster-apps-on-docker/spark-standalone-cluster-on-docker/issues/40)).
+ - Enhanced Spark compatibility with Scala kernel ([#35](https://github.com/cluster-apps-on-docker/spark-standalone-cluster-on-docker/issues/35)).
  
 ## [1.2.0](https://github.com/andre-marcos-perez/spark-standalone-cluster-on-docker/releases/tag/v1.2.0) (2020-08-19)
 

@@ -1,0 +1,55 @@
+name: build-jupyterlab
+description: builds jupyterlab image
+inputs:
+  SCALA_VERSION:
+    description: 'Scala version to built images with'
+    required: true
+  SCALA_KERNEL_VERSION:
+    description: 'Scala kernel version to built images with'
+    required: true
+  SPARK_VERSION:
+    description: 'Spark version to built images with'
+    required: true
+  JUPYTERLAB_VERSION:
+    description: 'JupyterLab version to built images with'
+    required: true
+  DOCKERHUB_USR:
+    description: 'Docker Hub user to push images with'
+    required: true
+  DOCKERHUB_PWD:
+    description: 'Docker Hub password to push images with'
+    required: true
+  IS_LATEST:
+    description: 'Indicate whether the images is latest'
+    required: false
+    default: "false"
+runs:
+  using: "composite"
+  steps:
+    - name: Build Base Image
+      shell: bash
+      run: |
+        cd ${GITHUB_WORKSPACE}/build
+        docker build \
+          --build-arg build_date="$(date -u +'%Y-%m-%d')" \
+          --build-arg scala_version="${{ inputs.SCALA_VERSION }}" \
+          -f docker/base/Dockerfile \
+          -t base:latest .
+    - name: Build & Push JupyterLab Image
+      shell: bash
+      run: |
+        cd ${GITHUB_WORKSPACE}/build
+        docker build \
+        --build-arg build_date="$(date -u +'%Y-%m-%d')" \
+        --build-arg scala_version="${{ inputs.SCALA_VERSION }}" \
+        --build-arg spark_version="${{ inputs.SPARK_VERSION }}" \
+        --build-arg jupyterlab_version="${{ inputs.JUPYTERLAB_VERSION }}" \
+        --build-arg scala_kernel_version="${{ inputs.SCALA_KERNEL_VERSION }}" \
+        -f docker/jupyterlab/Dockerfile \
+        -t jupyterlab:${{ inputs.JUPYTERLAB_VERSION }}-spark-${{ inputs.SPARK_VERSION }} .
+        docker tag jupyterlab:${{ inputs.JUPYTERLAB_VERSION }}-spark-${{ inputs.SPARK_VERSION }} ${{ inputs.DOCKERHUB_USR }}/jupyterlab:${{ inputs.JUPYTERLAB_VERSION }}-spark-${{ inputs.SPARK_VERSION }}
+        docker tag jupyterlab:${{ inputs.JUPYTERLAB_VERSION }}-spark-${{ inputs.SPARK_VERSION }} ${{ inputs.DOCKERHUB_USR }}/jupyterlab:latest
+        echo ${{ inputs.DOCKERHUB_PWD }} | docker login -u ${{ inputs.DOCKERHUB_USR }} --password-stdin
+        if [ "${GITHUB_REF}" == "refs/heads/master" ]; then docker push ${{ inputs.DOCKERHUB_USR }}/jupyterlab:${{ inputs.JUPYTERLAB_VERSION }}-spark-${{ inputs.SPARK_VERSION }}; fi
+        if [ "${GITHUB_REF}" == "refs/heads/master" ] && [ "${{ inputs.IS_LATEST }}" == "true" ]; then docker push ${{ inputs.DOCKERHUB_USR }}/jupyterlab:latest; fi
+

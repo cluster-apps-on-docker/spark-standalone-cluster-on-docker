@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.2.2](https://github.com/andre-marcos-perez/spark-standalone-cluster-on-docker/releases/tag/v1.2.2) ()
+## [1.2.2](https://github.com/andre-marcos-perez/spark-standalone-cluster-on-docker/releases/tag/v1.2.2) (2020-12-30)
 
 ### Repository
 

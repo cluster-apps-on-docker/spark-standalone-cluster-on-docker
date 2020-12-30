@@ -55,10 +55,10 @@ runs:
           --build-arg spark_version="${{ inputs.SPARK_VERSION }}" \
           -f docker/spark-master/Dockerfile \
           -t spark-master:${{ inputs.SPARK_VERSION }} .
-        echo ${{ inputs.DOCKERHUB_PWD }} | docker login -u ${{ inputs.DOCKERHUB_USR }} --password-stdin
         docker tag spark-master:${{ inputs.SPARK_VERSION }} ${{ inputs.DOCKERHUB_USR }}/spark-master:${{ inputs.SPARK_VERSION }}
-        if [ "${{ inputs.PUSH_TO_DOCKERHUB }}" == "true" ]; then docker push ${{ inputs.DOCKERHUB_USR }}/spark-master:${{ inputs.SPARK_VERSION }}; fi
         docker tag spark-master:${{ inputs.SPARK_VERSION }} ${{ inputs.DOCKERHUB_USR }}/spark-master:latest
+        echo ${{ inputs.DOCKERHUB_PWD }} | docker login -u ${{ inputs.DOCKERHUB_USR }} --password-stdin
+        if [ "${{ inputs.PUSH_TO_DOCKERHUB }}" == "true" ]; then docker push ${{ inputs.DOCKERHUB_USR }}/spark-master:${{ inputs.SPARK_VERSION }}; fi
         if [ "${{ inputs.PUSH_TO_DOCKERHUB }}" == "true" ] && [ "${{ inputs.IS_LATEST }}" == "true" ]; then docker push ${{ inputs.DOCKERHUB_USR }}/spark-master:latest; fi
     - name: Build & Push Spark Worker Image
       shell: bash
@@ -69,8 +69,8 @@ runs:
           --build-arg spark_version="${{ inputs.SPARK_VERSION }}" \
           -f docker/spark-worker/Dockerfile \
           -t spark-worker:${{ inputs.SPARK_VERSION }} .
-        echo ${{ inputs.DOCKERHUB_PWD }} | docker login -u ${{ inputs.DOCKERHUB_USR }} --password-stdin
         docker tag spark-worker:${{ inputs.SPARK_VERSION }} ${{ inputs.DOCKERHUB_USR }}/spark-worker:${{ inputs.SPARK_VERSION }}
-        if [ "${{ inputs.PUSH_TO_DOCKERHUB }}" == "true" ]; then docker push ${{ inputs.DOCKERHUB_USR }}/spark-worker:${{ inputs.SPARK_VERSION }}; fi
         docker tag spark-worker:${{ inputs.SPARK_VERSION }} ${{ inputs.DOCKERHUB_USR }}/spark-worker:latest
+        echo ${{ inputs.DOCKERHUB_PWD }} | docker login -u ${{ inputs.DOCKERHUB_USR }} --password-stdin
+        if [ "${{ inputs.PUSH_TO_DOCKERHUB }}" == "true" ]; then docker push ${{ inputs.DOCKERHUB_USR }}/spark-worker:${{ inputs.SPARK_VERSION }}; fi
         if [ "${{ inputs.PUSH_TO_DOCKERHUB }}" == "true" ] && [ "${{ inputs.IS_LATEST }}" == "true" ]; then docker push ${{ inputs.DOCKERHUB_USR }}/spark-worker:latest; fi

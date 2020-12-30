@@ -53,7 +53,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@master
       - name: Build JupyterLab v3.0.0 + Spark v3.0.0 (latest)
-        uses: ./.github/actions/build-spark
+        uses: ./.github/actions/build-jupyterlab
         with:
           DOCKERHUB_USR: ${DOCKERHUB_USR}
           DOCKERHUB_PWD: ${DOCKERHUB_PWD}
@@ -64,7 +64,7 @@ jobs:
           IS_LATEST: "true"
           PUSH_TO_DOCKERHUB: "false"
       - name: Build JupyterLab v2.1.4 + Spark v3.0.0
-        uses: ./.github/actions/build-spark
+        uses: ./.github/actions/build-jupyterlab
         with:
           DOCKERHUB_USR: ${DOCKERHUB_USR}
           DOCKERHUB_PWD: ${DOCKERHUB_PWD}
@@ -75,7 +75,7 @@ jobs:
           IS_LATEST: "false"
           PUSH_TO_DOCKERHUB: "false"
       - name: Build JupyterLab v3.0.0 + Spark v2.4.4
-        uses: ./.github/actions/build-spark
+        uses: ./.github/actions/build-jupyterlab
         with:
           DOCKERHUB_USR: ${DOCKERHUB_USR}
           DOCKERHUB_PWD: ${DOCKERHUB_PWD}
@@ -86,7 +86,7 @@ jobs:
           IS_LATEST: "false"
           PUSH_TO_DOCKERHUB: "false"
       - name: Build JupyterLab v2.1.4 + Spark v2.4.4
-        uses: ./.github/actions/build-spark
+        uses: ./.github/actions/build-jupyterlab
         with:
           DOCKERHUB_USR: ${DOCKERHUB_USR}
           DOCKERHUB_PWD: ${DOCKERHUB_PWD}
@@ -97,7 +97,7 @@ jobs:
           IS_LATEST: "false"
           PUSH_TO_DOCKERHUB: "false"
       - name: Build JupyterLab v3.0.0 + Spark v2.4.0
-        uses: ./.github/actions/build-spark
+        uses: ./.github/actions/build-jupyterlab
         with:
           DOCKERHUB_USR: ${DOCKERHUB_USR}
           DOCKERHUB_PWD: ${DOCKERHUB_PWD}
@@ -108,7 +108,7 @@ jobs:
           IS_LATEST: "false"
           PUSH_TO_DOCKERHUB: "false"
       - name: Build JupyterLab v2.1.4 + Spark v2.4.0
-        uses: ./.github/actions/build-spark
+        uses: ./.github/actions/build-jupyterlab
         with:
           DOCKERHUB_USR: ${DOCKERHUB_USR}
           DOCKERHUB_PWD: ${DOCKERHUB_PWD}

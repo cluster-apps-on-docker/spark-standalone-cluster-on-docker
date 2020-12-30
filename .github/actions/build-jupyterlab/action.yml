@@ -51,9 +51,9 @@ runs:
         --build-arg scala_kernel_version="${{ inputs.SCALA_KERNEL_VERSION }}" \
         -f docker/jupyterlab/Dockerfile \
         -t jupyterlab:${{ inputs.JUPYTERLAB_VERSION }}-spark-${{ inputs.SPARK_VERSION }} .
-        echo ${{ inputs.DOCKERHUB_PWD }} | docker login -u ${{ inputs.DOCKERHUB_USR }} --password-stdin
         docker tag jupyterlab:${{ inputs.JUPYTERLAB_VERSION }}-spark-${{ inputs.SPARK_VERSION }} ${{ inputs.DOCKERHUB_USR }}/jupyterlab:${{ inputs.JUPYTERLAB_VERSION }}-spark-${{ inputs.SPARK_VERSION }}
-        if [ "${{ inputs.PUSH_TO_DOCKERHUB }}" == "true" ]; then docker push ${{ inputs.DOCKERHUB_USR }}/jupyterlab:${{ inputs.JUPYTERLAB_VERSION }}-spark-${{ inputs.SPARK_VERSION }}; fi
         docker tag jupyterlab:${{ inputs.JUPYTERLAB_VERSION }}-spark-${{ inputs.SPARK_VERSION }} ${{ inputs.DOCKERHUB_USR }}/jupyterlab:latest
+        echo ${{ inputs.DOCKERHUB_PWD }} | docker login -u ${{ inputs.DOCKERHUB_USR }} --password-stdin
+        if [ "${{ inputs.PUSH_TO_DOCKERHUB }}" == "true" ]; then docker push ${{ inputs.DOCKERHUB_USR }}/jupyterlab:${{ inputs.JUPYTERLAB_VERSION }}-spark-${{ inputs.SPARK_VERSION }}; fi
         if [ "${{ inputs.PUSH_TO_DOCKERHUB }}" == "true" ] && [ "${{ inputs.IS_LATEST }}" == "true" ]; then docker push ${{ inputs.DOCKERHUB_USR }}/jupyterlab:latest; fi
 

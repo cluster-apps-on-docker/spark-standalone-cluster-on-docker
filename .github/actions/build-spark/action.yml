@@ -1,0 +1,70 @@
+name: build-spark
+description: builds spark master and worker images
+inputs:
+  SCALA_VERSION:
+    description: 'Scala version to built images with'
+    required: true
+  SPARK_VERSION:
+    description: 'Spark version to built images with'
+    required: true
+  HADOOP_VERSION:
+    description: 'Hadoop version to built images with'
+    required: true
+  SHOULD_PUSH_TO_DOCKERHUB:
+    description: 'Boolean to indicate whether the images should be pushed to DockerHub'
+    required: false
+    default: 'false'
+  IS_LATEST:
+    description: 'Boolean to indicate whether the images is latest'
+    required: false
+    default: 'false'
+runs:
+  using: "composite"
+  steps:
+    - name: Build Base Image
+      shell: bash
+      run: |
+        cd ${GITHUB_WORKSPACE}/build
+        docker build \
+          --build-arg build_date="$(date -u +'%Y-%m-%d')" \
+          --build-arg scala_version="${{ inputs.SCALA_VERSION }}" \
+          -f docker/base/Dockerfile \
+          -t base:latest .
+    - name: Build Spark Base Image
+      shell: bash
+      run: |
+        cd ${GITHUB_WORKSPACE}/build
+        docker build \
+          --build-arg build_date="$(date -u +'%Y-%m-%d')" \
+          --build-arg spark_version="${{ inputs.SPARK_VERSION }}" \
+          --build-arg hadoop_version="${{ inputs.HADOOP_VERSION }}" \
+          -f docker/spark-base/Dockerfile \
+          -t spark-base:${{ inputs.SPARK_VERSION }} .
+    - name: Build & Push Spark Master Image
+      shell: bash
+      run: |
+        cd ${GITHUB_WORKSPACE}/build
+        docker build \
+          --build-arg build_date="$(date -u +'%Y-%m-%d')" \
+          --build-arg spark_version="${{ inputs.SPARK_VERSION }}" \
+          -f docker/spark-master/Dockerfile \
+          -t spark-master:${{ inputs.SPARK_VERSION }} .
+        echo ${{ secrets.DOCKERHUB_PWD }} | docker login -u ${{ secrets.DOCKERHUB_USR }} --password-stdin
+        docker tag spark-master:${{ inputs.SPARK_VERSION }} ${{ secrets.DOCKERHUB_USR }}/spark-master:${{ inputs.SPARK_VERSION }}
+        if [ "${{ inputs.SHOULD_PUSH_TO_DOCKERHUB }}" == "true" ]; then docker push ${{ secrets.DOCKERHUB_USR }}/spark-master:${{ inputs.SPARK_VERSION }}; fi
+        docker tag spark-master:${{ inputs.SPARK_VERSION }} ${{ secrets.DOCKERHUB_USR }}/spark-master:latest
+        if [ "${{ inputs.SHOULD_PUSH_TO_DOCKERHUB }}" == "true" ] && [ "${{ inputs.IS_LATEST }}" == "true" ]; then docker push ${{ secrets.DOCKERHUB_USR }}/spark-master:latest; fi
+    - name: Build & Push Spark Worker Image
+      shell: bash
+      run: |
+        cd ${GITHUB_WORKSPACE}/build
+        docker build \
+          --build-arg build_date="$(date -u +'%Y-%m-%d')" \
+          --build-arg spark_version="${{ inputs.SPARK_VERSION }}" \
+          -f docker/spark-worker/Dockerfile \
+          -t spark-worker:${{ inputs.SPARK_VERSION }} .
+        echo ${{ secrets.DOCKERHUB_PWD }} | docker login -u ${{ secrets.DOCKERHUB_USR }} --password-stdin
+        docker tag spark-worker:${{ inputs.SPARK_VERSION }} ${{ secrets.DOCKERHUB_USR }}/spark-worker:${{ inputs.SPARK_VERSION }}
+        if [ "${{ inputs.SHOULD_PUSH_TO_DOCKERHUB }}" == "true" ]; then docker push ${{ secrets.DOCKERHUB_USR }}/spark-worker:${{ inputs.SPARK_VERSION }}; fi
+        docker tag spark-worker:${{ inputs.SPARK_VERSION }} ${{ secrets.DOCKERHUB_USR }}/spark-worker:latest
+        if [ "${{ inputs.SHOULD_PUSH_TO_DOCKERHUB }}" == "true" ] && [ "${{ inputs.IS_LATEST }}" == "true" ]; then docker push ${{ secrets.DOCKERHUB_USR }}/spark-worker:latest; fi

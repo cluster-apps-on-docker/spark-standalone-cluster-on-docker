@@ -1,0 +1,20 @@
+name: build-feature
+on:
+  push:
+    branches:
+      - 'feature/ci-enhancement'
+jobs:
+  spark-images:
+      name: Spark Images
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout Code
+          uses: actions/checkout@master
+        - name: Build Spark v3.0.0 (latest)
+          uses: ./.github/actions/build-spark
+          with:
+            SCALA_VERSION: "2.12.10"
+            SPARK_VERSION: "3.0.0"
+            HADOOP_VERSION: "3.2"
+            SHOULD_PUSH_TO_DOCKERHUB: 'false'
+            IS_LATEST: 'true'

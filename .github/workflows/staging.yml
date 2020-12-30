@@ -12,7 +12,7 @@ jobs:
       DOCKERHUB_PWD: ${{ secrets.DOCKERHUB_PWD }}
     steps:
       - name: Checkout Code
-        uses: actions/checkout@staging
+        uses: actions/checkout@v2
       - name: Build Spark v3.0.0 (latest)
         uses: ./.github/actions/build-spark
         with:
@@ -46,7 +46,7 @@ jobs:
       DOCKERHUB_PWD: ${{ secrets.DOCKERHUB_PWD }}
     steps:
       - name: Checkout Code
-        uses: actions/checkout@staging
+        uses: actions/checkout@v2
       - name: Build JupyterLab v3.0.0 + Spark v3.0.0 (latest)
         uses: ./.github/actions/build-jupyterlab
         with:

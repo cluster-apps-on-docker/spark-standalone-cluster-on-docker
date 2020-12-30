@@ -19,14 +19,10 @@ inputs:
   DOCKERHUB_PWD:
     description: 'Docker Hub password to push images with'
     required: true
-  PUSH_TO_DOCKERHUB:
-    description: 'Boolean to indicate whether the images should be pushed to DockerHub'
-    required: false
-    default: "false"
   IS_LATEST:
-    description: 'Boolean to indicate whether the images is latest'
+    description: 'Indicate whether the images is latest'
     required: false
-    default: "false"
+    default: ""
 runs:
   using: "composite"
   steps:
@@ -54,6 +50,6 @@ runs:
         docker tag jupyterlab:${{ inputs.JUPYTERLAB_VERSION }}-spark-${{ inputs.SPARK_VERSION }} ${{ inputs.DOCKERHUB_USR }}/jupyterlab:${{ inputs.JUPYTERLAB_VERSION }}-spark-${{ inputs.SPARK_VERSION }}
         docker tag jupyterlab:${{ inputs.JUPYTERLAB_VERSION }}-spark-${{ inputs.SPARK_VERSION }} ${{ inputs.DOCKERHUB_USR }}/jupyterlab:latest
         echo ${{ inputs.DOCKERHUB_PWD }} | docker login -u ${{ inputs.DOCKERHUB_USR }} --password-stdin
-        if [ "${{ inputs.PUSH_TO_DOCKERHUB }}" == "true" ]; then docker push ${{ inputs.DOCKERHUB_USR }}/jupyterlab:${{ inputs.JUPYTERLAB_VERSION }}-spark-${{ inputs.SPARK_VERSION }}; fi
-        if [ "${{ inputs.PUSH_TO_DOCKERHUB }}" == "true" ] && [ "${{ inputs.IS_LATEST }}" == "true" ]; then docker push ${{ inputs.DOCKERHUB_USR }}/jupyterlab:latest; fi
+        if [ "${GITHUB_REF}" == "refs/heads/master" ]; then docker push ${{ inputs.DOCKERHUB_USR }}/jupyterlab:${{ inputs.JUPYTERLAB_VERSION }}-spark-${{ inputs.SPARK_VERSION }}; fi
+        if [ "${GITHUB_REF}" == "refs/heads/master" ] && [ ! -z "${{ inputs.IS_LATEST }}" ]; then docker push ${{ inputs.DOCKERHUB_USR }}/jupyterlab:latest; fi
 

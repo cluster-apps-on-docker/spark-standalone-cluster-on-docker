@@ -11,7 +11,7 @@ parallel computing in distributed environments through our projects. :sparkles:
 4. Do your magic :rainbow:;
 5. Commit your changes;
 6. Push to your feature branch;
-7. Create a new pull request from your  the **develop** branch.
+7. Create a new pull request from your feature branch to the **develop** branch.
 
 ### Contributions ideas
 

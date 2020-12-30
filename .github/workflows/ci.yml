@@ -29,6 +29,7 @@ jobs:
           env:
             SCALA_VERSION: "2.12.10"
           run: |
+            echo "${GITHUB_REF}"
             cd ${GITHUB_WORKSPACE}/build
             docker build \
               --build-arg build_date="$(date -u +'%Y-%m-%d')" \
@@ -61,9 +62,9 @@ jobs:
               -t spark-master:${SPARK_VERSION} .
             echo ${DOCKERHUB_PWD} | docker login -u ${DOCKERHUB_USR} --password-stdin
             docker tag spark-master:${SPARK_VERSION} ${DOCKERHUB_USR}/spark-master:${SPARK_VERSION}
-            if [ "${GITHUB_REF}" == "master" ]; then docker push ${DOCKERHUB_USR}/spark-master:${SPARK_VERSION}; fi
+            if [ "${GITHUB_REF}" == "refs/heads/master" ]; then docker push ${DOCKERHUB_USR}/spark-master:${SPARK_VERSION}; fi
             docker tag spark-master:${SPARK_VERSION} ${DOCKERHUB_USR}/spark-master:latest
-            if [ "${GITHUB_REF}" == "master" ]; then docker push ${DOCKERHUB_USR}/spark-master:latest; fi
+            if [ "${GITHUB_REF}" == "refs/heads/master" ]; then docker push ${DOCKERHUB_USR}/spark-master:latest; fi
 
         - name: Build & Push Spark Worker Image - Spark v3.0.0 (latest)
           env:
@@ -77,14 +78,15 @@ jobs:
               -t spark-worker:${SPARK_VERSION} .
             echo ${DOCKERHUB_PWD} | docker login -u ${DOCKERHUB_USR} --password-stdin
             docker tag spark-worker:${SPARK_VERSION} ${DOCKERHUB_USR}/spark-worker:${SPARK_VERSION}
-            if [ "${GITHUB_REF}" == "master" ]; then docker push ${DOCKERHUB_USR}/spark-worker:${SPARK_VERSION}; fi
+            if [ "${GITHUB_REF}" == "refs/heads/master" ]; then docker push ${DOCKERHUB_USR}/spark-worker:${SPARK_VERSION}; fi
             docker tag spark-worker:${SPARK_VERSION} ${DOCKERHUB_USR}/spark-worker:latest
-            if [ "${GITHUB_REF}" == "master" ]; then docker push ${DOCKERHUB_USR}/spark-worker:latest; fi
+            if [ "${GITHUB_REF}" == "refs/heads/master" ]; then docker push ${DOCKERHUB_USR}/spark-worker:latest; fi
 
         - name: Build Base Image - Scala v2.11.12
           env:
             SCALA_VERSION: "2.11.12"
           run: |
+            echo "${GITHUB_REF}"
             cd ${GITHUB_WORKSPACE}/build
             docker build \
               --build-arg build_date="$(date -u +'%Y-%m-%d')" \
@@ -117,7 +119,7 @@ jobs:
               -t spark-master:${SPARK_VERSION} .
             echo ${DOCKERHUB_PWD} | docker login -u ${DOCKERHUB_USR} --password-stdin
             docker tag spark-master:${SPARK_VERSION} ${DOCKERHUB_USR}/spark-master:${SPARK_VERSION}
-            if [ "${GITHUB_REF}" == "master" ]; then docker push ${DOCKERHUB_USR}/spark-master:${SPARK_VERSION}; fi
+            if [ "${GITHUB_REF}" == "refs/heads/master" ]; then docker push ${DOCKERHUB_USR}/spark-master:${SPARK_VERSION}; fi
 
         - name: Build & Push Spark Worker Image - Spark v2.4.4
           env:
@@ -131,7 +133,7 @@ jobs:
               -t spark-worker:${SPARK_VERSION} .
             echo ${DOCKERHUB_PWD} | docker login -u ${DOCKERHUB_USR} --password-stdin
             docker tag spark-worker:${SPARK_VERSION} ${DOCKERHUB_USR}/spark-worker:${SPARK_VERSION}
-            if [ "${GITHUB_REF}" == "master" ]; then docker push ${DOCKERHUB_USR}/spark-worker:${SPARK_VERSION}; fi
+            if [ "${GITHUB_REF}" == "refs/heads/master" ]; then docker push ${DOCKERHUB_USR}/spark-worker:${SPARK_VERSION}; fi
 
         - name: Build Spark Base Image - Spark v2.4.0
           env:
@@ -158,7 +160,7 @@ jobs:
               -t spark-master:${SPARK_VERSION} .
             echo ${DOCKERHUB_PWD} | docker login -u ${DOCKERHUB_USR} --password-stdin
             docker tag spark-master:${SPARK_VERSION} ${DOCKERHUB_USR}/spark-master:${SPARK_VERSION}
-            if [ "${GITHUB_REF}" == "master" ]; then docker push ${DOCKERHUB_USR}/spark-master:${SPARK_VERSION}; fi
+            if [ "${GITHUB_REF}" == "refs/heads/master" ]; then docker push ${DOCKERHUB_USR}/spark-master:${SPARK_VERSION}; fi
 
         - name: Build & Push Spark Worker Image - Spark v2.4.0
           env:
@@ -172,7 +174,7 @@ jobs:
               -t spark-worker:${SPARK_VERSION} .
             echo ${DOCKERHUB_PWD} | docker login -u ${DOCKERHUB_USR} --password-stdin
             docker tag spark-worker:${SPARK_VERSION} ${DOCKERHUB_USR}/spark-worker:${SPARK_VERSION}
-            if [ "${GITHUB_REF}" == "master" ]; then docker push ${DOCKERHUB_USR}/spark-worker:${SPARK_VERSION}; fi
+            if [ "${GITHUB_REF}" == "refs/heads/master" ]; then docker push ${DOCKERHUB_USR}/spark-worker:${SPARK_VERSION}; fi
 
   jupyterlab-images:
 
@@ -192,6 +194,7 @@ jobs:
         env:
           SCALA_VERSION: "2.12.10"
         run: |
+          echo "${GITHUB_REF}"
           cd ${GITHUB_WORKSPACE}/build
           docker build \
             --build-arg build_date="$(date -u +'%Y-%m-%d')" \
@@ -216,14 +219,15 @@ jobs:
             -t jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION} .
           echo ${DOCKERHUB_PWD} | docker login -u ${DOCKERHUB_USR} --password-stdin
           docker tag jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION} ${DOCKERHUB_USR}/jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION}
-          if [ "${GITHUB_REF}" == "master" ]; then docker push ${DOCKERHUB_USR}/jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION}; fi
+          if [ "${GITHUB_REF}" == "refs/heads/master" ]; then docker push ${DOCKERHUB_USR}/jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION}; fi
           docker tag jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION} ${DOCKERHUB_USR}/jupyterlab:latest
-          if [ "${GITHUB_REF}" == "master" ]; then docker push ${DOCKERHUB_USR}/jupyterlab:latest; fi
+          if [ "${GITHUB_REF}" == "refs/heads/master" ]; then docker push ${DOCKERHUB_USR}/jupyterlab:latest; fi
 
       - name: Build Base Image - Scala v2.11.12
         env:
           SCALA_VERSION: "2.11.12"
         run: |
+          echo "${GITHUB_REF}"
           cd ${GITHUB_WORKSPACE}/build
           docker build \
             --build-arg build_date="$(date -u +'%Y-%m-%d')" \
@@ -248,7 +252,7 @@ jobs:
             -t jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION} .
           echo ${DOCKERHUB_PWD} | docker login -u ${DOCKERHUB_USR} --password-stdin
           docker tag jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION} ${DOCKERHUB_USR}/jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION}
-          if [ "${GITHUB_REF}" == "master" ]; then docker push ${DOCKERHUB_USR}/jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION}; fi
+          if [ "${GITHUB_REF}" == "refs/heads/master" ]; then docker push ${DOCKERHUB_USR}/jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION}; fi
 
       - name: Build & Push JupyterLab Image - JupyterLab v3.0.0 + Spark v2.4.0
         env:
@@ -267,4 +271,4 @@ jobs:
             -t jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION} .
           echo ${DOCKERHUB_PWD} | docker login -u ${DOCKERHUB_USR} --password-stdin
           docker tag jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION} ${DOCKERHUB_USR}/jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION}
-          if [ "${GITHUB_REF}" == "master" ]; then docker push ${DOCKERHUB_USR}/jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION}; fi
+          if [ "${GITHUB_REF}" == "refs/heads/master" ]; then docker push ${DOCKERHUB_USR}/jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION}; fi

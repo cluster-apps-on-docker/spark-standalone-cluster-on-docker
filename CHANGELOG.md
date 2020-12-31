@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.3](https://github.com/andre-marcos-perez/spark-standalone-cluster-on-docker/releases/tag/v1.2.3) (2020-12-31)
+
+### Core
+
+ - Added wget Python package on JupyterLab image since it is been used on Medium article ([#65](https://github.com/cluster-apps-on-docker/spark-standalone-cluster-on-docker/issues/65)).
+
+### Repository
+
+ - Enhanced Github actions with build matrix.
+
 ## [1.2.2](https://github.com/andre-marcos-perez/spark-standalone-cluster-on-docker/releases/tag/v1.2.2) (2020-12-30)
 
 ### Repository

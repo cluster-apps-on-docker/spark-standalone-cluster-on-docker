@@ -7,7 +7,7 @@ on:
       - 'master'
 jobs:
   spark-latest-images:
-    name: Spark Images
+    name: Spark Images (latest)
     runs-on: ubuntu-latest
     env:
       DOCKERHUB_USR: ${{ secrets.DOCKERHUB_USR }}
@@ -34,6 +34,8 @@ jobs:
       matrix:
         spark_version: [ "2.4.4", "2.4.0" ]
     steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
       - name: Build Spark v2.4.4 + v2.4.0
         uses: ./.github/actions/build-spark
         with:
@@ -43,7 +45,7 @@ jobs:
           SPARK_VERSION: ${{ matrix.spark_version }}
           HADOOP_VERSION: "2.7"
   jupyterlab-latest-images:
-    name: JupyterLab Images
+    name: JupyterLab Images (latest)
     runs-on: ubuntu-latest
     env:
       DOCKERHUB_USR: ${{ secrets.DOCKERHUB_USR }}

@@ -4,8 +4,8 @@ on:
     branches:
       - 'staging'
 jobs:
-  spark-images:
-    name: Spark Images
+  spark-latest-images:
+    name: Spark Images (latest)
     runs-on: ubuntu-latest
     env:
       DOCKERHUB_USR: ${{ secrets.DOCKERHUB_USR }}
@@ -22,24 +22,28 @@ jobs:
           SPARK_VERSION: "3.0.0"
           HADOOP_VERSION: "3.2"
           IS_LATEST: "true"
-      - name: Build Spark v2.4.4
+  spark-images:
+    name: Spark Images
+    runs-on: ubuntu-latest
+    env:
+      DOCKERHUB_USR: ${{ secrets.DOCKERHUB_USR }}
+      DOCKERHUB_PWD: ${{ secrets.DOCKERHUB_PWD }}
+    strategy:
+      matrix:
+        spark_version: [ "2.4.4", "2.4.0" ]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Build Spark v2.4.4 + v2.4.0
         uses: ./.github/actions/build-spark
         with:
           DOCKERHUB_USR: ${DOCKERHUB_USR}
           DOCKERHUB_PWD: ${DOCKERHUB_PWD}
           SCALA_VERSION: "2.11.12"
-          SPARK_VERSION: "2.4.4"
+          SPARK_VERSION: ${{ matrix.spark_version }}
           HADOOP_VERSION: "2.7"
-      - name: Build Spark v2.4.0
-        uses: ./.github/actions/build-spark
-        with:
-          DOCKERHUB_USR: ${DOCKERHUB_USR}
-          DOCKERHUB_PWD: ${DOCKERHUB_PWD}
-          SCALA_VERSION: "2.11.12"
-          SPARK_VERSION: "2.4.0"
-          HADOOP_VERSION: "2.7"
-  jupyterlab-images:
-    name: JupyterLab Images
+  jupyterlab-latest-images:
+    name: JupyterLab Images (latest)
     runs-on: ubuntu-latest
     env:
       DOCKERHUB_USR: ${{ secrets.DOCKERHUB_USR }}
@@ -47,7 +51,7 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-      - name: Build JupyterLab v3.0.0 + Spark v3.0.0 (latest)
+      - name: Build JupyterLab v3.0.0 and Spark v3.0.0 (latest)
         uses: ./.github/actions/build-jupyterlab
         with:
           DOCKERHUB_USR: ${DOCKERHUB_USR}
@@ -57,7 +61,7 @@ jobs:
           SPARK_VERSION: "3.0.0"
           JUPYTERLAB_VERSION: "3.0.0"
           IS_LATEST: "true"
-      - name: Build JupyterLab v2.1.4 + Spark v3.0.0
+      - name: Build JupyterLab v2.1.4 and Spark v3.0.0
         uses: ./.github/actions/build-jupyterlab
         with:
           DOCKERHUB_USR: ${DOCKERHUB_USR}
@@ -66,39 +70,26 @@ jobs:
           SCALA_KERNEL_VERSION: "0.10.9"
           SPARK_VERSION: "3.0.0"
           JUPYTERLAB_VERSION: "2.1.4"
-      - name: Build JupyterLab v3.0.0 + Spark v2.4.4
+          IS_LATEST: "false"
+  jupyterlab-images:
+    name: JupyterLab Images
+    runs-on: ubuntu-latest
+    env:
+      DOCKERHUB_USR: ${{ secrets.DOCKERHUB_USR }}
+      DOCKERHUB_PWD: ${{ secrets.DOCKERHUB_PWD }}
+    strategy:
+      matrix:
+        spark_version: [ "2.4.4", "2.4.0" ]
+        jupyterlab_version: [ "3.0.0", "2.1.4" ]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Build JupyterLab v3.0.0 + v2.1.4 and Spark v2.4.4 + v2.4.0
         uses: ./.github/actions/build-jupyterlab
         with:
           DOCKERHUB_USR: ${DOCKERHUB_USR}
           DOCKERHUB_PWD: ${DOCKERHUB_PWD}
           SCALA_VERSION: "2.11.12"
           SCALA_KERNEL_VERSION: "0.6.0"
-          SPARK_VERSION: "2.4.4"
-          JUPYTERLAB_VERSION: "3.0.0"
-      - name: Build JupyterLab v2.1.4 + Spark v2.4.4
-        uses: ./.github/actions/build-jupyterlab
-        with:
-          DOCKERHUB_USR: ${DOCKERHUB_USR}
-          DOCKERHUB_PWD: ${DOCKERHUB_PWD}
-          SCALA_VERSION: "2.11.12"
-          SCALA_KERNEL_VERSION: "0.6.0"
-          SPARK_VERSION: "2.4.4"
-          JUPYTERLAB_VERSION: "2.1.4"
-      - name: Build JupyterLab v3.0.0 + Spark v2.4.0
-        uses: ./.github/actions/build-jupyterlab
-        with:
-          DOCKERHUB_USR: ${DOCKERHUB_USR}
-          DOCKERHUB_PWD: ${DOCKERHUB_PWD}
-          SCALA_VERSION: "2.11.12"
-          SCALA_KERNEL_VERSION: "0.6.0"
-          SPARK_VERSION: "2.4.0"
-          JUPYTERLAB_VERSION: "3.0.0"
-      - name: Build JupyterLab v2.1.4 + Spark v2.4.0
-        uses: ./.github/actions/build-jupyterlab
-        with:
-          DOCKERHUB_USR: ${DOCKERHUB_USR}
-          DOCKERHUB_PWD: ${DOCKERHUB_PWD}
-          SCALA_VERSION: "2.11.12"
-          SCALA_KERNEL_VERSION: "0.6.0"
-          SPARK_VERSION: "2.4.0"
-          JUPYTERLAB_VERSION: "2.1.4"
+          SPARK_VERSION: ${{ matrix.spark_version }}
+          JUPYTERLAB_VERSION: ${{ matrix.jupyterlab_version }}

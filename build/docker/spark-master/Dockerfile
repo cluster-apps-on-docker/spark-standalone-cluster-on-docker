@@ -1,6 +1,6 @@
 ARG spark_version
 FROM spark-base:${spark_version}
-LABEL manteiner="Andre Perez <andre.marcos.perez@gmail.com>"
+LABEL maintainer="Andre Perez <andre.marcos.perez@gmail.com>"
 
 # -- Layer: Image Metadata
 

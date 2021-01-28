@@ -4,6 +4,6 @@ applications:
   jupyterlab: "3.0.5"
 build:
   build_airflow: "true"
-  build_base: "true"
-  build_spark: "true"
-  build_jupyterlab: "true"
+  build_base: "false"
+  build_spark: "false"
+  build_jupyterlab: "false"

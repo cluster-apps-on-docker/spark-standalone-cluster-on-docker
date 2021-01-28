@@ -5,14 +5,16 @@ from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from airflow.utils import dates
 
-logging.basicConfig(format="%(name)s-%(levelname)s-%(asctime)s-%(message)s", level=logging.INFO)
+logging.basicConfig(format="%(name)s-%(levelname)s-%(asctime)s-%(message)s",
+                    level=logging.INFO)
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
+
 def create_dag(dag_id):
     default_args = {
-        "owner": "someone",
+        "owner": "toddg",
         "description": (
             "DAG to explain airflow + pyspark concepts"
         ),
@@ -32,53 +34,62 @@ def create_dag(dag_id):
 
     def task_1(**kwargs):
         logger.info('=====Executing Task 1=============')
+        # TODO: BUGBUG: installing deps like this is a Very Bad Practice (TM)
+        # TODO: BUGBUG: do something much smarter after switching to KubernetesExecutor
+
+        logger.info('Importing nec. python libs...')
+        import sys
+        import subprocess
+        import pkg_resources
+
+        required = {'numpy', 'pandas', 'wget'}
+        installed = {pkg.key for pkg in pkg_resources.working_set}
+        missing = required - installed
+
+        if missing:
+            # implement pip as a subprocess:
+            logger.info(f'Importing missing libs: {missing!r}')
+            subprocess.check_call([sys.executable, '-m', 'pip', 'install', *missing])
+
+        logger.info(f'Importing pyspark.sql.SparkSession')
         from pyspark.sql import SparkSession
-        spark = SparkSession.\
-            builder.\
-                appName("pyspark-notebook").\
-                master("local[1]").\
-                getOrCreate()
-        import zipfile
+        import requests
+        import tempfile
         import os
 
-        with zipfile.ZipFile(os.path.join('data', 'iris_data.zip'), 'r') as zip_ref:
-            zip_ref.extractall('data')
-            
-        data = spark.read.csv(os.path.join('data', 'iris.data'))
-        logger.info(data.show(n=5))
-        return kwargs['message']
+        spark = SparkSession. \
+            builder. \
+            appName("spark-airflow-01"). \
+            master("local[1]"). \
+            getOrCreate()
+        logger.info(f'created spark session = {spark!r}')
 
-    def task_2(**kwargs):
-        logger.info('=====Executing Task 2=============')
-        task_instance = kwargs['ti']
-        result = task_instance.xcom_pull(key=None, task_ids='Task_1')
+        logger.info("downloading iris.data")
+        url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
+        logger.info(f'downloading resource from url = {url!r}')
+        r = requests.get(url)
+        logger.info("downloaded iris.data")
 
-        from pyspark.sql import Row
-        from pyspark.sql import SQLContext
-        sc = spark.sparkContext
-
-        sqlContext = SQLContext(spark)
-        list_p = [('John',19),('Smith',29),('Adam',35),('Henry',50)]
-        rdd = sc.parallelize(list_p)
-        ppl = rdd.map(lambda x: Row(name=x[0], age=int(x[1])))
-        DF_ppl = sqlContext.createDataFrame(ppl)
-        logger.info(DF_ppl.printSchema())
+        with tempfile.TemporaryDirectory() as tmpdirname:
+            logger.info(f"created temp directory {tmpdirname}")
+            with open(os.path.join(tmpdirname, "iris.data"), "wb") as fd:
+                fd.write(r.content)
+                logger.info("wrote iris.data")
+                data = spark.read.csv(os.path.join(tmpdirname, "iris.data"))
+                logger.info("loaded iris.data into spark")
+                logger.info(data.show(n=5))
 
     with new_dag:
         task1 = PythonOperator(task_id='Task_1',
-                                                    python_callable=task_1,
-                                                    op_kwargs=
-                                                    {
-                                                        'message': 'hello airflow'
-                                                    },
-                                                    provide_context=True)
+                               python_callable=task_1,
+                               op_kwargs=
+                               {
+                                   'message': 'hello airflow'
+                               },
+                               provide_context=True)
 
-        task2 = PythonOperator(task_id='Task_2',
-                                            python_callable=task_2,
-                                            op_kwargs=None,
-                                            provide_context=True)
-        task2.set_upstream(task1)
         return new_dag
 
-dag_id = "spark-airflow"
+
+dag_id = "spark-airflow-01"
 globals()[dag_id] = create_dag(dag_id)

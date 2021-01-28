@@ -18,10 +18,6 @@ LABEL org.label-schema.schema-version="1.0"
 ARG airflow_uid="50000"
 ARG spark_version="3.0.0"
 
-# install pyspark and airflow as the airflow user
-USER ${airflow_uid}
-RUN pip install "pyspark==${spark_version}"
-
 # install default jdk as root
 USER root
 RUN apt-get update -y && apt-get install -y default-jdk
@@ -30,3 +26,21 @@ ENV PATH=$PATH:$JAVA_HOME/bin
 
 # drop back to airflow user
 USER ${airflow_uid}
+
+# install pyspark and airflow as the airflow user
+RUN pip install "pyspark==${spark_version}"
+
+# -- Layer: Scientific programming dependencies
+
+ARG requests_version="2.25.1"
+ARG numpy_version="1.19.5"
+ARG pandas_version="1.1.5"
+ARG matplotlib_version="3.3.4"
+ARG scipy_version="1.5.4"
+
+# install other deps here as needed
+RUN pip install "requests==${requests_version}" \
+                "numpy==${numpy_version}" \
+                "pandas==${pandas_version}" \
+                "matplotlib==${matplotlib_version}"\
+                "scipy==${scipy_version}"\

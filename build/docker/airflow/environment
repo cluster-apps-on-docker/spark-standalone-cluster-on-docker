@@ -1,0 +1,15 @@
+AIRFLOW__CORE__LOAD_DEFAULT_CONNECTIONS=False
+AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgres+psycopg2://airflow:airflow@postgres:5432/airflow
+AIRFLOW__CORE__FERNET_KEY=81HqDtbqAywKSOumSha3BhWNOdQ26slT6K0YaZeZyPs=
+AIRFLOW_CONN_METADATA_DB=postgres+psycopg2://airflow:airflow@postgres:5432/airflow
+AIRFLOW_VAR__METADATA_DB_SCHEMA=airflow
+AIRFLOW__SCHEDULER__SCHEDULER_HEARTBEAT_SEC=10
+AIRFLOW__CORE__EXECUTOR=LocalExecutor
+
+# is the max number of task instances that can run concurrently across ALL of Airflow (all tasks across all dags)
+# on this machine, I have 8 cores
+AIRFLOW__CORE__PARALLELISM=8
+
+# is the max number of task instances allowed to run concurrently FOR A SINGLE SPECIFIC DAG
+# limit to N cores per dag for testing
+AIRFLOW__CORE__DAG_CONCURRENCY=1

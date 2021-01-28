@@ -319,3 +319,5 @@ spark-warehouse/
 
 
 # End of https://www.toptal.com/developers/gitignore/api/spark,jupyternotebooks,pycharm,pycharm+iml,pycharm+all
+
+build/docker/airflow/airflow-logs

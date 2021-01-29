@@ -1,9 +1,13 @@
-import codecs
+"""spark-airflow-01.py shows how to instantiate pyspark and process data."""
 import logging
 from datetime import timedelta
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from airflow.utils import dates
+from pyspark.sql import SparkSession
+import requests
+import tempfile
+import os
 
 logging.basicConfig(format="%(name)s-%(levelname)s-%(asctime)s-%(message)s",
                     level=logging.INFO)
@@ -14,7 +18,7 @@ logger.setLevel(logging.INFO)
 
 def create_dag(dag_id):
     default_args = {
-        "owner": "toddg",
+        "owner": "demo",
         "description": (
             "DAG to explain airflow + pyspark concepts"
         ),
@@ -34,29 +38,9 @@ def create_dag(dag_id):
 
     def task_1(**kwargs):
         logger.info('=====Executing Task 1=============')
-        # TODO: BUGBUG: installing deps like this is a Very Bad Practice (TM)
-        # TODO: BUGBUG: do something much smarter after switching to KubernetesExecutor
-
-        logger.info('Importing nec. python libs...')
-        import sys
-        import subprocess
-        import pkg_resources
-
-        required = {'numpy', 'pandas', 'wget'}
-        installed = {pkg.key for pkg in pkg_resources.working_set}
-        missing = required - installed
-
-        if missing:
-            # implement pip as a subprocess:
-            logger.info(f'Importing missing libs: {missing!r}')
-            subprocess.check_call([sys.executable, '-m', 'pip', 'install', *missing])
+        install_missing_dependencies()
 
         logger.info(f'Importing pyspark.sql.SparkSession')
-        from pyspark.sql import SparkSession
-        import requests
-        import tempfile
-        import os
-
         spark = SparkSession. \
             builder. \
             appName("spark-airflow-01"). \
@@ -78,6 +62,21 @@ def create_dag(dag_id):
                 data = spark.read.csv(os.path.join(tmpdirname, "iris.data"))
                 logger.info("loaded iris.data into spark")
                 logger.info(data.show(n=5))
+
+    def install_missing_dependencies():
+        # TODO: BUGBUG: installing deps like this is a Very Bad Practice (TM)
+        # TODO: BUGBUG: do something much smarter after switching to KubernetesExecutor
+        logger.info('Importing nec. python libs...')
+        import sys
+        import subprocess
+        import pkg_resources
+        required = {'numpy', 'pandas', 'wget'}
+        installed = {pkg.key for pkg in pkg_resources.working_set}
+        missing = required - installed
+        if missing:
+            # implement pip as a subprocess:
+            logger.info(f'Importing missing libs: {missing!r}')
+            subprocess.check_call([sys.executable, '-m', 'pip', 'install', *missing])
 
     with new_dag:
         task1 = PythonOperator(task_id='Task_1',

@@ -28,6 +28,7 @@ services:
     ports:
       - "8793:8793"
     volumes:
+      - shared-workspace:/opt/workspace
       - ./docker/airflow/dags:/opt/airflow/dags
       - ./docker/airflow/airflow-logs:/opt/airflow/logs
     command: scheduler
@@ -46,6 +47,7 @@ services:
     env_file:
       - ./docker/airflow/environment
     volumes:
+      - shared-workspace:/opt/workspace
       - ./docker/airflow/dags:/opt/airflow/dags
       - ./docker/airflow/scripts:/opt/airflow/scripts
       - ./docker/airflow/airflow-logs:/opt/airflow/logs

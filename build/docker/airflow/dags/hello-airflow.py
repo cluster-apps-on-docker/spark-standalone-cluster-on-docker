@@ -22,7 +22,7 @@ logger.setLevel(logging.INFO)
 
 def create_dag(dag_id):
     default_args = {
-        "owner": "someone",
+        "owner": "demo",
         "description": (
             "DAG to explain airflow concepts"
         ),

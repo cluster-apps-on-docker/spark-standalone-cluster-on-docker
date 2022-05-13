@@ -1,4 +1,4 @@
-#!/bin/bash
+!/bin/bash
 #
 # -- Build Apache Spark Standalone Cluster Docker Images
 

@@ -1,6 +1,6 @@
 ARG debian_buster_image_tag=8-jre-slim
 FROM openjdk:${debian_buster_image_tag}
-LABEL manteiner="Andre Perez <andre.marcos.perez@gmail.com>"
+LABEL mantainer="Gagandeep Singh <singh.gagandeep8@gmail.com>"
 
 # -- Layer: Image Metadata
 

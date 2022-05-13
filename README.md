@@ -146,3 +146,6 @@ project is maintained by:
 > Support us on GitHub by staring this project :star:
 
 > Support us on [Patreon](https://www.patreon.com/andreperez). :sparkling_heart:
+
+
+https://www.cloudbees.com/blog/how-to-install-and-run-jenkins-with-docker-compose

@@ -5,17 +5,16 @@ volumes:
     driver: local
 services:
   jupyterlab:
-    build: 
-      context: .
-      dockerfile: Dockerfile
+    image: jupyterlab-${JUPYTERLAB_VERSION}:spark-${SPARK_VERSION}
     container_name: jupyterlab
     ports:
       - 8888:8888
       - 4040:4040
     volumes:
-      - shared-workspace:/opt/workspace
+      # - shared-workspace:/opt/workspace
+      - ../src/:/opt/workspace/src/
   spark-master:
-    image: andreper/spark-master:3.0.0
+    image: spark-master:${SPARK_VERSION}
     container_name: spark-master
     ports:
       - 8080:8080
@@ -23,7 +22,7 @@ services:
     volumes:
       - shared-workspace:/opt/workspace
   spark-worker-1:
-    image: andreper/spark-worker:3.0.0
+    image: spark-worker:${SPARK_VERSION}
     container_name: spark-worker-1
     environment:
       - SPARK_WORKER_CORES=1
@@ -35,7 +34,7 @@ services:
     depends_on:
       - spark-master
   spark-worker-2:
-    image: andreper/spark-worker:3.0.0
+    image: spark-worker:${SPARK_VERSION}
     container_name: spark-worker-2
     environment:
       - SPARK_WORKER_CORES=1
@@ -46,3 +45,52 @@ services:
       - shared-workspace:/opt/workspace
     depends_on:
       - spark-master
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - 22181:2181
+  
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    ports:
+      - 29092:29092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1   
+
+  dbeaver:
+    image: dbeaver/cloudbeaver:latest
+    container_name: cloudbeaver
+    ports:
+      - 8978:8978
+    volumes:
+      - /var/cloudbeaver/workspace:/opt/cloudbeaver/workspace
+
+  jenkins:
+    image: jenkins/jenkins:lts
+    privileged: true
+    user: root
+    ports:
+     - 8070:8080
+     - 50000:50000
+    container_name: jenkins
+    volumes:
+     - ../jenkins_configuration:/var/jenkins_home
+
+  jenkins-agent:
+    image: jenkins-lts
+    privileged: true
+    user: root
+    container_name: jenkins-agent
+    environment:
+     - JENKINS_AGENT_SSH_PUBKEY=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCqL2kvtcffPc4FGBs6lULpelDCdGlFZZaruJMPr9yruwiRHtppPI61CUoUBlAPR9LRIDreYMpl1KXxnTryxBCDyZ+xvTwjpuTaEcUmCT8dPSvzh9GtYwlWSPGBT2f8U4apIZBeNbMPxCPfbE0ze4EEzJfGC9nLMLbGtLQCwL7tZLh1ajl5/pBV+FzYhjGBHtQe/VdE0o4+8l6+j/4KZqdG4k9KUQRvfGKobSEj85iDC07H/aEIl/atE3o1Cr0dwmQH/T4pWjrdfYHaRsTQRzsh9AYNzbgQYepVstfARnMJft7F5BzKRssGctCi+75mEDrsUu6y0iVkicH6jfX2tUSRPTAxxJKY1yBL8A9L6tY+5RwK+Jlz0I0Hrs/w58MNto6+oLOm397z0AXx0hzgKu8a0KpUxd4bhQQ875RB/wqxTIv9Y3pkksZo/IO9plN4ZENFnbZN1+H0Z1deecpgdQU1Wf0I4kqRCDWtY/UypjP4Tt7V5cf7AYBKqL3TRWcGUD0= root@34ef1a36a2c6

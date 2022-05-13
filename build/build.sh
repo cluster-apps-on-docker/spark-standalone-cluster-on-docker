@@ -1,4 +1,4 @@
-!/bin/bash
+# !/bin/bash
 #
 # -- Build Apache Spark Standalone Cluster Docker Images
 
@@ -8,12 +8,13 @@
 
 BUILD_DATE="$(date -u +'%Y-%m-%d')"
 
-SHOULD_BUILD_BASE="$(grep -m 1 build_base build.yml | grep -o -P '(?<=").*(?=")')"
-SHOULD_BUILD_SPARK="$(grep -m 1 build_spark build.yml | grep -o -P '(?<=").*(?=")')"
-SHOULD_BUILD_JUPYTERLAB="$(grep -m 1 build_jupyter build.yml | grep -o -P '(?<=").*(?=")')"
+SHOULD_BUILD_BASE="$(grep -m 1 BUILD_BASE .env | cut -d "=" -f 2-)"
+SHOULD_BUILD_SPARK="$(grep -m 1 BUILD_SPARK .env | cut -d "=" -f 2-)"
+SHOULD_BUILD_JUPYTERLAB="$(grep -m 1 BUILD_JUPYTERLAB .env | cut -d "=" -f 2-)"
+SHOULD_BUILD_JENKINS="$(grep -m 1 BUILD_JENKINS .env | cut -d "=" -f 2-)"
 
-SPARK_VERSION="$(grep -m 1 spark build.yml | grep -o -P '(?<=").*(?=")')"
-JUPYTERLAB_VERSION="$(grep -m 1 jupyterlab build.yml | grep -o -P '(?<=").*(?=")')"
+SPARK_VERSION="$(grep -m 1 SPARK_VERSION .env | cut -d "=" -f 2-)"
+JUPYTERLAB_VERSION="$(grep -m 1 JUPYTERLAB_VERSION .env | cut -d "=" -f 2-)"
 
 SPARK_VERSION_MAJOR=${SPARK_VERSION:0:1}
 
@@ -132,7 +133,15 @@ function buildImages() {
       --build-arg jupyterlab_version="${JUPYTERLAB_VERSION}" \
       --build-arg scala_kernel_version="${SCALA_KERNEL_VERSION}" \
       -f docker/jupyterlab/Dockerfile \
-      -t jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION} .
+      -t jupyterlab-${JUPYTERLAB_VERSION}:spark-${SPARK_VERSION} .
+  fi
+
+  if [[ "${SHOULD_BUILD_JENKINS}" == "true" ]]
+  then
+    docker build \
+      --build-arg build_date="${BUILD_DATE}" \
+      -f docker/jenkins/Dockerfile \
+      -t jenkins-agent-lts .
   fi
 
 }

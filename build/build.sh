@@ -35,7 +35,17 @@ fi
 # -- Functions----------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
 
+function sanitize() {
+  docker system prune --volumes -f
+
+  for image_id in $(docker images --filter "dangling=true" -q --no-trunc); do
+    docker rmi $image_id 
+  done
+}
+
 function cleanContainer() {
+    echo "Container $1 deletion"
+
     container="$(docker ps -a | grep $1 | awk '{print $1}')"
     
     while [ -n "${container}" ];
@@ -46,15 +56,22 @@ function cleanContainer() {
 }
 
 function cleanContainers() {
-    cleanContainer 'jupyterlab'
-    cleanContainer 'spark-worker'
-    cleanContainer 'spark-master'
-    cleanContainer 'spark-base'
-    cleanContainer 'base'
+    declare -a container_names=( "jupyterlab" "spark-worker" "spark-master" "spark-base" "base" )
+    
+    for container_name in ${container_names[@]}; do
+      cleanContainer $container_name
+    done
 }
 
 function cleanImage() {
-  docker rmi -f "$(docker images | grep -m 1 $1 | awk '{print $3}')"
+  echo "Image *$1* deletion"
+
+  for image_id in $(docker images | grep -m 1 $1 | awk '{print $3}'); do    
+    docker rmi -f $image_id
+    for subimages in $(docker images --filter since=$image_id -q); do
+      docker inspect --format='{{.Id}} {{.Parent}}' $subimages | cut -d' ' -f1 | cut -d: -f2 | xargs docker rmi -f
+    done
+  done
 }
 
 function cleanImages() {
@@ -66,9 +83,11 @@ function cleanImages() {
 
     if [[ "${SHOULD_BUILD_SPARK}" == "true" ]]
     then
-      cleanImage 'spark-worker'
-      cleanImage 'spark-master'
-      cleanImage 'spark-base'
+      declare -a container_names=( "spark-worker", "spark-master", "spark-base" )
+    
+      for container_name in ${container_names[@]}; do
+        cleanImage $container_name
+      done
     fi
 
     if [[ "${SHOULD_BUILD_BASE}" == "true" ]]
@@ -79,14 +98,21 @@ function cleanImages() {
 }
 
 function cleanVolume() {
+  echo "Volume *$1* deletion"
   docker volume rm $1
 }
 
 function cleanVolumes() {
-  cleanVolume "hadoop-distributed-file-system"
+  declare -a volume_names=( "hadoop-distributed-file-system" )
+  
+  for volume_name in ${container_names[@]}; do
+    cleanVolume $volume_name
+  done
+  
 }
 
 function cleanEnvironment() {
+  sanitize;
   cleanContainers;
   cleanImages;
   cleanVolumes;
@@ -97,7 +123,7 @@ function buildImage() {
   filename=$2
   tag_name=$3
 
-  eval "docker build --progress=plain $build_args -f $filename -t $tag_name ."
+  eval "docker build --force-rm --progress=plain $build_args -f $filename -t $tag_name ."
 }
 
 function buildImages() {
@@ -110,7 +136,7 @@ function buildImages() {
     filename='docker/base/Dockerfile';
     tag_name='base:latest';
 
-    buildImage $builds_args $filename $tag_name
+    buildImage "$builds_args" "$filename" "$tag_name"
   fi
 
   if [[ "${SHOULD_BUILD_SPARK}" == "true" ]]
@@ -123,16 +149,16 @@ function buildImages() {
     filename='docker/spark-base/Dockerfile';
     tag_name="spark-base:${SPARK_VERSION}";
 
-    buildImage $builds_args $filename $tag_name
+    buildImage "$builds_args" "$filename" "$tag_name"
 
     build_arg_1="--build-arg build_date="${BUILD_DATE}"";
     build_arg_2="--build-arg spark_version="${SPARK_VERSION}""
     builds_args="$build_arg_1 $build_arg_2";
-
+    
     filename='docker/spark-master/Dockerfile';
     tag_name="spark-master:${SPARK_VERSION}";
 
-    buildImage $builds_args $filename $tag_name
+    buildImage "$builds_args" "$filename" "$tag_name"
 
     build_arg_1="--build-arg build_date="${BUILD_DATE}""
     build_arg_2="--build-arg spark_version="${SPARK_VERSION}""
@@ -141,7 +167,7 @@ function buildImages() {
     filename='docker/spark-worker/Dockerfile';
     tag_name="spark-worker:${SPARK_VERSION}";
 
-    buildImage $builds_args $filename $tag_name
+    buildImage "$builds_args" "$filename" "$tag_name"
   fi
 
   if [[ "${SHOULD_BUILD_JUPYTERLAB}" == "true" ]]
@@ -155,12 +181,17 @@ function buildImages() {
     builds_args="$build_arg_1 $build_arg_2 $build_arg_3 $build_arg_4 $build_arg_5"; 
     filename='docker/spark-worker/Dockerfile';
     tag_name="jupyterlab:${JUPYTERLAB_VERSION}-spark-${SPARK_VERSION}";
-
-    buildImage $builds_args $filename $tag_name
+    
+    buildImage "$builds_args" "$filename" "$tag_name"
   fi
 }
 
+function preamble() {
+  echo 'Dpkg::Progress-Fancy "1";' > /etc/apt/apt.conf.d/99progressbar
+}
+
 function buildEnvironment() {
+  preamble;
   buildImages;
 }
 
@@ -173,4 +204,4 @@ function prepareEnvironment() {
 # -- Main --------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
 
-prepareEnviroment;
+prepareEnvironment;

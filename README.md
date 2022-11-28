@@ -51,7 +51,9 @@ docker-compose up
 
  - Install [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/), check **infra** [supported versions](#tech-stack)
 
-### Download from Docker Hub (easier)
+### How to start
+
+#### Download from Docker Hub (easier)
 
 1. Download the [docker compose](docker-compose.yml) file;
 
@@ -70,7 +72,7 @@ docker-compose up
 5. Stop the cluster by typing `ctrl+c` on the terminal;
 6. Run step 3 to restart the cluster.
 
-### Build from your local machine
+#### Build from your local machine
 
 > **Note**: Local build is currently only supported on Linux OS distributions.
 

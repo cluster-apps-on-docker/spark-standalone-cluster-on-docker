@@ -1,3 +1,29 @@
+ARG IMAGE="ubuntu:16.04"
+FROM ${IMAGE}
+
+ARG DEBIAN_FRONTEND="noninteractive"
+ARG DEBCONF_NOWARNINGS="yes"
+ARG DEBCONF_TERSE="yes"
+ARG APT="apt-get -qq -y"
+ARG LANG="C.UTF-8"
+
+# Configure APT
+RUN set -x \
+&& echo "debconf debconf/frontend select ${DEBIAN_FRONTEND}" | debconf-set-selections \
+&& echo 'APT::Install-Recommends "false";' | tee /etc/apt/apt.conf.d/99install-recommends \
+&& echo 'APT::Get::Assume-Yes "true";' | tee /etc/apt/apt.conf.d/99assume-yes \
+&& sed -Ei 's|^(DPkg::Pre-Install-Pkgs .*)|#\1|g' /etc/apt/apt.conf.d/70debconf \
+&& debconf-show debconf
+
+# Install Packages
+RUN set -x \
+&& mv /etc/apt/apt.conf.d/70debconf . \
+&& ${APT} update \
+&& ${APT} install apt-utils >/dev/null \
+&& mv 70debconf /etc/apt/apt.conf.d \
+&& ${APT} upgrade >/dev/null \
+&& ${APT} install curl >/dev/null
+
 ARG debian_buster_image_tag=8-jre-slim
 FROM openjdk:${debian_buster_image_tag}
 LABEL manteiner="Andre Perez <andre.marcos.perez@gmail.com>"
@@ -19,11 +45,11 @@ ARG shared_workspace=/opt/workspace
 
 RUN mkdir -p ${shared_workspace}/data && \
     mkdir -p /usr/share/man/man1 && \
-    apt-get update -y && \
-    apt-get install -y curl python3 r-base && \
+    ${APT} update >/dev/null
+    ${APT} install curl python3 r-base && \
     ln -s /usr/bin/python3 /usr/bin/python && \
     curl https://downloads.lightbend.com/scala/${scala_version}/scala-${scala_version}.deb -k -o scala.deb && \
-    apt install -y ./scala.deb && \
+    ${APT} install ./scala.deb && \
     rm -rf scala.deb /var/lib/apt/lists/*
 
 ENV SCALA_HOME="/usr/bin/scala"

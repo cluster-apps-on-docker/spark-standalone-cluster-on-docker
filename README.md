@@ -53,7 +53,7 @@ docker-compose up
 
 ### How to start
 
-#### Download from Docker Hub (easier)
+#### Download from Docker Hub (easiest)
 
 1. Download the [docker compose](docker-compose.yml) file;
 

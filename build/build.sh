@@ -8,28 +8,17 @@
 
 BUILD_DATE="$(date -u +'%Y-%m-%d')"
 
-SHOULD_BUILD_BASE="$(grep -m 1 build_base build.yml | grep -o -P '(?<=").*(?=")')"
-SHOULD_BUILD_SPARK="$(grep -m 1 build_spark build.yml | grep -o -P '(?<=").*(?=")')"
-SHOULD_BUILD_JUPYTERLAB="$(grep -m 1 build_jupyter build.yml | grep -o -P '(?<=").*(?=")')"
+SHOULD_BUILD_BASE="$(grep -m 1 build_base build.yml | sed -E 's/.*"([^"]*)".*/\1/')"
+SHOULD_BUILD_SPARK="$(grep -m 1 build_spark build.yml | sed -E 's/.*"([^"]*)".*/\1/')"
+SHOULD_BUILD_JUPYTERLAB="$(grep -m 1 build_jupyter build.yml | sed -E 's/.*"([^"]*)".*/\1/')"
 
-SPARK_VERSION="$(grep -m 1 spark build.yml | grep -o -P '(?<=").*(?=")')"
-JUPYTERLAB_VERSION="$(grep -m 1 jupyterlab build.yml | grep -o -P '(?<=").*(?=")')"
+SPARK_VERSION="$(grep -m 1 spark build.yml | sed -E 's/.*"([^"]*)".*/\1/')"
+JUPYTERLAB_VERSION="$(grep -m 1 jupyterlab build.yml | sed -E 's/.*"([^"]*)".*/\1/')"
 
 SPARK_VERSION_MAJOR=${SPARK_VERSION:0:1}
-
-if [[ "${SPARK_VERSION_MAJOR}" == "2" ]]
-then
-  HADOOP_VERSION="2.7"
-  SCALA_VERSION="2.11.12"
-  SCALA_KERNEL_VERSION="0.6.0"
-elif [[ "${SPARK_VERSION_MAJOR}"  == "3" ]]
-then
-  HADOOP_VERSION="3.2"
-  SCALA_VERSION="2.12.10"
-  SCALA_KERNEL_VERSION="0.10.9"
-else
-  exit 1
-fi
+HADOOP_VERSION="3"
+SCALA_VERSION="2.12.20"
+SCALA_KERNEL_VERSION="0.14.2"
 
 # ----------------------------------------------------------------------------------------------------------------------
 # -- Functions----------------------------------------------------------------------------------------------------------

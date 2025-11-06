@@ -1,5 +1,5 @@
-ARG debian_buster_image_tag=8-jre-slim
-FROM openjdk:${debian_buster_image_tag}
+ARG java_image_tag=21.0.8-jre-headless-ubuntu-24.04
+FROM sapmachine:${java_image_tag}
 LABEL manteiner="Andre Perez <andre.marcos.perez@gmail.com>"
 
 # -- Layer: Image Metadata
@@ -18,13 +18,16 @@ ARG scala_version
 ARG shared_workspace=/opt/workspace
 
 RUN mkdir -p ${shared_workspace}/data && \
-    mkdir -p /usr/share/man/man1 && \
-    apt-get update -y && \
-    apt-get install -y curl python3 r-base && \
-    ln -s /usr/bin/python3 /usr/bin/python && \
-    curl https://downloads.lightbend.com/scala/${scala_version}/scala-${scala_version}.deb -k -o scala.deb && \
-    apt install -y ./scala.deb && \
-    rm -rf scala.deb /var/lib/apt/lists/*
+    mkdir -p /usr/share/man/man1
+
+RUN apt-get -y update && \
+    apt-get -y install curl python3 r-base && \
+    apt-get -y clean
+
+RUN curl -L https://github.com/scala/scala/releases/download/v${scala_version}/scala-${scala_version}.deb -o scala.deb && \
+    apt-get -y install ./scala.deb && \
+    rm -rf scala.deb && \
+    apt-get -y clean
 
 ENV SCALA_HOME="/usr/bin/scala"
 ENV PATH=${PATH}:${SCALA_HOME}/bin

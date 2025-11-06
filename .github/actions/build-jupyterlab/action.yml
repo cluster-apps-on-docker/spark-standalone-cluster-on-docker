@@ -19,10 +19,6 @@ inputs:
   DOCKERHUB_PWD:
     description: 'Docker Hub password to push images with'
     required: true
-  IS_LATEST:
-    description: 'Indicate whether the images is latest'
-    required: false
-    default: "false"
 runs:
   using: "composite"
   steps:
@@ -51,5 +47,4 @@ runs:
         docker tag jupyterlab:${{ inputs.JUPYTERLAB_VERSION }}-spark-${{ inputs.SPARK_VERSION }} ${{ inputs.DOCKERHUB_USR }}/jupyterlab:latest
         echo ${{ inputs.DOCKERHUB_PWD }} | docker login -u ${{ inputs.DOCKERHUB_USR }} --password-stdin
         if [ "${GITHUB_REF}" == "refs/heads/master" ]; then docker push ${{ inputs.DOCKERHUB_USR }}/jupyterlab:${{ inputs.JUPYTERLAB_VERSION }}-spark-${{ inputs.SPARK_VERSION }}; fi
-        if [ "${GITHUB_REF}" == "refs/heads/master" ] && [ "${{ inputs.IS_LATEST }}" == "true" ]; then docker push ${{ inputs.DOCKERHUB_USR }}/jupyterlab:latest; fi
-
+        if [ "${GITHUB_REF}" == "refs/heads/master" ]; then docker push ${{ inputs.DOCKERHUB_USR }}/jupyterlab:latest; fi

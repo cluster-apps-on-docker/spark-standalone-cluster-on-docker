@@ -108,11 +108,11 @@ docker-compose up
 | Docker Engine  | 1.13.0+ |
 | Docker Compose | 1.10.0+ |
 
-- Languages and Kernels
+- Languages
 
-| Spark | Hadoop | Scala   | [Scala Kernel](https://almond.sh/) | Python | [Python Kernel](https://ipython.org/) | R     | [R Kernel](https://irkernel.github.io/) |
-|-------|--------|---------|------------------------------------|--------|---------------------------------------|-------|-----------------------------------------|
-| 3.x   | 3      | 2.12.20 | 0.14.2                             | 3.7.3  | 7.19.0                                | 3.5.2 | 1.1.1                                   |
+| Spark | Hadoop | Scala   | [Scala Kernel](https://almond.sh/) | Python | R     |
+|-------|--------|---------|------------------------------------|--------|-------|
+| 3.5.7 | 3      | 2.12.20 | 0.14.2                             | 3.12.3 | 4.3.3 | 
 
 - Apps
 

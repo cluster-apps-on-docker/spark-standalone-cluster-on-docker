@@ -1,6 +1,6 @@
 ARG spark_version
 FROM spark-base:${spark_version}
-LABEL manteiner="Andre Perez <andre.marcos.perez@gmail.com>"
+LABEL maintainer="Andre Perez <andre.marcos.perez@gmail.com>"
 
 # -- Layer: Image Metadata
 
@@ -14,6 +14,6 @@ LABEL org.label-schema.schema-version="1.0"
 
 # -- Runtime
 
-EXPOSE 8080 7077
+EXPOSE 8080 7077 4040
 
 CMD bin/spark-class org.apache.spark.deploy.master.Master >> logs/spark-master.out

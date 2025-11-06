@@ -22,7 +22,7 @@ ARG jupyterlab_version
 
 RUN apt-get -y update && \
     apt-get -y install python3-pip python3-dev && \
-    pip3 install wget==3.2 pyspark==${spark_version} jupyterlab==${jupyterlab_version} && \
+    pip3 install wget==3.2 pyspark==${spark_version} jupyterlab==${jupyterlab_version} --break-package-system && \
     apt-get -y clean
 
 # -- Layer: Scala kernel for Spark

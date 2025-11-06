@@ -1,6 +1,6 @@
 ARG java_image_tag=21.0.8-jre-headless-ubuntu-24.04
 FROM sapmachine:${java_image_tag}
-LABEL manteiner="Andre Perez <andre.marcos.perez@gmail.com>"
+LABEL maintainer="Andre Perez <andre.marcos.perez@gmail.com>"
 
 # -- Layer: Image Metadata
 

@@ -19,7 +19,7 @@ services:
     container_name: spark-master
     ports:
       - "8080:8080"
-      - "4040:4040"
+      - "7077:7077"
     volumes:
       - shared-workspace:/opt/workspace
   spark-worker-1:

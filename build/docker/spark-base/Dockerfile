@@ -27,6 +27,7 @@ RUN curl -L https://archive.apache.org/dist/spark/spark-${spark_version}/spark-$
 ENV SPARK_HOME /usr/bin/spark-${spark_version}-bin-hadoop${hadoop_version}
 ENV SPARK_MASTER_HOST spark-master
 ENV SPARK_MASTER_PORT 7077
+ENV SPARK_MASTER_WEBUI_PORT 8080
 ENV PYSPARK_PYTHON python3
 
 # -- Runtime

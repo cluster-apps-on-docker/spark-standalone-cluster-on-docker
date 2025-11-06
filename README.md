@@ -40,7 +40,7 @@ docker-compose up
 ### Cluster overview
 
 | Application     | URL                                      | Description                                                |
-| --------------- | ---------------------------------------- | ---------------------------------------------------------- |
+|-----------------|------------------------------------------|------------------------------------------------------------|
 | JupyterLab      | [localhost:8888](http://localhost:8888/) | Cluster interface with built-in Jupyter notebooks          |
 | Spark Driver    | [localhost:4040](http://localhost:4040/) | Spark Driver web ui                                        |
 | Spark Master    | [localhost:8080](http://localhost:8080/) | Spark Master node                                          |
@@ -104,28 +104,27 @@ docker-compose up
 - Infra
 
 | Component      | Version |
-| -------------- | ------- |
+|----------------|---------|
 | Docker Engine  | 1.13.0+ |
 | Docker Compose | 1.10.0+ |
 
 - Languages and Kernels
 
 | Spark | Hadoop | Scala   | [Scala Kernel](https://almond.sh/) | Python | [Python Kernel](https://ipython.org/) | R     | [R Kernel](https://irkernel.github.io/) |
-| ----- | ------ | ------- | ---------------------------------- | ------ | ------------------------------------- | ----- | --------------------------------------- |
-| 3.x   | 3.2    | 2.12.10 | 0.10.9                             | 3.7.3  | 7.19.0                                 | 3.5.2 | 1.1.1                                   |
-| 2.x   | 2.7    | 2.11.12 | 0.6.0                              | 3.7.3  | 7.19.0                                 | 3.5.2 | 1.1.1                                   |
+|-------|--------|---------|------------------------------------|--------|---------------------------------------|-------|-----------------------------------------|
+| 3.x   | 3      | 2.12.20 | 0.14.2                             | 3.7.3  | 7.19.0                                | 3.5.2 | 1.1.1                                   |
 
 - Apps
 
-| Component      | Version                 | Docker Tag                                           |
-| -------------- | ----------------------- | ---------------------------------------------------- |
-| Apache Spark   | 2.4.0 \| 2.4.4 \| 3.0.0 | **\<spark-version>**                                 |
-| JupyterLab     | 2.1.4 \| 3.0.0          | **\<jupyterlab-version>**-spark-**\<spark-version>** |
+| Component    | Version | Docker Tag                                           |
+|--------------|---------|------------------------------------------------------|
+| Apache Spark | 3.5.7   | **\<spark-version>**                                 |
+| JupyterLab   | 4.4.10  | **\<jupyterlab-version>**-spark-**\<spark-version>** |
 
 ## <a name="metrics"></a>Metrics
 
 | Image                                                          | Size                                                                                           | Downloads                                                                 |
-| -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+|----------------------------------------------------------------|------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
 | [JupyterLab](https://hub.docker.com/r/andreper/jupyterlab)     | ![docker-size-jupyterlab](https://img.shields.io/docker/image-size/andreper/jupyterlab/latest) | ![docker-pull](https://img.shields.io/docker/pulls/andreper/jupyterlab)   |
 | [Spark Master](https://hub.docker.com/r/andreper/spark-master) | ![docker-size-master](https://img.shields.io/docker/image-size/andreper/spark-master/latest)   | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-master) |
 | [Spark Worker](https://hub.docker.com/r/andreper/spark-worker) | ![docker-size-worker](https://img.shields.io/docker/image-size/andreper/spark-worker/latest)   | ![docker-pull](https://img.shields.io/docker/pulls/andreper/spark-worker) |

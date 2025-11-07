@@ -1,4 +1,4 @@
 build:
-  build_base: "false"
-  build_spark: "false"
+  build_base: "true"
+  build_spark: "true"
   build_jupyterlab: "true"

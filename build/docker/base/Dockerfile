@@ -22,12 +22,14 @@ RUN mkdir -p ${shared_workspace}/data && \
 
 RUN apt-get -y update && \
     apt-get -y install curl python3 r-base && \
-    apt-get -y clean
+    apt-get -y clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN curl -L https://github.com/scala/scala/releases/download/v${scala_version}/scala-${scala_version}.deb -o scala.deb && \
     apt-get -y install ./scala.deb && \
     rm -rf scala.deb && \
-    apt-get -y clean
+    apt-get -y clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV SCALA_HOME="/usr/bin/scala"
 ENV PATH=${PATH}:${SCALA_HOME}/bin

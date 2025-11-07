@@ -23,4 +23,4 @@ parallel computing in distributed environments through our projects. :sparkles:
 - [x] JupyterLab R kernel;
 - [x] Jupyter notebook with Apache Spark R API examples;
 - [ ] Test coverage;
-- [ ] Ever growing examples.
+- [ ] Ever-growing examples.

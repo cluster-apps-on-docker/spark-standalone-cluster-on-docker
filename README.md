@@ -9,7 +9,7 @@
 This project gives you an **Apache Spark** cluster in standalone mode with a **JupyterLab** interface built on top of **Docker**.
 Learn Apache Spark through its **Scala**, **Python** (PySpark) and **R** (SparkR) API by running the Jupyter [notebooks](build/workspace/) with examples on how to read, process and write data.
 
-<p align="center"><img src="docs/image/cluster-architecture.png"></p>
+<p align="center"><img alt="cluster-architecture" src="docs/image/cluster-architecture.png"></p>
 
 ![build-master](https://github.com/cluster-apps-on-docker/spark-standalone-cluster-on-docker/workflows/build-master/badge.svg)
 ![sponsor](https://img.shields.io/badge/patreon-sponsor-ff69b4)
@@ -22,7 +22,7 @@ Learn Apache Spark through its **Scala**, **Python** (PySpark) and **R** (SparkR
 ## TL;DR
 
 ```bash
-curl -LO https://raw.githubusercontent.com/cluster-apps-on-docker/spark-standalone-cluster-on-docker/master/docker-compose.yml
+curl -LO https://raw.githubusercontent.com/cluster-apps-on-docker/spark-standalone-cluster-on-docker/master/assets/docker-compose.yml
 docker-compose up
 ```
 
@@ -53,13 +53,13 @@ docker-compose up
 
 ### Download from Docker Hub (easier)
 
-1. Download the [docker compose](docker-compose.yml) file;
+1. Download the [docker compose](assets/docker-compose.yml) file;
 
 ```bash
-curl -LO https://raw.githubusercontent.com/cluster-apps-on-docker/spark-standalone-cluster-on-docker/master/docker-compose.yml
+curl -LO https://raw.githubusercontent.com/cluster-apps-on-docker/spark-standalone-cluster-on-docker/master/assets/docker-compose.yml
 ```
 
-2. Edit the [docker compose](docker-compose.yml) file with your favorite tech stack version, check **apps** [supported versions](#tech-stack);
+2. Edit the [docker compose](assets/docker-compose.yml) file with your favorite tech stack version, check **apps** [supported versions](#tech-stack);
 3. Start the cluster;
 
 ```bash
@@ -110,16 +110,16 @@ docker-compose up
 
 - Languages
 
-| Spark | Hadoop | Scala   | [Scala Kernel](https://almond.sh/) | Python | R     |
-|-------|--------|---------|------------------------------------|--------|-------|
-| 3.5.7 | 3      | 2.12.20 | 0.14.2                             | 3.12.3 | 4.3.3 |
+| Spark | Hadoop | Scala   | Python | R     |
+|-------|--------|---------|--------|-------|
+| 3.5.7 | 3      | 2.12.20 | 3.12.3 | 4.3.3 |
 
 - Apps
 
-| Component    | Version | Docker Tag                                           |
-|--------------|---------|------------------------------------------------------|
-| Apache Spark | 3.5.7   | **\<spark-version>**                                 |
-| JupyterLab   | 4.4.10  | **\<jupyterlab-version>**-spark-**\<spark-version>** |
+| Component    | Version | Docker Tag         |
+|--------------|---------|--------------------|
+| Apache Spark | 3.5.7   | 3.5.7              |
+| JupyterLab   | 4.4.10  | 4.4.10-spark-3.5.7 |
 
 ## <a name="metrics"></a>Metrics
 

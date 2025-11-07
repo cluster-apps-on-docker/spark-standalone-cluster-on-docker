@@ -12,12 +12,11 @@ SHOULD_BUILD_BASE="$(grep -m 1 build_base build.yml | sed -E 's/.*"([^"]*)".*/\1
 SHOULD_BUILD_SPARK="$(grep -m 1 build_spark build.yml | sed -E 's/.*"([^"]*)".*/\1/')"
 SHOULD_BUILD_JUPYTERLAB="$(grep -m 1 build_jupyter build.yml | sed -E 's/.*"([^"]*)".*/\1/')"
 
-SPARK_VERSION="$(grep -m 1 spark build.yml | sed -E 's/.*"([^"]*)".*/\1/')"
-JUPYTERLAB_VERSION="$(grep -m 1 jupyterlab build.yml | sed -E 's/.*"([^"]*)".*/\1/')"
-
+SPARK_VERSION="3.5.7"
 HADOOP_VERSION="3"
 SCALA_VERSION="2.12.20"
 SCALA_KERNEL_VERSION="0.14.2"
+JUPYTERLAB_VERSION="4.4.10"
 
 # ----------------------------------------------------------------------------------------------------------------------
 # -- Functions----------------------------------------------------------------------------------------------------------

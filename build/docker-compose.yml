@@ -8,22 +8,25 @@ volumes:
     driver: local
 services:
   jupyterlab:
+    pull_policy: never
     image: jupyterlab:4.4.10-spark-3.5.7
     container_name: jupyterlab
     ports:
       - "8888:8888"
+      - "4040:4040"
     volumes:
       - shared-workspace:/opt/workspace
   spark-master:
+    pull_policy: never
     image: spark-master:3.5.7
     container_name: spark-master
     ports:
       - "8080:8080"
       - "7077:7077"
-      - "4040:4040"
     volumes:
       - shared-workspace:/opt/workspace
   spark-worker-1:
+    pull_policy: never
     image: spark-worker:3.5.7
     container_name: spark-worker-1
     environment:
@@ -36,6 +39,7 @@ services:
     depends_on:
       - spark-master
   spark-worker-2:
+    pull_policy: never
     image: spark-worker:3.5.7
     container_name: spark-worker-2
     environment:
